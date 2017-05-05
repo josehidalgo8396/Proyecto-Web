@@ -11,6 +11,12 @@ def getData(link):
     title = soup.find("h3", attrs={"class":"title"}).getText()
     title = title.strip()
     print(title)
+    mainRight = soup.find("div", attrs={"id":"main-right"})
+    images = mainRight.select("img")
+    image = images[0]["src"]
+    print(image)
+    image2 = images[1]["src"]
+    print(image2)
     mainLeft = soup.find("div", attrs={"id":"main-left"})
     price = mainLeft.find("div", attrs={"class":"txt-label-price"}).getText()
     print(price)
