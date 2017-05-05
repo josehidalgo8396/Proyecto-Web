@@ -25,12 +25,6 @@ def getData(link):
     sold = mainLeft.find("div", attrs={"class":"sold-text-locker"}).getText()
     sold = sold.strip()
     print(sold)
-    '''
-    timer = mainLeft.find("div", attrs={"id":"deal-timer"})
-    countDown = timer.find("div", attrs={"id":"defaultCountdown"})
-    days = countDown.select("days")
-    print(days)
-    '''
     mainRight = soup.find("div", attrs={"id":"main-right"})
     mainRightInfo = mainRight.find("div", attrs={"id":"main-right-yellowbox"})
     tds = mainRightInfo.findAll("td")
@@ -55,9 +49,8 @@ def main(link):
         print("Cupon #" + str(conta))
         newLink = cupon.select("a")[0]["href"]
         getData(link+newLink)
+        break
         conta+=1
         print("\n\n--------------------------\n\n")
         
-    
-
 main("http://www.yuplon.com")
