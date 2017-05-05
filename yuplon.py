@@ -49,7 +49,6 @@ def main(link):
         print("Cupon #" + str(conta))
         newLink = cupon.select("a")[0]["href"]
         getData(link+newLink)
-        break
         conta+=1
         print("\n\n--------------------------\n\n")
         
