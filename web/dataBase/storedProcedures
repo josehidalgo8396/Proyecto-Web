@@ -1,0 +1,12 @@
+CREATE OR REPLACE FUNCTION  sp_login(usernameP text, passwordP text) RETURNS INTEGER AS '
+   BEGIN
+		if exists(SELECT * FROM UserTable where username = usernameP and password = passwordP) then
+            return 1;
+      	else
+        	return 0;
+        end if;
+   END;
+' LANGUAGE 'plpgsql'
+STABLE;
+
+
