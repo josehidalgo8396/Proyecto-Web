@@ -8,9 +8,13 @@ var repository = require('../dataAccess/repository.js');
 
 exports.validateUser = function(data, callback){
     var paramsString = "'" +data.userName+"'"+','+"'"+data.password+"'";
-
+    var spName = 'sp_login';
+    if(data.type) {
+        spName = 'sp_register';
+        paramsString = "'" +data.userName+"'"+','+"''";
+    }
     repository.executeQuery({
-        spName: 'sp_login',
+        spName: spName,
         params: paramsString
     }, 
     function(success, data) {

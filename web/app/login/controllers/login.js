@@ -44,7 +44,17 @@
 				FB.login(function(response) {
 					if (response.authResponse) {
 						FB.api('/me', {fields: 'name, email'}, function(response) {
-							console.log(response);
+							var data = {userName: response.email, type: "facebook"};
+							loginService.logIn(data).then(function(result) {
+								if(result.success) {
+									shareSessionService.setSession(data.userName);
+									welcomeMessage();
+				        			sendToHome();
+								}
+								else{
+									messageHandlerService.notifyWarning(null, result.message);
+								}
+							})
 						});
 					} 
 					else {
