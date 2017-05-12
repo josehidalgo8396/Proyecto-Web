@@ -1,0 +1,13 @@
+.label{
+    width: 10%;
+    display: inline-block;
+    margin-bottom: 10px;
+    color: black;
+    text-align: justify;
+    font-size: 100%;
+}
+.textarea{
+    resize: none;
+    width: 400px;
+    height: 100px;
+}

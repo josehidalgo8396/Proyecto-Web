@@ -22,9 +22,8 @@
 			};
 
 			var welcomeMessage = function() {
-                var message = 'Bienvenido al Sistema de Apoyo Administrativo';
+                var message = 'Bienvenido '+$scope.userData.userName;
                 messageHandlerService.notifySuccess(null, message);
-
             };
 
 			$scope.login = function(pData) {
@@ -44,7 +43,7 @@
 				FB.login(function(response) {
 					if (response.authResponse) {
 						FB.api('/me', {fields: 'name, email'}, function(response) {
-							var data = {userName: response.email, type: "facebook"};
+							var data = {userName: response.email, type: "facebook", rol:"user"};
 							loginService.logIn(data).then(function(result) {
 								if(result.success) {
 									shareSessionService.setSession(data.userName);

@@ -1,0 +1,29 @@
+<div>
+  	<ol class="breadcrumb">
+	  <li class="active">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menu</li>
+	  <li class="active">Contacto</li>
+	</ol>
+    <div class="container">
+        <div>
+            <form ng-submit="sendMessage(message)">
+                <fieldset>
+                    <legend>Contacto</legend>
+                    <label class="label"> Nombre</label>
+                    <input ng-model="message.name" type="text" placeholder="Nombre" required autofocus required/>
+                    <br/>
+                    <label class="label">Apellidos</label>
+                    <input ng-model="message.lastName" type="text" placeholder="Apellidos" required/>
+                    <br/>
+                    <label class="label">Email</label>
+                    <input ng-model="message.email" type="email" placeholder="Correo" required/>
+                    <br/>
+                    <label class="label">Mensaje</label>
+                    <textarea class="textarea" ng-model="memssage.message" required> </textarea>
+                    <br/><br/>
+                    <input type="submit" value="Enviar"/>
+                    <input type="reset" value="Borrar"/>
+                </fieldset>
+            </form>
+        </div>
+	</div>
+</div>

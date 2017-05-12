@@ -2,7 +2,9 @@ var express       = require('express'),
     app           = express(),
     server        = require('http').createServer(app),
     bodyParser    = require('body-parser'),
-    sessionController     = require('./controllers/sessionController.js');
+    sessionController     = require('./controllers/sessionController.js')
+    userController  =require('./controllers/userController.js'),
+    contactController   =require('./controllers/contactController.js');
 
 app.use(bodyParser.urlencoded({
 	extended: true
@@ -15,8 +17,17 @@ app.use('/', express.static(__dirname + '/app'));
 app.get('/promo', function(req, res) {
     res.sendfile(__dirname + '/common/views/promo.html');
 });
-var pg = require("pg");
+
 app.post('/login', sessionController.login);
+
+app.get('/users', userController.getAllUsers);
+app.get('/users/:id', userController.getUserById);
+app.post('/users', userController.addUser);
+app.put('/users/:id', userController.updateUser);
+app.put('/users/disable/:id',userController.disableUser);
+app.put('/changePassword/:id', userController.changePassword);
+
+app.post('/sendMail', contactController.sendMail);
 
 server.listen(8080, function(){
 	console.log('Listening at port 8080...');

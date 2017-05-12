@@ -18,6 +18,10 @@
                 {
                     name: "Cerrar Sesión",
                     link: "logout"
+                },
+                {
+                    name: "Cambiar Contraseña",
+                    link: "cambiar-contrasena"
                 }
             ];
 
@@ -33,6 +37,13 @@
                 {
                     name: "Contacto",
                     link: "contacto"
+                }
+            ];
+
+            $scope.administracion = [
+                {
+                    name: "Gestión de Usuarios",
+                    link: "gestionar-usuarios"
                 }
             ];
 

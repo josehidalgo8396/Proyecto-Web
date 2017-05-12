@@ -34,6 +34,24 @@
           parent: 'base',
           templateUrl: 'common/views/promo.html'
         })
+        .state('gestionar-usuarios', {
+          url: '/gestionar-usuarios',
+          parent: 'home',
+          templateUrl: 'usuarios/views/gestionar-usuarios.html',
+          controller: 'GestionUsuariosCtrl'
+        })
+        .state('cambiar-contrasena', {
+          url: '/cambiar-contrasena',
+          parent: 'home',
+          templateUrl: 'usuarios/views/cambiar-contrasena.html',
+          controller: 'PasswordCtrl'
+        })
+        .state('contacto', {
+          url: '/contacto',
+          parent: 'home',
+          templateUrl: 'contacto/views/contacto.html',
+          controller: 'ContactoCtrl'
+        })
     });
     window.fbAsyncInit = function() {
       FB.init({
