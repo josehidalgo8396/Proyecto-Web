@@ -4,10 +4,11 @@ CREATE TABLE UserTable
   name text NOT NULL,
   email text NOT NULL,
   password text NOT NULL,
+  rol integer NOT NULL,
   CONSTRAINT user_pkey PRIMARY KEY (username)
 )
 WITH (
   OIDS=FALSE
 );
 
-INSERT INTO UserTable (username,name,email,password) VALUES('jose','Jose','correo','123');
+INSERT INTO UserTable (username,name,email,password,rol) VALUES('jose','Jose','correo','123',1);

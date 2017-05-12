@@ -10,3 +10,15 @@ CREATE OR REPLACE FUNCTION  sp_login(usernameP text, passwordP text) RETURNS INT
 STABLE;
 
 
+CREATE FUNCTION  sp_register(usernameP text, nameP text, emailP text, passwordP text, rolP integer) RETURNS INTEGER AS '
+   BEGIN
+		if exists(SELECT * FROM UserTable where username = usernameP) then
+            return 0;
+       	else
+        	insert into UserTable(username, name, email, password, rol) values(usernameP, nameP, emailP, passwordP, rolP); /*drop function sp_register(text,text,text,text,integer);*/
+            return 1;
+        end if;
+   END;
+' LANGUAGE 'plpgsql';
+
+

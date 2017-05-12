@@ -10,7 +10,7 @@ exports.validateUser = function(data, callback){
     var spName = 'sp_login';
     if(data.type) {
         spName = 'sp_register';
-        paramsString = "'" +data.userName+"'"+','+"''" +"," +"'" +data.rol+ "'";
+        paramsString = "'" +data.userName+"'"+","+"'" + data.name +"'" +"," +"'" + data.email +"'" +"," +"'" + data.password +"'"+","+data.rol;
     }
     repository.executeQuery({
         spName: spName,
@@ -35,7 +35,11 @@ exports.validateUser = function(data, callback){
                 }
             }
             else{
-
+                callback({
+                    status: true, 
+                    message: 'Registro con Facebook exitoso',
+                    data: {}
+                });
             }
         } 
         else {

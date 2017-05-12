@@ -21,8 +21,8 @@
 				$state.go('home');
 			};
 
-			var welcomeMessage = function() {
-                var message = 'Bienvenido '+$scope.userData.userName;
+			var welcomeMessage = function(name) {
+                var message = 'Bienvenido '+name;
                 messageHandlerService.notifySuccess(null, message);
             };
 
@@ -30,7 +30,7 @@
 				loginService.logIn(pData).then(function(result) {
 					if(result.success) {
 						shareSessionService.setSession(pData.userName);
-						welcomeMessage();
+						welcomeMessage(pData.userName);
 				        sendToHome();
 					}
 					else {
@@ -43,11 +43,11 @@
 				FB.login(function(response) {
 					if (response.authResponse) {
 						FB.api('/me', {fields: 'name, email'}, function(response) {
-							var data = {userName: response.email, type: "facebook", rol:"user"};
+							var data = {userName: response.email, type: "facebook", rol:0, name: response.name, password:response.email, email: response.email};
 							loginService.logIn(data).then(function(result) {
 								if(result.success) {
 									shareSessionService.setSession(data.userName);
-									welcomeMessage();
+									welcomeMessage(data.name);
 				        			sendToHome();
 								}
 								else{
