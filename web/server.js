@@ -31,8 +31,8 @@ app.put('/changePassword/:id', userController.changePassword);
 app.post('/sendMail', contactController.sendMail);
 
 
-app.get('./home',homeController.getAllCupons);
-app.get('./home',homeController.getAllPromotions);
+app.get('/home/cupons',homeController.getAllCupons);
+app.get('/home/promotions',homeController.getAllPromotions);
 
 
 

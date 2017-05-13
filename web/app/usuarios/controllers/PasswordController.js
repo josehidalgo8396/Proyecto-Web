@@ -16,7 +16,7 @@
 			};
 
 			$scope.getUser = function() {
-				$scope.inputUser.usuario = shareSessionService.getSession().usuario;
+				$scope.inputUser.usuario = shareSessionService.getSession();
 			};
 
 			$scope.getUser();

@@ -7,7 +7,7 @@ exports.allCupons = function(callback){
     }, 
     function(success, data) {
         if(success) {
-            data = data[0];
+            data = data.sp_getcupons;
             if (data.length == 0){
                 callback(
                 {
@@ -17,14 +17,31 @@ exports.allCupons = function(callback){
                 });
             }
             else{
+                callback({
+                    success: true, 
+                    message: "Operación exitosa",
+                    data: data
+                });
+            }
+        } 
+        else{
+            callback(
+            {
+                success: false,
+                data: null,
+                message: "No se pudo establecer la conexión a la base de datos"
+            });
+        }
+    });
+};
 
-                var paramsString = "'" + data[0][0].id + "'";
-
-                repository.executeQuery({
+/*
+repository.executeQuery({
                     spName:  'sp_get_Additional_Info_Cupon',
-                    params: paramsString
+                    params: data[0].id
                 },
                 function(success2, data2) {
+                    console.log(data2);
                     if(success){
                         data.additionalInfo  = data2;
 
@@ -46,12 +63,36 @@ exports.allCupons = function(callback){
                             }  
                         });
                     }  
-                });
+                });*/
 
+
+exports.allPromotions= function(callback){
+    repository.executeQuery({
+        spName: 'sp_getPromotions',
+        params: ''
+    }, 
+    function(success, data) {
+        if(success) {
+            data = data.sp_getpromotions;
+            if (data.length == 0){
+                callback(
+                {
+                    success: false,
+                    data: null,
+                    message: "No hay registro de Promociones"
+                });
+            }
+            else{
+                callback(
+                {
+                    success: true,
+                    data: data,
+                    message: "Operación exitosa"
+                });
             }
         } 
-        else 
-        {callback(
+        else{
+            callback(
             {
                 success: false,
                 data: null,
@@ -62,29 +103,8 @@ exports.allCupons = function(callback){
 };
 
 
-exports.allPromotions= function(callback){
-    repository.executeQuery({
-        spName: 'sp_getPromotions',
-        params: ''
-    }, 
-    function(success, data) {
-
-        console.log(data);
-        
-        if(success) {
-            data = data[0];
-
-            if (data.length == 0){
-                callback(
-                {
-                    success: false,
-                    data: null,
-                    message: "No hay registro de Promociones"
-                });
-            }
-            else{
-
-                var paramsString = "'" + data[0][0].id + "'";
+/* 
+var paramsString = "'" + data[0][0].id + "'";
 
                 repository.executeQuery({
                     spName:  'sp_get_Important_Info_Promotion',
@@ -114,16 +134,4 @@ exports.allPromotions= function(callback){
                             }  
                         });
                     }  
-                });
-            }
-        } 
-        else 
-        {callback(
-            {
-                success: false,
-                data: null,
-                message: "No se pudo establecer la conexión a la base de datos"
-            });
-        }
-    });
-};
+                });*/

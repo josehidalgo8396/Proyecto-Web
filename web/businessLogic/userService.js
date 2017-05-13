@@ -5,11 +5,6 @@
  *Sistema de apoyo administrativo
 */
 var repository = require('../dataAccess/repository.js');
-var userValidator = require('./dataValidator/userValidator.js');
-
-var formatDateFromJSToMySQL = function(JSdate){
-    return new Date(JSdate).toISOString().substring(0, 10);
-};
 
 exports.allUsers = function(callback){
     repository.executeQuery({
@@ -73,8 +68,8 @@ exports.userByUsername = function(data, callback){
                     });
             }
         } 
-        else 
-        {callback(
+        else {
+            callback(
             {
                 success: false,
                 errorCode: 405,
@@ -85,60 +80,20 @@ exports.userByUsername = function(data, callback){
 };
 
 exports.addUser = function(data, callback){
-    var validationStatus;
-    validationStatus = userValidator.validateData(data);
-    if(!validationStatus.success){
-        callback(
-            {
-                success: false,
-                data: null,
-                message: validationStatus.message
-            });
-        return;
-    }
-
-    validationStatus = userValidator.validateDates(data.fechaInicioAutorizacion, data.fechaFinalAutorizacion);
-    if(!validationStatus.success){
-        callback(
-            {
-                success: false,
-                data: null,
-                message: validationStatus.message
-            });
-        return;
-    }
-
-    data.fechaInicioAutorizacion = formatDateFromJSToMySQL(data.fechaInicioAutorizacion);
-    data.fechaFinalAutorizacion = formatDateFromJSToMySQL(data.fechaFinalAutorizacion);
-    var paramsString = '\"'+data.usuario+'\"'+','+
-                '\"'+data.contrasena+'\"'+','+
-                '\"'+data.cedula+'\"'+','+
-                '\"'+data.nombre+'\"'+','+
-                '\"'+data.correo+'\"'+','+
-                '\"'+data.tipo+'\"'+','+
-                 data.activo +','+
-                '\"'+data.fechaInicioAutorizacion+'\"'+','+
-                '\"'+data.fechaFinalAutorizacion+'\"';
-
+    var paramsString = "'" +data.usuario+"'"+","+"'" + data.nombre +"'" +"," +"'" + data.correo +"'" +"," +"'" + data.contrasena +"'"+","+data.tipo;
     repository.executeQuery({
-        spName: 'sp_agregarUsuario',
+        spName: 'sp_addUser',
         params: paramsString
     }, 
-    function(success, dataQuery) {
+    function(success, data) {
         if(success) {
-            if(dataQuery[0][0].valid == 1) {
-                var paramsString2 = '\"' + data.usuarioActual + '\"' + ',' + '\"' + data.usuario + '\"' + ',' + '\"' + 'i' + '\"';
-                repository.executeQuery({
-                    spName: 'sp_historialGestionUsuario',
-                    params:  paramsString2
-                },
-                function(success2, data2) {
-                    callback(
-                    {
-                        success: true,
-                        data: null,
-                        message: "El usuario se agregó correctamente"
-                    });
+            var data = data.sp_adduser;
+            if(data == 1) {
+                callback(
+                {
+                    success: true,
+                    data: null,
+                    message: "El usuario se agregó correctamente"
                 });
             }
             else{
@@ -150,8 +105,8 @@ exports.addUser = function(data, callback){
                 });
             }
         } 
-        else 
-        {callback(
+        else{
+            callback(
             {
                 success: false,
                 data: null,
@@ -263,25 +218,14 @@ exports.disableUser = function(data, callback){
 
 
 exports.changePassword = function(data, callback) {
-    var passwordsStatus = userValidator.validatePasswords(data.currentPassword, data.newPassword, data.newPassword2);
-    if(!passwordsStatus.success){
-        callback(
-            {
-                success: false,
-                data: null,
-                message: passwordsStatus.message
-            });
-        return;
-    }
-
-    var paramsString = '\"' + data.usuario + '\"' + ',' + '\"' + data.currentPassword + '\"' + ',' + '\"' + data.newPassword + '\"';
+    var paramsString = "'" +data.usuario+"'"+","+"'" + data.currentPassword +"'" +"," +"'" + data.newPassword +"'";
     repository.executeQuery({
         spName: 'sp_cambiarContrasena',
         params: paramsString
     }, 
     function(success, data) {
         if(success) {
-            data = data[0][0].valid;
+            data = data.sp_cambiarcontrasena;
             if(data == 1) {
                 callback(
                 {
@@ -299,8 +243,8 @@ exports.changePassword = function(data, callback) {
                 });
             }
         } 
-        else 
-        {callback(
+        else{
+            callback(
             {
                 success: false,
                 data: null,

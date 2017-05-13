@@ -32,12 +32,7 @@
       $scope.editUser = function(userToEdit){
         $scope.inputUser.usuario = userToEdit.usuario;
         $scope.inputUser.nombre = userToEdit.nombre;
-        $scope.inputUser.correo = userToEdit.correo;
-        $scope.inputUser.cedula = userToEdit.cedula;
         $scope.inputUser.tipo = userToEdit.tipo;
-        $scope.inputUser.fechaInicioAutorizacion = userToEdit.fechaInicioAutorizacion;
-        $scope.inputUser.fechaFinalAutorizacion = userToEdit.fechaFinalAutorizacion;
-        $scope.inputUser.activo = userToEdit.activo.data[0];
       };
 
       $scope.updateUser = function (userToUpdate) {
@@ -55,9 +50,8 @@
       };
       
       $scope.addUser = function (newUser) {
-        newUser.usuarioActual = $scope.user.usuario;
-        newUser.activo = 1;
         newUser.contrasena = newUser.usuario;
+        newUser.correo = newUser.usuario;
         usuarioService.addUser(newUser).then(function(result) {
           if (result.success == true){
             $scope.getUsers();

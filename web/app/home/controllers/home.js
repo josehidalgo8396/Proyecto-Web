@@ -6,7 +6,7 @@
    * @author Luis Javier Ramírez Torres
    * @name GestionUsuariosCtrl
    * @description
-   * #  controller para la gestion de usuarios
+   * #  controller para los cupones y promociones
    */
   angular
     .module('webApp')
@@ -14,16 +14,17 @@
      function ($scope, homeService, messageHandlerService, shareSessionService) {
   
       $scope.user = {};
-      $scope.cuponList = {};
-      $scope.promotionList = {};
+      $scope.cuponList = [];
+      $scope.promotionList = [];
 
       $scope.getCupons = function(){
         homeService.getCupons().then(function(result) {
           if (result.success){
-            $scope.cuponList = result.data;
+            $scope.cuponList = result.data.split(",");
+            console.log($scope.cuponList);
           }
           else{
-            $scope.cuponList = {};
+            $scope.cuponList = [];
             messageHandlerService.notifyWarning(null, result.message);
           }
         }); 
@@ -32,23 +33,22 @@
       $scope.getPromotions = function(){
         homeService.getPromotions().then(function(result) {
           if (result.success){
-            $scope.promotionList = result.data;
+            $scope.promotionList = result.data.split(",");
+            console.log($scope.promotionList);
           }
           else{
-            $scope.promotionList = {};
+            $scope.promotionList = [];
             messageHandlerService.notifyWarning(null, result.message);
           }
         }); 
       };
 
-
       $scope.getUser = function() {
         $scope.user = shareSessionService.getSession();
       };
 
-
       $scope.getUser();
-      //$scope.getCupons();
+      $scope.getCupons();
       $scope.getPromotions();
   }]);
 })();

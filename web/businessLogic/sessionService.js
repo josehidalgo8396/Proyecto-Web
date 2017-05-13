@@ -18,7 +18,7 @@ exports.validateUser = function(data, callback){
     }, 
     function(success, data2) {
         if(success) {
-            if(data2.sp_login) {
+            if(data2.sp_login != undefined) {
                 if(data2.sp_login == 0) {
                     callback({
                         status: false, 

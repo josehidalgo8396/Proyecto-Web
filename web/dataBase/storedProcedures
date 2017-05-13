@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION  sp_login(usernameP text, passwordP text) RETURNS INTEGER AS '
+CREATE OR REPLACE FUNCTION  sp_login(usernameP text, passwordP text) RETURNS INTEGER AS $$
    BEGIN
 		if exists(SELECT * FROM UserTable where username = usernameP and password = passwordP) then
             return 1;
@@ -6,20 +6,42 @@ CREATE OR REPLACE FUNCTION  sp_login(usernameP text, passwordP text) RETURNS INT
         	return 0;
         end if;
    END;
-' LANGUAGE 'plpgsql'
+$$ LANGUAGE 'plpgsql'
 STABLE;
 
 
-CREATE FUNCTION  sp_register(usernameP text, nameP text, emailP text, passwordP text, rolP integer) RETURNS INTEGER AS '
+CREATE FUNCTION  sp_register(usernameP text, nameP text, emailP text, passwordP text, rolP integer) RETURNS INTEGER AS $$
    BEGIN
 		if exists(SELECT * FROM UserTable where username = usernameP) then
             return 0;
        	else
-        	insert into UserTable(username, name, email, password, rol) values(usernameP, nameP, emailP, passwordP, rolP); /*drop function sp_register(text,text,text,text,integer);*/
+        	insert into UserTable(username, name, email, password, rol) values(usernameP, nameP, emailP, passwordP, rolP);
             return 1;
         end if;
    END;
-' LANGUAGE 'plpgsql';
+$$ LANGUAGE 'plpgsql';
+
+CREATE FUNCTION  sp_cambiarContrasena(usernameP text, currentPassP text, newPassP text) RETURNS INTEGER AS $$
+   BEGIN
+		if exists(SELECT * FROM UserTable where username = usernameP and password = currentPassP) then
+            update UserTable set password = newPassP where username = usernameP;
+            return 1;
+       	else
+        	return 0;
+        end if;
+   END;
+$$ LANGUAGE 'plpgsql'; 
+
+CREATE FUNCTION  sp_addUser(usernameP text, nameP text, emailP text, passwordP text, rolP integer) RETURNS INTEGER AS $$
+   BEGIN
+   		if exists(SELECT * FROM UserTable where username = usernameP) then
+            return 0;
+      	else
+            insert into UserTable(username, name, email, password, rol) values(usernameP, nameP, emailP, passwordP, rolP);
+        	return 1;
+        end if;
+   END;
+$$ LANGUAGE 'plpgsql';
 
 
 
