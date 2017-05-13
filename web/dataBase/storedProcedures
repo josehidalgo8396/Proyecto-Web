@@ -22,3 +22,59 @@ CREATE FUNCTION  sp_register(usernameP text, nameP text, emailP text, passwordP 
 ' LANGUAGE 'plpgsql';
 
 
+
+CREATE OR REPLACE FUNCTION  sp_getCupons() 
+RETURNS TABLE (id integer,title text,subtitle text ,image text ,maxPrice integer,normalPrice integer,save integer,sold integer,days integer)
+AS $$
+   BEGIN
+		RETURN QUERY SELECT * FROM CUPON;
+   END; $$
+LANGUAGE 'plpgsql'
+
+
+CREATE OR REPLACE FUNCTION  sp_get_Additional_Info_Cupon(idParam integer) 
+RETURNS TABLE (id integer,idCupon integer,info text)
+AS $$
+   BEGIN
+		RETURN QUERY SELECT * FROM CUPON_ADDITIONAL_INFO where idCupon = idParam;
+   END; $$
+LANGUAGE 'plpgsql'
+
+
+CREATE OR REPLACE FUNCTION  sp_get_Restriction_Info_Cupon(idParam integer) 
+RETURNS TABLE (id integer,idCupon integer,info text)
+AS $$
+   BEGIN
+		RETURN QUERY SELECT * FROM CUPON_RESTRICTION_INFO where idCupon = idParam;
+   END; $$
+LANGUAGE 'plpgsql'
+
+
+
+
+CREATE OR REPLACE FUNCTION  sp_getPromotions() 
+RETURNS TABLE (id integer,title text,image1 text ,image2 text ,price float,value float,discount integer,save float,sold integer)
+AS $$
+   BEGIN
+		RETURN QUERY SELECT * FROM PROMOTION;
+   END; $$
+LANGUAGE 'plpgsql'
+
+
+CREATE OR REPLACE FUNCTION  sp_get_Important_Info_Promotion(idParam integer) 
+RETURNS TABLE (id integer,idPromotion integer,info text)
+AS $$
+   BEGIN
+		RETURN QUERY SELECT * FROM PROMOTION_IMPORTANT_INFO where idPromotion = idParam;
+   END; $$
+LANGUAGE 'plpgsql'
+
+CREATE OR REPLACE FUNCTION  sp_get_Must_Know_Info_Promotion(idParam integer) 
+RETURNS TABLE (id integer,idPromotion integer,info text)
+AS $$
+   BEGIN
+		RETURN QUERY SELECT * FROM PROMOTION_MUST_KNOW_INFO where idPromotion = idParam;
+   END; $$
+LANGUAGE 'plpgsql'
+
+

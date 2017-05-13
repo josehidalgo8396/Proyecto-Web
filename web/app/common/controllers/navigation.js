@@ -27,6 +27,10 @@
 
             $scope.menu = [
                 {
+                    name: "Home",
+                    link: "home"
+                },
+                {
                     name: "Promociones",
                     link: "promociones"
                 },

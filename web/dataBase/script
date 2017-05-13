@@ -11,4 +11,90 @@ WITH (
   OIDS=FALSE
 );
 
+CREATE TABLE CUPON
+(
+    id serial NOT NULL,
+    title text NOT NULL,
+    subtitle text NOT NULL,
+    image text NOT NULL,
+    maxPrice integer NOT NULL,
+    normalPrice integer NOT NULL,
+    save integer NOT NULL,
+    sold integer NOT NULL,
+    days integer NOT NULL,
+    CONSTRAINT cupon_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+
+CREATE TABLE CUPON_ADDITIONAL_INFO
+(
+    id serial NOT NULL,
+    idCupon integer NOT NULL references CUPON(id),
+    info text NOT NULL,
+    CONSTRAINT cupon_additional_info_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+
+CREATE TABLE CUPON_RESTRICTION_INFO
+(
+    id serial NOT NULL,
+    idCupon integer NOT NULL references CUPON(id),
+    info text NOT NULL,
+    CONSTRAINT cupon_restriction_info_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+
+
+CREATE TABLE PROMOTION
+(
+    id serial NOT NULL,
+    title text NOT NULL,
+    image1 text NOT NULL,
+    image2 text NOT NULL,
+    price float NOT NULL,
+    value float NOT NULL,
+    discount integer NOT NULL,
+    save float NOT NULL,
+    sold integer NOT NULL,
+    CONSTRAINT promotion_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+
+CREATE TABLE PROMOTION_IMPORTANT_INFO
+(
+    id serial NOT NULL,
+    idPromotion integer NOT NULL references PROMOTION(id),
+    info text NOT NULL,
+    CONSTRAINT promotion_important_info_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+
+CREATE TABLE PROMOTION_MUST_KNOW_INFO
+(
+    id serial NOT NULL,
+    idPromotion integer NOT NULL references PROMOTION(id),
+    info text NOT NULL,
+    CONSTRAINT promotion_must_know_info_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+
 INSERT INTO UserTable (username,name,email,password,rol) VALUES('jose','Jose','correo','123',1);
+
+INSERT INTO PROMOTION (title,image1,image2,price,value,discount,save,sold) VALUES('prom1','image1','image2',10,11,12,13,14);
+INSERT INTO PROMOTION (title,image1,image2,price,value,discount,save,sold) VALUES('prom2','image1','image2',10,11,12,13,14);
+
+select * from PROMOTION
+select * from PROMOTION_IMPORTANT_INFO
+select * from PROMOTION_MUST_KNOW_INFO

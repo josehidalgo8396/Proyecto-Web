@@ -5,6 +5,7 @@ var express       = require('express'),
     sessionController     = require('./controllers/sessionController.js')
     userController  =require('./controllers/userController.js'),
     contactController   =require('./controllers/contactController.js');
+    homeController = require('./controllers/homeController.js');
 
 app.use(bodyParser.urlencoded({
 	extended: true
@@ -28,6 +29,12 @@ app.put('/users/disable/:id',userController.disableUser);
 app.put('/changePassword/:id', userController.changePassword);
 
 app.post('/sendMail', contactController.sendMail);
+
+
+app.get('./home',homeController.getAllCupons);
+app.get('./home',homeController.getAllPromotions);
+
+
 
 server.listen(8080, function(){
 	console.log('Listening at port 8080...');
