@@ -43,7 +43,7 @@
 				FB.login(function(response) {
 					if (response.authResponse) {
 						FB.api('/me', {fields: 'name, email'}, function(response) {
-							var data = {userName: response.email, type: "facebook", rol:0, name: response.name, password:response.email, email: response.email};
+							var data = {type: "facebook", rol:0, name: response.name, password:response.email, username: response.email};
 							loginService.logIn(data).then(function(result) {
 								if(result.success) {
 									shareSessionService.setSession(data.userName);

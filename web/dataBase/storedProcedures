@@ -10,12 +10,12 @@ $$ LANGUAGE 'plpgsql'
 STABLE;
 
 
-CREATE FUNCTION  sp_register(usernameP text, nameP text, emailP text, passwordP text, rolP integer) RETURNS INTEGER AS $$
+CREATE FUNCTION  sp_register(usernameP text, nameP text, passwordP text, rolP integer, activeP integer) RETURNS INTEGER AS $$
    BEGIN
 		if exists(SELECT * FROM UserTable where username = usernameP) then
             return 0;
        	else
-        	insert into UserTable(username, name, email, password, rol) values(usernameP, nameP, emailP, passwordP, rolP);
+        	insert into UserTable(username, name, password, rol, active) values(usernameP, nameP, passwordP, rolP, activeP);
             return 1;
         end if;
    END;
@@ -32,14 +32,31 @@ CREATE FUNCTION  sp_cambiarContrasena(usernameP text, currentPassP text, newPass
    END;
 $$ LANGUAGE 'plpgsql'; 
 
-CREATE FUNCTION  sp_addUser(usernameP text, nameP text, emailP text, passwordP text, rolP integer) RETURNS INTEGER AS $$
+CREATE FUNCTION  sp_addUser(usernameP text, nameP text, passwordP text, rolP integer, activeP integer) RETURNS INTEGER AS $$
    BEGIN
    		if exists(SELECT * FROM UserTable where username = usernameP) then
             return 0;
       	else
-            insert into UserTable(username, name, email, password, rol) values(usernameP, nameP, emailP, passwordP, rolP);
+            insert into UserTable(username, name, password, rol, active) values(usernameP, nameP, passwordP, rolP, activeP);
         	return 1;
         end if;
+   END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE FUNCTION  sp_updateUser(usernameP text, nameP text, rolP integer) RETURNS INTEGER AS $$  
+   BEGIN
+   		if exists(SELECT * FROM UserTable where username = usernameP) then
+            update  UserTable set name = nameP, rol = rolP where username = usernameP;
+            return 1;
+      	else
+        	return 0;
+        end if;
+   END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE FUNCTION  sp_disableUser(usernameP text) RETURNS VOID AS $$ 
+   BEGIN
+   		update  UserTable set active = 0 where username = usernameP;
    END;
 $$ LANGUAGE 'plpgsql';
  
@@ -48,7 +65,7 @@ RETURNS SETOF CUPON AS $$
    	BEGIN
 		RETURN QUERY SELECT * FROM CUPON;
     END; $$
-LANGUAGE 'plpgsql'
+LANGUAGE 'plpgsql';
 
 
 CREATE OR REPLACE FUNCTION  sp_get_Additional_Info_Cupon(idParam integer) 
@@ -56,7 +73,7 @@ RETURNS SETOF CUPON_ADDITIONAL_INFO AS $$
    BEGIN
 		RETURN QUERY SELECT * FROM CUPON_ADDITIONAL_INFO where idCupon = idParam;
    END; $$
-LANGUAGE 'plpgsql'
+LANGUAGE 'plpgsql';
 
 
 CREATE OR REPLACE FUNCTION  sp_get_Restriction_Info_Cupon(idParam integer) 
@@ -64,7 +81,7 @@ RETURNS SETOF CUPON_RESTRICTION_INFO AS $$
    BEGIN
 		RETURN QUERY SELECT * FROM CUPON_RESTRICTION_INFO where idCupon = idParam;
    END; $$
-LANGUAGE 'plpgsql'
+LANGUAGE 'plpgsql';
 
 
 CREATE OR REPLACE FUNCTION  sp_getPromotions() 
@@ -72,7 +89,7 @@ RETURNS SETOF PROMOTION AS $$
    BEGIN
 		RETURN QUERY SELECT * FROM PROMOTION;
    END; $$
-LANGUAGE 'plpgsql'
+LANGUAGE 'plpgsql';
 
 
 CREATE OR REPLACE FUNCTION  sp_get_Important_Info_Promotion(idParam integer) 
@@ -80,7 +97,7 @@ RETURNS SETOF PROMOTION_IMPORTANT_INFO AS $$
    BEGIN
 		RETURN QUERY SELECT * FROM PROMOTION_IMPORTANT_INFO where idPromotion = idParam;
    END; $$
-LANGUAGE 'plpgsql'
+LANGUAGE 'plpgsql';
 
 
 CREATE OR REPLACE FUNCTION  sp_get_Must_Know_Info_Promotion(idParam integer) 
@@ -88,14 +105,14 @@ RETURNS SETOF PROMOTION_MUST_KNOW_INFO AS $$
    BEGIN
 		RETURN QUERY SELECT * FROM PROMOTION_MUST_KNOW_INFO where idPromotion = idParam;
    END; $$
-LANGUAGE 'plpgsql'
+LANGUAGE 'plpgsql';
 
 
-CREATE OR REPLACE FUNCTION  sp_getUsers() 
+CREATE OR REPLACE FUNCTION  sp_getUsers()
 RETURNS SETOF UserTable AS $$
    BEGIN
-		RETURN QUERY SELECT * FROM UserTable;
+		RETURN QUERY SELECT * FROM UserTable where active = 1;
    END; $$
-LANGUAGE 'plpgsql'
+LANGUAGE 'plpgsql';
 
 

@@ -2,10 +2,10 @@ CREATE TABLE UserTable
 (
   username text NOT NULL,
   name text NOT NULL,
-  email text NOT NULL,
   password text NOT NULL,
   rol integer NOT NULL,
-  CONSTRAINT user_pkey PRIMARY KEY (username)
+  active integer NOT NULL,
+  CONSTRAINT user_pkey PRIMARY KEY (username) 
 )
 WITH (
   OIDS=FALSE
@@ -90,11 +90,4 @@ WITH (
   OIDS=FALSE
 );
 
-INSERT INTO UserTable (username,name,email,password,rol) VALUES('jose','Jose','correo','123',1);
-
-INSERT INTO PROMOTION (title,image1,image2,price,value,discount,save,sold) VALUES('prom1','image1','image2',10,11,12,13,14);
-INSERT INTO PROMOTION (title,image1,image2,price,value,discount,save,sold) VALUES('prom2','image1','image2',10,11,12,13,14);
-
-select * from PROMOTION
-select * from PROMOTION_IMPORTANT_INFO
-select * from PROMOTION_MUST_KNOW_INFO
+INSERT INTO UserTable (username,name,password,rol,active) VALUES('jose','Jose','123',1,1);

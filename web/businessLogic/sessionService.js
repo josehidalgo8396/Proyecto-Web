@@ -10,7 +10,7 @@ exports.validateUser = function(data, callback){
     var spName = 'sp_login';
     if(data.type) {
         spName = 'sp_register';
-        paramsString = "'" +data.userName+"'"+","+"'" + data.name +"'" +"," +"'" + data.email +"'" +"," +"'" + data.password +"'"+","+data.rol;
+        paramsString = "'" +data.userName+"'"+","+"'" + data.name +"'" +"," +"'" + data.password +"'"+","+data.rol+",1";
     }
     repository.executeQuery({
         spName: spName,

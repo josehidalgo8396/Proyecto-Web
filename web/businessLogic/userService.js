@@ -31,7 +31,8 @@ exports.allUsers = function(callback){
             }
         } 
         else 
-        {callback(
+        {
+            callback(
             {
                 success: false,
                 data: null,
@@ -41,45 +42,9 @@ exports.allUsers = function(callback){
     });
 };
 
-exports.userByUsername = function(data, callback){
-    repository.executeQuery({
-        spName: 'sp_getUserByUsername',
-        params: data.id
-    }, 
-    function(success, data) {
-        if(success) {
-            data = data[0];
-            if (data.length == 0){
-                callback(
-                {
-                    success: false,
-                    data: null,
-                    message: "No se encontró ningún registro del usuario solicitado"
-                });
-            }
-            else{
-                data = data[0];
-                callback(
-                    {
-                        success: true,
-                        data: data,
-                        message: ""
-                    });
-            }
-        } 
-        else {
-            callback(
-            {
-                success: false,
-                errorCode: 405,
-                errorMsg: "No se pudo establecer la conexión a la base de datos"
-            });
-        }
-    });
-};
 
 exports.addUser = function(data, callback){
-    var paramsString = "'" +data.usuario+"'"+","+"'" + data.nombre +"'" +"," +"'" + data.correo +"'" +"," +"'" + data.contrasena +"'"+","+data.tipo;
+    var paramsString = "'" +data.usuario+"'"+","+"'" + data.nombre +"'" +"," +"'" + data.contrasena +"'"+","+data.tipo+",1";
     repository.executeQuery({
         spName: 'sp_addUser',
         params: paramsString
@@ -116,61 +81,34 @@ exports.addUser = function(data, callback){
 };
 
 exports.updateUser = function(data, callback){
-    var nameStatus = userValidator.validateData(data);
-    if(!nameStatus.success){
-        callback(
-            {
-                success: false,
-                data: null,
-                message: nameStatus.message
-            });
-        return;
-    }
-
-    validationStatus = userValidator.validateDates(data.fechaInicioAutorizacion, data.fechaFinalAutorizacion);
-    if(!validationStatus.success){
-        callback(
-            {
-                success: false,
-                data: null,
-                message: validationStatus.message
-            });
-        return;
-    }
-    
-    data.fechaInicioAutorizacion = formatDateFromJSToMySQL(data.fechaInicioAutorizacion);
-    data.fechaFinalAutorizacion = formatDateFromJSToMySQL(data.fechaFinalAutorizacion);
-    var paramsString = '\"'+data.usuario+'\"'+','+
-                        '\"'+data.contrasena+'\"'+','+
-                        '\"'+data.nombre+'\"'+','+
-                        '\"'+data.cedula+'\"'+','+
-                        '\"'+data.correo+'\"'+','+
-                        '\"'+data.tipo+'\"'+','+
-                        data.activo +','+
-                        '\"'+data.fechaInicioAutorizacion+'\"'+','+
-                        '\"'+data.fechaFinalAutorizacion+'\"';
+    var paramsString = "'" +data.usuario+"'"+","+"'" + data.nombre +"'" +","+data.tipo;
     repository.executeQuery({
-        spName: 'sp_actualizarUsuario',
+        spName: 'sp_updateUser',
         params: paramsString
     }, 
-    function(success, dataQuery) {
+    function(success, data) {
         if(success) {
-            var paramsString2 = '\"' + data.usuarioActual + '\"' + ',' + '\"' + data.usuario + '\"' + ',' + '\"' + 'm' + '\"';
-            repository.executeQuery({
-                spName: 'sp_historialGestionUsuario',
-                params:  paramsString2
-            },
-            function(success2, data2) {
+            var data = data[0].sp_updateuser;
+            if(data == 1) {
                 callback(
                 {
                     success: true,
                     data: null,
                     message: "El usuario se actualizó correctamente"
                 });
-            });
+            }
+            else{
+                callback(
+                {
+                    success: false,
+                    data: null,
+                    message: "El usuario no se puede modificar"
+                });
+            }
         } 
         else 
-        {callback(
+        {
+            callback(
             {
                 success: false,
                 data: null,
@@ -181,35 +119,27 @@ exports.updateUser = function(data, callback){
 };
 
 exports.disableUser = function(data, callback){
-    
-    
-    var paramsString = '\"'+data.usuario+'\"';
+    var paramsString = "'"+data.usuario+"'";
     repository.executeQuery({
-        spName: 'sp_deshabilitarUsuario',
+        spName: 'sp_disableUser',
         params: paramsString
     }, 
-    function(success, dataQuery) {
+    function(success, data) {
         if(success) {
-            var paramsString2 = '\"' + data.usuarioActual + '\"' + ',' + '\"' + data.usuario + '\"' + ',' + '\"' + 'd' + '\"';
-            repository.executeQuery({
-                spName: 'sp_historialGestionUsuario',
-                params:  paramsString2
-            },
-            function(success2, data2) {
-                callback(
-                {
-                    success: true,
-                    data: null,
-                    message: "El usuario se actualizó correctamente"
-                });
+            callback(
+            {
+                success: true,
+                data: null,
+                message: "El usuario se deshabilitó correctamente"
             });
         } 
         else 
-        {callback(
+        {
+            callback(
             {
                 success: false,
                 data: null,
-                message: "Por favor asegúrese de selecionar un usuario antes de actualizar o que el nombre del usuario no está en uso"
+                message: "Error deshabilitando el usuario"
             });
         }
     }); 
