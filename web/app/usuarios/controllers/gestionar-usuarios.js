@@ -21,6 +21,7 @@
         usuarioService.getUsers().then(function(result) {
           if (result.success){
             $scope.usersList = result.data;
+            console.log($scope.usersList);
           }
           else{
             $scope.usersList = {};
@@ -30,9 +31,9 @@
       };
 
       $scope.editUser = function(userToEdit){
-        $scope.inputUser.usuario = userToEdit.usuario;
-        $scope.inputUser.nombre = userToEdit.nombre;
-        $scope.inputUser.tipo = userToEdit.tipo;
+        $scope.inputUser.usuario = userToEdit.username;
+        $scope.inputUser.nombre = userToEdit.name;
+        $scope.inputUser.tipo = userToEdit.rol;
       };
 
       $scope.updateUser = function (userToUpdate) {

@@ -32,7 +32,8 @@
         .state('home', {
           url: '/home',
           parent: 'base',
-          templateUrl: 'common/views/promo.html',
+          //templateUrl: 'common/views/promo.html',
+          templateUrl: 'home/views/home.html',
           controller: 'GestionHomeCtrl'
         })
         .state('gestionar-usuarios', {

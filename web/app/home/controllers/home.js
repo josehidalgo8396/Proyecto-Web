@@ -20,7 +20,7 @@
       $scope.getCupons = function(){
         homeService.getCupons().then(function(result) {
           if (result.success){
-            $scope.cuponList = result.data.split(",");
+            $scope.cuponList = result.data;
             console.log($scope.cuponList);
           }
           else{
@@ -33,7 +33,7 @@
       $scope.getPromotions = function(){
         homeService.getPromotions().then(function(result) {
           if (result.success){
-            $scope.promotionList = result.data.split(",");
+            $scope.promotionList = result.data;
             console.log($scope.promotionList);
           }
           else{

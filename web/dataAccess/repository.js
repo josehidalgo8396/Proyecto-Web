@@ -15,7 +15,7 @@ exports.executeQuery = function(data, callback) {
             callback(false, null);
         }
         else{
-            var sql = 'SELECT '+data.spName+'('+data.params+');';
+            var sql = 'SELECT * FROM '+data.spName+'('+data.params+');';
             client.query(sql, function(err2, result) {
                 if(err2) {
                     console.log(err2);
@@ -24,7 +24,7 @@ exports.executeQuery = function(data, callback) {
                 }
                 else {
                     client.end();
-                    callback(true, result.rows[0]); 
+                    callback(true, result.rows); 
                 }        
             }); 
         }

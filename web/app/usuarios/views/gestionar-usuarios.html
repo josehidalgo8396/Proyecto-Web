@@ -34,7 +34,7 @@
 								<select class="form-control" ng-model="inputUser.tipo" placeholder="Ingrese el tipo de Usuario">
 									<option value="" disabled selected>Tipo</option>
 									<option value="1">Administrador</option>
-									<option value="0">Coordinador</option>
+									<option value="0">Usuario</option>
 								</select>
 							</td>
 							<td style="white-space: nowrap">
@@ -43,9 +43,9 @@
 			                </td>
 						</tr>
 						<tr ng-repeat="user in usersList" ng-click="editUser(user)" style="cursor:pointer">
-							<td>{{user.usuario}}</td> 
-							<td>{{user.nombre}}</td>
-							<td>{{user.tipo}}</td>
+							<td>{{user.username}}</td> 
+							<td>{{user.name}}</td>
+							<td>{{user.rol}}</td>
 							<td style="white-space: nowrap">
 			               		<button class="btn btn-danger btn-xs"  uib-tooltip="deshabilitar" ng-click="disableUser(user.usuario)"><span class="glyphicon glyphicon-trash"></span></button> 
 			                </td>

@@ -7,7 +7,6 @@ exports.allCupons = function(callback){
     }, 
     function(success, data) {
         if(success) {
-            data = data.sp_getcupons;
             if (data.length == 0){
                 callback(
                 {
@@ -73,7 +72,6 @@ exports.allPromotions= function(callback){
     }, 
     function(success, data) {
         if(success) {
-            data = data.sp_getpromotions;
             if (data.length == 0){
                 callback(
                 {

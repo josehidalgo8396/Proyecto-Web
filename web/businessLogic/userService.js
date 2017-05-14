@@ -8,12 +8,11 @@ var repository = require('../dataAccess/repository.js');
 
 exports.allUsers = function(callback){
     repository.executeQuery({
-        spName: 'sp_obtenerUsuarios',
+        spName: 'sp_getUsers',
         params: ''
     }, 
     function(success, data) {
         if(success) {
-            data = data[0];
             if (data.length == 0){
                 callback(
                 {
@@ -87,7 +86,7 @@ exports.addUser = function(data, callback){
     }, 
     function(success, data) {
         if(success) {
-            var data = data.sp_adduser;
+            var data = data[0].sp_adduser;
             if(data == 1) {
                 callback(
                 {
@@ -225,7 +224,7 @@ exports.changePassword = function(data, callback) {
     }, 
     function(success, data) {
         if(success) {
-            data = data.sp_cambiarcontrasena;
+            var data = data[0].sp_cambiarcontrasena;
             if(data == 1) {
                 callback(
                 {
