@@ -11,7 +11,7 @@
 
       //muestra esta vista por defecto
       //redirecciona en caso de nos reconocer la ruta ingresada
-      $urlRouterProvider.otherwise('/home');
+      $urlRouterProvider.otherwise('/1');
 
       $stateProvider
         //vista abstracta sobre la que se carga las demás vistas principales
@@ -29,28 +29,32 @@
         .state('logout', {
           controller: 'LogoutCtrl'
         })
+        .state('prom', {
+          url: '/1',
+          parent: 'base',
+          templateUrl: 'common/views/promo.html'
+        })
         .state('home', {
           url: '/home',
-          parent: 'base',
-          //templateUrl: 'common/views/promo.html',
+          parent: 'prom',
           templateUrl: 'home/views/home.html',
           controller: 'GestionHomeCtrl'
         })
         .state('gestionar-usuarios', {
           url: '/gestionar-usuarios',
-          parent: 'home',
+          parent: 'prom',
           templateUrl: 'usuarios/views/gestionar-usuarios.html',
           controller: 'GestionUsuariosCtrl'
         })
         .state('cambiar-contrasena', {
           url: '/cambiar-contrasena',
-          parent: 'home',
+          parent: 'prom',
           templateUrl: 'usuarios/views/cambiar-contrasena.html',
           controller: 'PasswordCtrl'
         })
         .state('contacto', {
           url: '/contacto',
-          parent: 'home',
+          parent: 'prom',
           templateUrl: 'contacto/views/contacto.html',
           controller: 'ContactoCtrl'
         })
