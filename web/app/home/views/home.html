@@ -1,21 +1,35 @@
-
-
-
-	<div class="panel panel-default" ng-repeat = "cupon in cuponList">	
-		<h3>Cupón</h3>
-		<h4>{{cupon.title}}</h4>
-		<h4>Precio normal: 	₡{{cupon.normalprice}}000</h4>
-		<h4>Precio ahora: 	₡{{cupon.maxprice}}000</h4>
-		<h4>Ahorro:  {{cupon.save}}%</h4>
-		<img src={{cupon.image}} style="height: 100px;width: 200px">			
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<ul class="nav navbar-nav">
+			<li><a href="{{lol()}}">Cupones</a></li>
+      		<li><a href="{{lol()}">Promociones</a></li>
+		</ul>
 	</div>
-
-	<div class="panel panel-default" ng-repeat = "prom in promotionList">	
-		<h3>Promoción</h3>
-		<h4>{{prom.title}}</h4>
-		<h4>Precio normal: ₡{{prom.value}}000</h4>
-		<h4>Precio ahora: ₡{{prom.price}}000</h4>
-		<h4>Ahorro: {{prom.save}}%</h4>
-		<img src={{prom.image1}} style="height: 100px;width: 200px">			
+</nav>
+<div>
+	<div ng-show="p">
+		<div class="panel panel-default" ng-repeat = "cupon in filteredCupons">	
+			<h3>Cupón</h3>
+			<h4>{{cupon.title}}</h4>
+			<h4>Precio normal: 	₡{{cupon.normalprice}}000</h4>
+			<h4>Precio ahora: 	₡{{cupon.maxprice}}000</h4>
+			<h4>Ahorro:  {{cupon.save}}%</h4>
+			<img src={{cupon.image}} style="height: 100px;width: 200px">			
+		</div>
+		<ul uib-pagination total-items="maxSize" ng-model="currentPage" max-size="numPerPage" class="pagination-lg" boundary-links="true" rotate="false"></ul>
 	</div>
+	<div ng-show="p">
+		hola
+		<!--
+		<div class="panel panel-default" ng-repeat = "prom in promotionList">	
+			<h3>Promoción</h3>
+			<h4>{{prom.title}}</h4>
+			<h4>Precio normal: ₡{{prom.value}}000</h4>
+			<h4>Precio ahora: ₡{{prom.price}}000</h4>
+			<h4>Ahorro: {{prom.save}}%</h4>
+			<img src={{prom.image1}} style="height: 100px;width: 200px">			
+		</div>-->
+	</div>
+</div>
+	
 

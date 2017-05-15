@@ -11,7 +11,7 @@
 
       //muestra esta vista por defecto
       //redirecciona en caso de nos reconocer la ruta ingresada
-      $urlRouterProvider.otherwise('/1');
+      $urlRouterProvider.otherwise('/home');
 
       $stateProvider
         //vista abstracta sobre la que se carga las demás vistas principales
@@ -30,7 +30,7 @@
           controller: 'LogoutCtrl'
         })
         .state('prom', {
-          url: '/1',
+          url: '',
           parent: 'base',
           templateUrl: 'common/views/promo.html'
         })
