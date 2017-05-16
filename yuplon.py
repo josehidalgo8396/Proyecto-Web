@@ -73,7 +73,7 @@ def insertData(lista):
     listaTemp.append(lista[5])
     listaTemp.append(lista[6])
     listaTemp.append(lista[7])
-    query = ("insert into PROMOTION(title, image1, image2, price, value, discount, save, sold) values(%s,%s,%s,%s,%s,%s,%s,%s)")
+    query = ("insert into PROMOTION(title, image1, image2, price, value, discount, save, sold, active) values(%s,%s,%s,%s,%s,%s,%s,%s,1)")
     promotion = tuple(listaTemp)
     cursor = db.cursor()
     cursor.execute(query,promotion)

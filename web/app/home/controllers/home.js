@@ -17,17 +17,21 @@
       $scope.cuponList = [];
       $scope.promotionList = [];
       $scope.filteredCupons = [];
-      $scope.currentPage = 0;
+      $scope.filteredPromotions = [];
+      $scope.currentCuponPage = 0;
+      $scope.currentPromotionPage = 0;
       $scope.numPerPage = 5;
-      $scope.maxSize = 0;
+      $scope.maxCuponSize = 0;
+      $scope.maxPromotionSize = 0;
+      $scope.tab = true;
 
       $scope.getCupons = function(){
         homeService.getCupons().then(function(result) {
           if (result.success){
             $scope.cuponList = result.data;
             console.log($scope.cuponList);
-            $scope.currentPage = 1;
-            $scope.maxSize = $scope.cuponList.length;
+            $scope.currentCuponPage = 1;
+            $scope.maxCuponSize = $scope.cuponList.length;
           }
           else{
             $scope.cuponList = [];
@@ -41,6 +45,8 @@
           if (result.success){
             $scope.promotionList = result.data;
             console.log($scope.promotionList);
+            $scope.currentPromotionPage = 1;
+            $scope.maxPromotionSize = $scope.promotionList.length;
           }
           else{
             $scope.promotionList = [];
@@ -49,19 +55,24 @@
         }); 
       };
 
-      $scope.$watch('currentPage', function() {
-        var begin = (($scope.currentPage - 1) * $scope.numPerPage), end = begin + $scope.numPerPage;
+      $scope.$watch('currentCuponPage', function() {
+        var begin = (($scope.currentCuponPage - 1) * $scope.numPerPage), end = begin + $scope.numPerPage;
         $scope.filteredCupons = $scope.cuponList.slice(begin, end);
+      });
+
+      $scope.$watch('currentPromotionPage', function() {
+        var begin = (($scope.currentPromotionPage - 1) * $scope.numPerPage), end = begin + $scope.numPerPage;
+        $scope.filteredPromotions = $scope.promotionList.slice(begin, end);
       });
 
       $scope.getUser = function() {
         $scope.user = shareSessionService.getSession();
       };
 
-      $scope.lol = function() {
-        $scope.p = false;
-      }
-      $scope.p = true;
+      $scope.setTab = function() {
+        $scope.tab = !$scope.tab;
+      };
+
       $scope.getUser();
       $scope.getCupons();
       $scope.getPromotions();

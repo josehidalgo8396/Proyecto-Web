@@ -78,7 +78,7 @@ LANGUAGE 'plpgsql';
 CREATE OR REPLACE FUNCTION  sp_getCupons() 
 RETURNS SETOF CUPON AS $$
    	BEGIN
-		RETURN QUERY SELECT * FROM CUPON;
+		RETURN QUERY SELECT * FROM CUPON where active = 1;
     END; $$
 LANGUAGE 'plpgsql';
  
@@ -100,9 +100,10 @@ RETURNS SETOF CUPON_RESTRICTION_INFO AS $$
 LANGUAGE 'plpgsql';
 
 
-CREATE FUNCTION  sp_addCupon(titleP text, subtitleP text, imageP text, maxPriceP integer, normalPriceP integer,saveP integer, soldP integer, daysP integer,activeP integer) RETURNS INTEGER AS $$
+CREATE FUNCTION  sp_addCupon(titleP text, subtitleP text, imageP text, maxPriceP integer, normalPriceP integer,saveP integer, soldP integer, daysP integer,activeP integer) RETURNS integer AS $$
    BEGIN
-		 insert into CUPON(title,subtitle,image,maxPrice,normalPrice,save,sold,days,active) values(titleP , subtitleP , imageP , maxPriceP , normalPriceP ,saveP , soldP , daysP, activeP ) returning id;
+		 insert into CUPON(title,subtitle,image,maxPrice,normalPrice,save,sold,days,active) values(titleP, subtitleP, imageP, maxPriceP, normalPriceP, saveP, soldP, daysP, activeP);
+   		 return (select id from Cupon order by id desc limit 1);
    END;
 $$ LANGUAGE 'plpgsql';
 
@@ -120,7 +121,7 @@ $$ LANGUAGE 'plpgsql';
 
 CREATE FUNCTION  sp_add_Restriction_Info_Cupon(idCuponP integer, infoP text) RETURNS INTEGER AS $$
    BEGIN
-   		if exists(SELECT * FROM CUPON_RESTRICTION_INFO where info = infoP) then
+   		if exists(SELECT * FROM CUPON_RESTRICTION_INFO where info = infoP and idCupon = idCuponP) then 
             return 0;
       	else
             insert into CUPON_RESTRICTION_INFO(idCupon,info) values(idCuponP , infoP);
@@ -147,7 +148,7 @@ $$ LANGUAGE 'plpgsql';
 CREATE OR REPLACE FUNCTION  sp_getPromotions() 
 RETURNS SETOF PROMOTION AS $$
    BEGIN
-		RETURN QUERY SELECT * FROM PROMOTION;
+		RETURN QUERY SELECT * FROM PROMOTION where active = 1;
    END; $$
 LANGUAGE 'plpgsql';
 

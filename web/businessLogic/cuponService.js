@@ -1,25 +1,21 @@
 var repository = require('../dataAccess/repository.js');
 
-
-
-
 exports.createCupon = function(data, callback){
-    var paramsString =  "'"+data.title+"',"+
-                        "'"+data.subtitle+"',"+
-                        "'"+data.image+"',"+
-                            data.maxPrice+','+
-                            data.normalPrice+','+
-                            data.save+ ','+
-                            data.sold+ ','+
-                            data.days;
-
+    var paramsString =  "'"+data.info.title+"',"+
+                        "'"+data.info.subtitle+"',"+
+                        "'"+data.info.image+"',"+
+                            data.info.maxPrice+','+
+                            data.info.normalPrice+','+
+                            data.info.save+ ','+
+                            data.info.sold+ ','+
+                            data.info.days+',1';
     repository.executeQuery({
         spName:  'sp_addCupon',
         params: paramsString
     },
-    function(success, dataQuery) {
+    function(success, data) {
         if(success) {
-            if(dataQuery[0] == 0) {
+            if(data[0].sp_addcupon == 0) {
                 callback({
                     success: false, 
                     message: 'Ya existe un Cupon con ese nombre',
@@ -31,7 +27,7 @@ exports.createCupon = function(data, callback){
                 callback({
                     success: true, 
                     message: 'Se ha registrado la informacion del cupón de manera exitosa',
-                    data: dataQuery[0]
+                    data: data[0].sp_addcupon
                 });
                
             }
@@ -39,7 +35,7 @@ exports.createCupon = function(data, callback){
         else {
             callback({
                 success: false, 
-                message: 'Ha ocurrido un error, no se ha registrado el funcionario',
+                message: 'Ha ocurrido un error, no se ha registrado el cupon',
                 data: {}
             });
         }
@@ -48,15 +44,15 @@ exports.createCupon = function(data, callback){
 
 
 exports.createAdditionalInfoCupon = function(data, callback){
-    var paramsString =      data.idCupon + ","+ "'"+data.info+"'";
+    var paramsString = data.id + ","+ "'"+data.params.info+"'";
 
     repository.executeQuery({
         spName:  'sp_add_Additional_Info_Cupon',
         params: paramsString
     },
-    function(success, dataQuery) {
+    function(success, data) {
         if(success) {
-            if(dataQuery[0] == 0) {
+            if(data[0].sp_add_additional_info_cupon == 0) {
                 callback({
                     success: false, 
                     message: 'El cupon ya posee esa información adicional',
@@ -68,7 +64,7 @@ exports.createAdditionalInfoCupon = function(data, callback){
                 callback({
                     success: true, 
                     message: 'Se ha registrado la informacion del cupón de manera exitosa',
-                    data: dataQuery[0]
+                    data: data[0].sp_add_additional_info_cupon
                 });
                
             }
@@ -84,15 +80,15 @@ exports.createAdditionalInfoCupon = function(data, callback){
 };
 
 exports.createRestrictionInfoCupon = function(data, callback){
-    var paramsString =      data.idCupon + ","+ "'"+data.info+"'";
+    var paramsString = data.id + ","+ "'"+data.params.info+"'";
 
     repository.executeQuery({
         spName:  'sp_add_Restriction_Info_Cupon',
         params: paramsString
     },
-    function(success, dataQuery) {
+    function(success, data) {
         if(success) {
-            if(dataQuery[0] == 0) {
+            if(data[0].sp_add_restriction_info_cupon == 0) {
                 callback({
                     success: false, 
                     message: 'El cupon ya posee esa información de restricción',
@@ -104,7 +100,7 @@ exports.createRestrictionInfoCupon = function(data, callback){
                 callback({
                     success: true, 
                     message: 'Se ha registrado la informacion del cupón de manera exitosa',
-                    data: dataQuery[0]
+                    data: data[0].sp_add_restriction_info_cupon
                 });
                
             }
@@ -118,9 +114,6 @@ exports.createRestrictionInfoCupon = function(data, callback){
         }
     });    
 };
-
-
-
 
 exports.allCupons = function(callback){
     repository.executeQuery({
@@ -155,34 +148,3 @@ exports.allCupons = function(callback){
         }
     });
 };
-
-
-/*
-repository.executeQuery({
-                    spName:  'sp_get_Additional_Info_Cupon',
-                    params: data[0].id
-                },
-                function(success2, data2) {
-                    console.log(data2);
-                    if(success){
-                        data.additionalInfo  = data2;
-
-                        var paramsString2 = "'" + data[0][0].id + "'";
-
-                        repository.executeQuery({
-                            spName:  'sp_get_Restriction_Info_Cupon',
-                            params: paramsString2
-                        },
-                        function(success3, data3) {
-                            if(success){
-                                data.restrictionInfo  = data3;
-
-                                callback({
-                                    success: true, 
-                                    message: "Operación exitosa",
-                                    data: data
-                                });
-                            }  
-                        });
-                    }  
-                });*/

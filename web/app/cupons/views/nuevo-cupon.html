@@ -74,15 +74,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr >
-                                    
+                                <tr>       
                                     <td>
                                         <textarea class="form-control" type="text" align="justify" placeholder="Información" ng-model="inputCupon.additionalInfo.info" required></textarea>
                                     </td>
                                     <td>
                                         <button class="btn btn-primary btn-xs"  uib-tooltip="agregar" ng-click="validAdditionalInfoForm(additionalForm.$valid, inputCupon.additionalInfo)"><span class="glyphicon glyphicon-plus"></span></button>
-                                    <td>
-    
+                                    </td>
+                                </tr>
                                 <tr ng-repeat = "infoA in cupon.additionalInfo">
                                     <td>{{infoA.info}}</td>
                                     <td></td>  

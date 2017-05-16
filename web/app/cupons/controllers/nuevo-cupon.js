@@ -34,6 +34,7 @@
 
 
       $scope.addCupon = function(pData){
+        console.log(pData);
         cuponService.addCupon(pData).then(function(result) {
           if(result.success) {
             messageHandlerService.notifySuccess(null, result.message);
@@ -44,50 +45,49 @@
                 params: pData.additionalInfo[i] 
               };
               addAdditionalInfoCupon(data);
-                }
+            }
             for (i = 0; i < pData.restrictionInfo.length; i++) {
               var data = {
                 id: result.data,  
                 params: pData.restrictionInfo[i] 
               };
               addRestrictionInfoCupon(data);
-                }
-                $state.go('gestionar-cupones');
+            }
+            $state.go('gestionar-cupones');
           }
           else {
             messageHandlerService.notifyWarning(null, result.message);
           }
         });
-
-        };
+      };
       
 
       var addAdditionalInfoCupon = function(pData) {
           cuponService.addAdditionalInfoCupon(pData).then(function(result) {
-          if(!result.success) {
-            messageHandlerService.notifyWarning(null, result.message);            
-          }
-        });
+            if(!result.success) {
+              messageHandlerService.notifyWarning(null, result.message);            
+            }
+          });
         };
 
       var addRestrictionInfoCupon = function(pData) {
           cuponService.addRestrictionInfoCupon(pData).then(function(result) {
-          if(!result.success) {
-            messageHandlerService.notifyWarning(null, result.message);            
-          }
-        });
+            if(!result.success) {
+              messageHandlerService.notifyWarning(null, result.message);            
+            }
+          });
         };  
 
 
 
         $scope.validAdditionalInfoForm = function(pIsValid, pData) {
-        if(pIsValid && pData.grado != "") { 
-          addAdditionalInfo(pData);
-        }
-        else {
-          var message = 'Debe completar todos los campos de la información adicional de manera correcta';
-          messageHandlerService.notifyError(null, message);
-        }
+          if(pIsValid && pData.grado != "") { 
+            addAdditionalInfo(pData);
+          }
+          else {
+            var message = 'Debe completar todos los campos de la información adicional de manera correcta';
+            messageHandlerService.notifyError(null, message);
+          }
       };
 
       $scope.validRestrictionInfoForm = function(pIsValid, pData) {
@@ -103,25 +103,24 @@
 
       $scope.validatedCupon = function(pIsValid, pData) {
           if(pIsValid) { 
-          var result = completeAllCuponData(pData);
+            var result = completeAllCuponData(pData);
             if(result.success) {
               $scope.addCupon(pData);
             }
             else {
               messageHandlerService.notifyWarning(null, result.message);
             }
-        }
-        else {
-          var message = 'Debe completar la información de manera correcta';
-          messageHandlerService.notifyError(null, message);
-        }
+          }
+          else {
+            var message = 'Debe completar la información de manera correcta';
+            messageHandlerService.notifyError(null, message);
+          }
         };
 
 
       var addAdditionalInfo = function(pData) {
         var newAdditionalInfo = {
           info: pData.info
-
         };
         $scope.cupon.additionalInfo.push(newAdditionalInfo);
         cleanAdditionalInfo();
@@ -135,7 +134,7 @@
 
       var addRestrictionInfo = function(pData) {
           var newRestrictionInfo = {
-          info: pData.info
+            info: pData.info
           };
           $scope.cupon.restrictionInfo.push(newRestrictionInfo);
           cleanRestrictionInfo();
@@ -158,11 +157,8 @@
             status.success = false;
             status.message = 'Debe agregar todas las secciones de información';
           }
-     
           return status;
       };
-
-
 
       $scope.getUser = function() {
           $scope.user = shareSessionService.getSession();

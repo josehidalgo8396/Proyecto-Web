@@ -1,13 +1,10 @@
-<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<ul class="nav navbar-nav">
-			<li><a href="{{lol()}}">Cupones</a></li>
-      		<li><a href="{{lol()}">Promociones</a></li>
-		</ul>
-	</div>
-</nav>
+<div class="tab" >
+  	<button class="tablinks" ng-click="setTab()">Cupones</button>
+  	<button class="tablinks" ng-click="setTab()">Promociones</button>
+</div>
+<br>
 <div>
-	<div ng-show="p">
+	<div ng-show="tab">
 		<div class="panel panel-default" ng-repeat = "cupon in filteredCupons">	
 			<h3>Cupón</h3>
 			<h4>{{cupon.title}}</h4>
@@ -16,19 +13,22 @@
 			<h4>Ahorro:  {{cupon.save}}%</h4>
 			<img src={{cupon.image}} style="height: 100px;width: 200px">			
 		</div>
-		<ul uib-pagination total-items="maxSize" ng-model="currentPage" max-size="numPerPage" class="pagination-lg" boundary-links="true" rotate="false"></ul>
+		<div align="center">
+			<ul uib-pagination total-items="maxCuponSize" ng-model="currentCuponPage" max-size="numPerPage" class="pagination-lg" boundary-links="true" rotate="false"></ul>
+		</div>
 	</div>
-	<div ng-show="p">
-		hola
-		<!--
-		<div class="panel panel-default" ng-repeat = "prom in promotionList">	
+	<div ng-show="tab==false">
+		<div class="panel panel-default" ng-repeat = "prom in filteredPromotions">	
 			<h3>Promoción</h3>
 			<h4>{{prom.title}}</h4>
 			<h4>Precio normal: ₡{{prom.value}}000</h4>
 			<h4>Precio ahora: ₡{{prom.price}}000</h4>
 			<h4>Ahorro: {{prom.save}}%</h4>
 			<img src={{prom.image1}} style="height: 100px;width: 200px">			
-		</div>-->
+		</div>
+		<div align="center">
+			<ul uib-pagination total-items="maxPromotionSize" ng-model="currentPromotionPage" max-size="numPerPage" class="pagination-lg" boundary-links="true" rotate="false"></ul>
+		</div>
 	</div>
 </div>
 	
