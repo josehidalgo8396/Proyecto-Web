@@ -58,6 +58,25 @@
           templateUrl: 'contacto/views/contacto.html',
           controller: 'ContactoCtrl'
         })
+        .state('gestionar-cupones', {
+          url: '/cupones',
+          parent: 'prom',
+          templateUrl: 'cupons/views/gestion-cupon.html',
+          controller: 'GestionCuponCtrl'
+        })
+        .state('gestionar-promociones', {
+          url: '/promociones',
+          parent: 'prom',
+          templateUrl: 'promociones/views/gestion-promocion.html',
+          controller: 'GestionPromocionCtrl'
+        })
+        .state('nuevo-cupon', {
+          url: '/nuevo-cupon',
+          parent: 'prom',
+          templateUrl: 'cupons/views/nuevo-cupon.html',
+          controller: 'NuevoCuponCtrl'
+        })
+
     });
     window.fbAsyncInit = function() {
       FB.init({

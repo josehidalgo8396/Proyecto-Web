@@ -32,6 +32,9 @@ CREATE FUNCTION  sp_cambiarContrasena(usernameP text, currentPassP text, newPass
    END;
 $$ LANGUAGE 'plpgsql'; 
 
+
+-- ---------------------------- USER ---------------------------------------
+
 CREATE FUNCTION  sp_addUser(usernameP text, nameP text, passwordP text, rolP integer, activeP integer) RETURNS INTEGER AS $$
    BEGIN
    		if exists(SELECT * FROM UserTable where username = usernameP) then
@@ -60,12 +63,25 @@ CREATE FUNCTION  sp_disableUser(usernameP text) RETURNS VOID AS $$
    END;
 $$ LANGUAGE 'plpgsql';
  
+
+CREATE OR REPLACE FUNCTION  sp_getUsers()
+RETURNS SETOF UserTable AS $$
+   BEGIN
+		RETURN QUERY SELECT * FROM UserTable where active = 1;
+   END; $$
+LANGUAGE 'plpgsql';
+
+
+-- ------------------------    CUPON    -----------------------------------------
+ 
+ 
 CREATE OR REPLACE FUNCTION  sp_getCupons() 
 RETURNS SETOF CUPON AS $$
    	BEGIN
 		RETURN QUERY SELECT * FROM CUPON;
     END; $$
 LANGUAGE 'plpgsql';
+ 
 
 
 CREATE OR REPLACE FUNCTION  sp_get_Additional_Info_Cupon(idParam integer) 
@@ -82,6 +98,54 @@ RETURNS SETOF CUPON_RESTRICTION_INFO AS $$
 		RETURN QUERY SELECT * FROM CUPON_RESTRICTION_INFO where idCupon = idParam;
    END; $$
 LANGUAGE 'plpgsql';
+
+
+CREATE FUNCTION  sp_addCupon(titleP text, subtitleP text, imageP text, maxPriceP integer, normalPriceP integer,saveP integer, soldP integer, daysP integer) RETURNS INTEGER AS $$
+   BEGIN
+   		if exists(SELECT * FROM CUPON where title = titleP) then
+            return 0;
+      	else
+            insert into CUPON(title,subtitle,image,maxPrice,normalPrice,save,sold,days) values(titleP , subtitleP , imageP , maxPriceP , normalPriceP ,saveP , soldP , daysP ) returning id;
+        end if;
+   END;
+$$ LANGUAGE 'plpgsql';
+
+
+CREATE FUNCTION  sp_add_Additional_Info_Cupon(idCuponP integer, infoP text) RETURNS INTEGER AS $$
+   BEGIN
+   		if exists(SELECT * FROM CUPON_ADDITIONAL_INFO where info = infoP and idCupon = idCuponP) then
+            return 0;
+      	else
+            insert into CUPON_ADDITIONAL_INFO(idCupon,info) values(idCuponP , infoP);
+        	return 1;
+        end if;
+   END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE FUNCTION  sp_add_Restriction_Info_Cupon(idCuponP integer, infoP text) RETURNS INTEGER AS $$
+   BEGIN
+   		if exists(SELECT * FROM CUPON_RESTRICTION_INFO where info = infoP) then
+            return 0;
+      	else
+            insert into CUPON_RESTRICTION_INFO(idCupon,info) values(idCuponP , infoP);
+        	return 1;
+        end if;
+   END;
+$$ LANGUAGE 'plpgsql';
+
+
+CREATE FUNCTION  sp_updateCupon(idP integer, titleP text, subtitleP text, imageP text, maxPriceP integer, normalPriceP integer,saveP integer, soldP integer, daysP integer) RETURNS INTEGER AS $$  
+   BEGIN
+   		if exists(SELECT * FROM CUPON where title = titleP) then
+            update  CUPON set title = titleP, subtitle = subtitleP, image = imageP, maxPrice = maxPriceP, normalPrice = normalPriceP, save = saveP, sold = soldP, days = daysP where id = idP;
+            return 1;
+      	else
+        	return 0;
+        end if;
+   END;
+$$ LANGUAGE 'plpgsql';
+
+-- -------------------  PROMOCION    ----------------------------
 
 
 CREATE OR REPLACE FUNCTION  sp_getPromotions() 
@@ -108,11 +172,16 @@ RETURNS SETOF PROMOTION_MUST_KNOW_INFO AS $$
 LANGUAGE 'plpgsql';
 
 
-CREATE OR REPLACE FUNCTION  sp_getUsers()
-RETURNS SETOF UserTable AS $$
+CREATE FUNCTION  sp_addPromocion(titleP text, image1P text, image2P text, priceP float, valueP float,discountP integer, saveP float, soldP integer) RETURNS INTEGER AS $$
    BEGIN
-		RETURN QUERY SELECT * FROM UserTable where active = 1;
-   END; $$
-LANGUAGE 'plpgsql';
+   		if exists(SELECT * FROM PROMOTION where title = titleP) then
+            return 0;
+      	else
+            insert into PROMOTION(title,image1,image2,price,value,discount,save,sold) values(titleP , image1P , image2P , priceP , valueP ,discountP , saveP , soldP ) returning id;
+        end if;
+   END;
+$$ LANGUAGE 'plpgsql';
+
+
 
 

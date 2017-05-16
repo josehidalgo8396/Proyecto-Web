@@ -6,6 +6,9 @@ var express       = require('express'),
     userController  =require('./controllers/userController.js'),
     contactController   =require('./controllers/contactController.js');
     homeController = require('./controllers/homeController.js');
+    cuponController = require('./controllers/cuponController.js');
+    promotionController = require('./controllers/promotionController.js');
+
 
 app.use(bodyParser.urlencoded({
 	extended: true
@@ -31,9 +34,18 @@ app.put('/changePassword/:id', userController.changePassword);
 app.post('/sendMail', contactController.sendMail);
 
 
-app.get('/home/cupons',homeController.getAllCupons);
-app.get('/home/promotions',homeController.getAllPromotions);
+app.get('/home/cupones',homeController.getAllCupons);
+app.get('/home/promociones',homeController.getAllPromotions);
 
+
+app.get('/cupones',cuponController.getAllCupons);
+app.post('/cupones',cuponController.addCupon);
+app.post('/cupones/additionalInfo',cuponController.addAdditionalInfoCupon);
+app.post('/cupones/restrictionInfo',cuponController.addRestrictionInfoCupon);
+
+
+
+app.get('/promociones',promotionController.getAllPromotions);
 
 
 server.listen(8080, function(){

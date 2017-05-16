@@ -7,15 +7,12 @@
 	<div ng-controller="NavegacionCtrl">
 	    <nav class="navbar navbar-default navbar-custom" role="navigation">
 	    	<div class="container-fluid">
+	    	 <div class="navbar-header">
+     			 <a class="navbar-brand" href ="#/home">Home</a>
+   			 </div>
 		        <div class="collapse navbar-collapse " ng-class="!navCollapsed && 'in'">
 		            <ul class="nav navbar-nav">
-		                <li uib-dropdown>
-		                    <a uib-dropdown-toggle>
-		                        Menu
-		                        <b class='caret'></b>
-		                    </a>
-		                    <tree tree='menu'></tree>
-		                </li>
+						
 						<li uib-dropdown>
 		                    <a uib-dropdown-toggle>
 		                        Administración
@@ -23,7 +20,26 @@
 		                    </a>
 		                    <tree tree='administracion'></tree>
 		                </li>
+
+		                <li uib-dropdown>
+		                    <a uib-dropdown-toggle>
+		                        Cupones
+		                        <b class='caret'></b>
+		                    </a>
+		                    <tree tree='cupones'></tree>
+		                </li>
+
+		                <li uib-dropdown>
+		                    <a uib-dropdown-toggle>
+		                        Promociones
+		                        <b class='caret'></b>
+		                    </a>
+		                    <tree tree='promociones'></tree>
+		                </li>
+
 		            </ul>
+
+
 		            <ul class="nav navbar-nav navbar-right" class="list-group">
 		                <li uib-dropdown>
 		                    <a uib-dropdown-toggle>
@@ -34,6 +50,12 @@
 		                    <tree tree='sesion'></tree>
 		                </li>
 		            </ul>
+
+		             <ul class="nav navbar-nav navbar-right">
+      					<li><a href="#/contacto">Contacto</a></li>	
+    				</ul>
+
+
 		        </div>
 	        </div>
 	        <!-- /.navbar-collapse -->

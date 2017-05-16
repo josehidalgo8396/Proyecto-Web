@@ -25,29 +25,53 @@
                 }
             ];
 
-            $scope.menu = [
+            /*$scope.menu = [
                 {
                     name: "Home",
                     link: "home"
                 },
                 {
                     name: "Promociones",
-                    link: "promociones"
+                    link: "gestionar-promociones"
                 },
                 {
                     name: "Cupones",
-                    link: "cupones"
+                    link: "gestionar-cupones"
                 },
                 {
                     name: "Contacto",
                     link: "contacto"
                 }
-            ];
+            ];*/
+
+            
 
             $scope.administracion = [
                 {
-                    name: "Gestión de Usuarios",
+                    name: "Gestion de Usuarios",
                     link: "gestionar-usuarios"
+                }
+            ];
+
+            $scope.cupones = [
+                {
+                    name: "Agregar Cupón",
+                    link: "nuevo-cupon"
+                },
+                {
+                    name: "Gestionar Cupones",
+                    link: "gestionar-cupones"
+                }
+            ];
+
+            $scope.promociones = [
+                {
+                    name: "Agregar Promoción",
+                    link: "nueva-promocion"
+                },
+                {
+                    name: "Gestionar Promociones",
+                    link: "gestionar-promociones"
                 }
             ];
 

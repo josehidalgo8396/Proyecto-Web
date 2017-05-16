@@ -1,0 +1,137 @@
+<div>
+	<ol class="breadcrumb">
+        <li class="active">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cupones</li>
+        <li class="active">Nuevo Cupón</li>
+    </ol>
+    <div>
+    	<div class="container"> 
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p>Ingrese los datos del cupón</p>
+                    <form name="cuponForm" novalidate>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Subtítulo</th>
+                                    <th>Imagen</th>
+                                    <th>Precio Máximo</th>
+                                    <th>Precio Normal</th>
+                                    <th>Ahorro</th>
+                                    <th>Vendidos</th>
+                                    <th>Días</th>
+                                </tr>
+                            </thead>
+                            <tbody> 
+                                <tr>
+                                    <td>
+                                        <input class="form-control" type="text" placeholder="Título" required ng-model="cupon.info.title" required>
+                                        </input>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="text" placeholder="Subtitulo" required ng-model="cupon.info.subtitle" required>
+                                        </input>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="text" placeholder="Imagen" required ng-model="cupon.info.image" requiered>
+                                        </input>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" placeholder="Precio Máximo" required ng-model="cupon.info.maxPrice" requiered>
+                                        </input>
+                                    </td> 
+                                    <td>
+                                        <input class="form-control" type="number" placeholder="Precio Normal" required ng-model="cupon.info.normalPrice"> 
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" placeholder="Ahorro" required ng-model="cupon.info.save"> 
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" placeholder="Vendidos" required ng-model="cupon.info.sold"> 
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" placeholder="Días" required ng-model="cupon.info.days"> 
+                                    </td>
+                                </tr>             
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <h4>Información Adicional</h4>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p>Ingrese la información adicional del cupón</p>
+                    <form name="additionalForm" novalidate>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Información</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr >
+                                    
+                                    <td>
+                                        <textarea class="form-control" type="text" align="justify" placeholder="Información" ng-model="inputCupon.additionalInfo.info" required></textarea>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary btn-xs"  uib-tooltip="agregar" ng-click="validAdditionalInfoForm(additionalForm.$valid, inputCupon.additionalInfo)"><span class="glyphicon glyphicon-plus"></span></button>
+                                    <td>
+    
+                                <tr ng-repeat = "infoA in cupon.additionalInfo">
+                                    <td>{{infoA.info}}</td>
+                                    <td></td>  
+                                </tr>         
+                            </tbody>
+                        </table>
+                    </form>   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <h4>Información de Restriciones</h4>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p>Ingrese las restricciones del cupón</p>
+                    <form name="restrictionForm" novalidate>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Restricción</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <textarea class="form-control" type="text" align="justify" placeholder="Restricción" ng-model="inputCupon.restrictionInfo.info" required></textarea>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary btn-xs"  uib-tooltip="agregar" ng-click="validRestrictionInfoForm(restrictionForm.$valid, inputCupon.restrictionInfo)"><span class="glyphicon glyphicon-plus"></span></button>
+                                    </td>
+                                </tr>  
+                                <tr ng-repeat = "infoR in cupon.restrictionInfo"> 
+                                    <td>{{infoR.info}}</td> 
+                                    <td></td>  
+                                </tr>          
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+       </div>
+    </div>
+    <div>
+        <div class="container">
+            <button class="btn btn-primary center-block" ng-click="validatedCupon(cuponForm.$valid, cupon)">Agregar Cupón</button> 
+            <br></br>
+       </div>
+    </div>
+</div>

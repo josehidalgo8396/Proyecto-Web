@@ -5,7 +5,7 @@
 		.factory("HomeService", ["requestService", function(requestService) {
 
 			var getC = function() {
-				var link = "/home/cupons";
+				var link = "/home/cupones";
 				return requestService.getRequest({params: ""}, {url: link}).then(function(result){
 	  				return result;
 	  			},
@@ -15,7 +15,7 @@
 			};
 
 			var getP = function() {
-				var link = "/home/promotions";
+				var link = "/home/promociones";
 				return requestService.getRequest({params: ""}, {url: link}).then(function(result){
 	  				return result;
 	  			},
