@@ -22,6 +22,7 @@ CREATE TABLE CUPON
     save integer NOT NULL,
     sold integer NOT NULL,
     days integer NOT NULL,
+    active integer NOT NULL,
     CONSTRAINT cupon_pkey PRIMARY KEY (id)
 )
 WITH (
@@ -62,6 +63,7 @@ CREATE TABLE PROMOTION
     discount integer NOT NULL,
     save float NOT NULL,
     sold integer NOT NULL,
+    active integer NOT NULL,
     CONSTRAINT promotion_pkey PRIMARY KEY (id)
 )
 WITH (

@@ -100,13 +100,9 @@ RETURNS SETOF CUPON_RESTRICTION_INFO AS $$
 LANGUAGE 'plpgsql';
 
 
-CREATE FUNCTION  sp_addCupon(titleP text, subtitleP text, imageP text, maxPriceP integer, normalPriceP integer,saveP integer, soldP integer, daysP integer) RETURNS INTEGER AS $$
+CREATE FUNCTION  sp_addCupon(titleP text, subtitleP text, imageP text, maxPriceP integer, normalPriceP integer,saveP integer, soldP integer, daysP integer,activeP integer) RETURNS INTEGER AS $$
    BEGIN
-   		if exists(SELECT * FROM CUPON where title = titleP) then
-            return 0;
-      	else
-            insert into CUPON(title,subtitle,image,maxPrice,normalPrice,save,sold,days) values(titleP , subtitleP , imageP , maxPriceP , normalPriceP ,saveP , soldP , daysP ) returning id;
-        end if;
+		 insert into CUPON(title,subtitle,image,maxPrice,normalPrice,save,sold,days,active) values(titleP , subtitleP , imageP , maxPriceP , normalPriceP ,saveP , soldP , daysP, activeP ) returning id;
    END;
 $$ LANGUAGE 'plpgsql';
 
@@ -134,10 +130,10 @@ CREATE FUNCTION  sp_add_Restriction_Info_Cupon(idCuponP integer, infoP text) RET
 $$ LANGUAGE 'plpgsql';
 
 
-CREATE FUNCTION  sp_updateCupon(idP integer, titleP text, subtitleP text, imageP text, maxPriceP integer, normalPriceP integer,saveP integer, soldP integer, daysP integer) RETURNS INTEGER AS $$  
+CREATE FUNCTION  sp_updateCupon(idP integer, titleP text, subtitleP text, imageP text, maxPriceP integer, normalPriceP integer,saveP integer, soldP integer, daysP integer,activeP integer) RETURNS INTEGER AS $$  
    BEGIN
-   		if exists(SELECT * FROM CUPON where title = titleP) then
-            update  CUPON set title = titleP, subtitle = subtitleP, image = imageP, maxPrice = maxPriceP, normalPrice = normalPriceP, save = saveP, sold = soldP, days = daysP where id = idP;
+   		if exists(SELECT * FROM CUPON where id = idP) then
+            update  CUPON set title = titleP, subtitle = subtitleP, image = imageP, maxPrice = maxPriceP, normalPrice = normalPriceP, save = saveP, sold = soldP, days = daysP, active = activeP where id = idP;
             return 1;
       	else
         	return 0;
@@ -172,16 +168,23 @@ RETURNS SETOF PROMOTION_MUST_KNOW_INFO AS $$
 LANGUAGE 'plpgsql';
 
 
-CREATE FUNCTION  sp_addPromocion(titleP text, image1P text, image2P text, priceP float, valueP float,discountP integer, saveP float, soldP integer) RETURNS INTEGER AS $$
+CREATE FUNCTION  sp_addPromotion(titleP text, image1P text, image2P text, priceP float, valueP float,discountP integer, saveP float, soldP integer, activeP integer) RETURNS INTEGER AS $$
    BEGIN
-   		if exists(SELECT * FROM PROMOTION where title = titleP) then
-            return 0;
-      	else
-            insert into PROMOTION(title,image1,image2,price,value,discount,save,sold) values(titleP , image1P , image2P , priceP , valueP ,discountP , saveP , soldP ) returning id;
-        end if;
+		 insert into PROMOTION(title,image1,image2,price,value,discount,save,sold,active) values(titleP , image1P , image2P , priceP , valueP ,discountP , saveP , soldP, activeP ) returning id;
    END;
 $$ LANGUAGE 'plpgsql';
 
+
+CREATE FUNCTION  sp_updatePromotion(idP integer, titleP text, image1P text, image2P text, priceP float, valueP float,discountP integer, saveP float, soldP integer, activeP integer) RETURNS INTEGER AS $$  
+   BEGIN
+   		if exists(SELECT * FROM PROMOTION where id = idP) then
+            update  PROMOTION set title = titleP, image1 = image1P, image2 = image2P, price = priceP, value = valueP, discount = discountP, save = saveP, sold = soldP, active = activeP where id = idP;
+            return 1;
+      	else
+        	return 0;
+        end if;
+   END;
+$$ LANGUAGE 'plpgsql';
 
 
 
