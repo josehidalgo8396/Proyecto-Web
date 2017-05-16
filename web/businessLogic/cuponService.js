@@ -45,7 +45,7 @@ exports.createCupon = function(data, callback){
 
 exports.createAdditionalInfoCupon = function(data, callback){
     var paramsString = data.id + ","+ "'"+data.params.info+"'";
-
+    
     repository.executeQuery({
         spName:  'sp_add_Additional_Info_Cupon',
         params: paramsString

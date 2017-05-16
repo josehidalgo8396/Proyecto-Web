@@ -76,6 +76,12 @@
           templateUrl: 'cupons/views/nuevo-cupon.html',
           controller: 'NuevoCuponCtrl'
         })
+        .state('nueva-promocion', {
+          url: '/nueva-promocion',
+          parent: 'prom',
+          templateUrl: 'promociones/views/nueva-promocion.html',
+          controller: 'NuevaPromocionCtrl'
+        })
 
     });
     window.fbAsyncInit = function() {

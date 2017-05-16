@@ -46,6 +46,9 @@ app.post('/cupones/restrictionInfo',cuponController.addRestrictionInfoCupon);
 
 
 app.get('/promociones',promotionController.getAllPromotions);
+app.post('/promociones',promotionController.addPromotion);
+app.post('/promociones/importantInfo',promotionController.addImportantInfoPromotion);
+app.post('/promociones/mustKnowInfo',promotionController.addMustKnowInfoPromotion);
 
 
 server.listen(8080, function(){
