@@ -2,8 +2,8 @@
   'use strict';
   angular
     .module('webApp')
-    .controller('NuevaPromocionCtrl', ["$scope", "PromocionService", "messageHandlerService" , "shareSessionService",
-     function ($scope, promocionService, messageHandlerService, shareSessionService) {
+    .controller('NuevaPromocionCtrl', ["$scope", "PromocionService", "messageHandlerService" , "shareSessionService","$state",
+     function ($scope, promocionService, messageHandlerService, shareSessionService,$state) {
   
       $scope.user = {};
 

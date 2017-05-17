@@ -212,3 +212,5 @@ CREATE FUNCTION  sp_updatePromotion(idP integer, titleP text, image1P text, imag
    END;
 $$ LANGUAGE 'plpgsql';
 
+
+

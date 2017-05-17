@@ -32,7 +32,7 @@ exports.createPromotion = function(data, callback){
                 callback({
                     success: true, 
                     message: 'Se ha registrado la informacion de la promoción de manera exitosa',
-                    data: data[0].sp_addcupon
+                    data: data[0].sp_addpromotion
                 });
                
             }
