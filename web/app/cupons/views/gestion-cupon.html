@@ -41,9 +41,7 @@
                         <tbody>
                             <tr ng-repeat="cupon in filters=(cuponList | filter:mdlTag)">
                                 <td><span><img src="{{cupon.image}}" style="height: 50px; width: 100px"> </span>{{cupon.title}}</td>
-                                
                                 <td style="white-space: nowrap">
-                                    
                                     <button class="btn btn-warning btn-xs"  uib-tooltip="editar" ng-click="sendToUpdateCuponView(cupon.id)"><span class="glyphicon glyphicon-pencil">
                                     </button>
                                     <button class="btn btn-danger btn-xs"  uib-tooltip="desactivar" ng-click="disableCupon(cupon.id)"><span class="glyphicon glyphicon-trash">

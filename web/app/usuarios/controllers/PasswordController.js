@@ -16,7 +16,9 @@
 			};
 
 			$scope.getUser = function() {
-				$scope.inputUser.usuario = shareSessionService.getSession();
+				var session = shareSessionService.getSession();
+        		$scope.inputUser.usuario = session.usuario;
+        		$scope.inputUser.rol = session.rol;
 			};
 
 			$scope.getUser();

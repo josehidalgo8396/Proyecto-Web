@@ -18,8 +18,8 @@ exports.validateUser = function(data, callback){
     }, 
     function(success, data2) {
         if(success) {
-            if(data2.sp_login != undefined) {
-                if(data2.sp_login == 0) {
+            if(data2[0].sp_login != undefined) {
+                if(data2[0].sp_login == -1) {
                     callback({
                         status: false, 
                         message: 'Usuario o contraseña no válida',
@@ -30,7 +30,7 @@ exports.validateUser = function(data, callback){
                     callback({
                         status: true, 
                         message: 'Usuario válido',
-                        data: {}
+                        data: data2[0].sp_login
                     });
                 }
             }

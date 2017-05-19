@@ -29,7 +29,9 @@
 
 
       $scope.getUser = function() {
-        $scope.user = shareSessionService.getSession();
+        var session = shareSessionService.getSession();
+        $scope.user.usuario = session.usuario;
+        $scope.user.rol = session.rol;
       };
 
 
@@ -74,15 +76,15 @@
         });
 
         modalInstance.result.then(
-        function (confirmationResponse) {
-          callback({
-            success: confirmationResponse
+          function (confirmationResponse) {
+            callback({
+              success: confirmationResponse
+            });
+          }, function () {
+            callback({
+              success: false
+            });
           });
-        }, function () {
-          callback({
-            success: false
-          });
-        });
       };
 
 

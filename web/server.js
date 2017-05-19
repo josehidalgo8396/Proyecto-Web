@@ -39,6 +39,9 @@ app.get('/home/promociones',homeController.getAllPromotions);
 
 
 app.get('/cupones',cuponController.getAllCupons);
+app.get('/cupones/:id', cuponController.getCupon);
+app.get('/cupones/restrictionInfo/:id', cuponController.getRestrictionInfo);
+app.get('/cupones/additionalInfo/:id', cuponController.getAdditionalInfo);
 app.post('/cupones',cuponController.addCupon);
 app.post('/cupones/additionalInfo',cuponController.addAdditionalInfoCupon);
 app.post('/cupones/restrictionInfo',cuponController.addRestrictionInfoCupon);

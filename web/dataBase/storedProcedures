@@ -1,9 +1,9 @@
 CREATE OR REPLACE FUNCTION  sp_login(usernameP text, passwordP text) RETURNS INTEGER AS $$
    BEGIN
 		if exists(SELECT * FROM UserTable where username = usernameP and password = passwordP) then
-            return 1;
+            return (select rol from UserTable where username = usernameP);
       	else
-        	return 0;
+        	return -1;
         end if;
    END;
 $$ LANGUAGE 'plpgsql'
@@ -92,10 +92,17 @@ RETURNS SETOF CUPON_ADDITIONAL_INFO AS $$
 LANGUAGE 'plpgsql';
 
 
-CREATE OR REPLACE FUNCTION  sp_get_Restriction_Info_Cupon(idParam integer) 
+CREATE OR REPLACE FUNCTION  sp_get_Restriction_Info_Cupon(idParam integer)
 RETURNS SETOF CUPON_RESTRICTION_INFO AS $$
    BEGIN
 		RETURN QUERY SELECT * FROM CUPON_RESTRICTION_INFO where idCupon = idParam;
+   END; $$
+LANGUAGE 'plpgsql';
+
+CREATE OR REPLACE FUNCTION  sp_get_Cupon(idParam integer) 
+RETURNS SETOF CUPON AS $$
+   BEGIN
+		RETURN QUERY SELECT * FROM CUPON where id = idParam;
    END; $$
 LANGUAGE 'plpgsql';
 

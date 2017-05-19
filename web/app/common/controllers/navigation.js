@@ -13,7 +13,7 @@
         .module('webApp')
         .controller('NavegacionCtrl',['$scope','shareSessionService', 'messageHandlerService', '$state',  
         function ($scope, shareSessionService, messageHandlerService, $state) {
-            $scope.username = '';   
+            $scope.user = {};   
             $scope.sesion = [
                 {
                     name: "Cerrar Sesión",
@@ -75,17 +75,18 @@
                 }
             ];
 
-            $scope.getUserName = function() {
+            $scope.getUser = function() {
                 if(shareSessionService.isStartSession()) {
                     var session = shareSessionService.getSession();
-                    $scope.username = session.usuario;
+                    $scope.user.usuario = session.usuario;
+                    $scope.user.rol = session.rol;
                 }
                 else{
                     $state.go("login");
                 }  
             };
 
-            $scope.getUserName();
+            $scope.getUser();
          
         }]);    
 })();

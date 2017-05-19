@@ -185,3 +185,75 @@ exports.allCupons = function(callback){
         }
     });
 };
+
+exports.getCupon = function(data, callback){
+    repository.executeQuery({
+        spName: 'sp_get_Cupon',
+        params: data.id
+    }, 
+    function(success, data) {
+        if(success) {
+            callback({
+                success: true, 
+                message: "Operación exitosa",
+                data: data[0]
+            });
+        } 
+        else{
+            callback(
+            {
+                success: false,
+                data: null,
+                message: "No se pudo obtener la información del cupón"
+            });
+        }
+    });
+};
+
+exports.getAdditionalInfo = function(data, callback){
+    repository.executeQuery({
+        spName: 'sp_get_Additional_Info_Cupon',
+        params: data.id
+    }, 
+    function(success, data) {
+        if(success) {
+            callback({
+                success: true, 
+                message: "Operación exitosa",
+                data: data
+            });
+        } 
+        else{
+            callback(
+            {
+                success: false,
+                data: null,
+                message: "No se pudo obtener la información adicional del cupón"
+            });
+        }
+    });
+};
+
+exports.getRestrictionInfo = function(data, callback){
+    repository.executeQuery({
+        spName: 'sp_get_Restriction_Info_Cupon',
+        params: data.id
+    }, 
+    function(success, data) {
+        if(success) {
+            callback({
+                success: true, 
+                message: "Operación exitosa",
+                data: data
+            });
+        } 
+        else{
+            callback(
+            {
+                success: false,
+                data: null,
+                message: "No se pudo obtener la información de restricción del cupón"
+            });
+        }
+    });
+};

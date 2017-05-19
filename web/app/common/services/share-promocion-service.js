@@ -17,10 +17,10 @@
             };
 
             return  {
-                setCuponId: function(pId) {
+                setPromocionId: function(pId) {
                     return setId(pId);
                 },
-                getCuponId: function() {
+                getPromocionId: function() {
                     return getId();
                 }
             };

@@ -1,7 +1,7 @@
 (function(){
     'use strict';
     angular
-        .module('saaApp')
+        .module('webApp')
         .service('shareCuponService', function() {
 
             var cuponData = {

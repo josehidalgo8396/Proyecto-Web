@@ -29,7 +29,8 @@
 			$scope.login = function(pData) {
 				loginService.logIn(pData).then(function(result) {
 					if(result.success) {
-						shareSessionService.setSession(pData.userName);
+						var session = {username: pData.userName, rol: result.data};
+						shareSessionService.setSession(session);
 						welcomeMessage(pData.userName);
 				        sendToHome();
 					}
@@ -46,7 +47,8 @@
 							var data = {type: "facebook", rol:0, name: response.name, password:response.email, username: response.email};
 							loginService.logIn(data).then(function(result) {
 								if(result.success) {
-									shareSessionService.setSession(data.userName);
+									var session = {username: data.username, rol: 0};
+									shareSessionService.setSession(session);
 									welcomeMessage(data.name);
 				        			sendToHome();
 								}

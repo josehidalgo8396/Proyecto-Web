@@ -11,8 +11,7 @@
 					<a class="navbar-brand" href ="#/home">Home</a>
 				</div>
 		        <div class="collapse navbar-collapse " ng-class="!navCollapsed && 'in'">
-		            <ul class="nav navbar-nav">
-						
+		            <ul ng-if="user.rol == 1" class="nav navbar-nav">
 						<li uib-dropdown>
 		                    <a uib-dropdown-toggle>
 		                        Administración
@@ -38,13 +37,11 @@
 		                </li>
 
 		            </ul>
-
-
 		            <ul class="nav navbar-nav navbar-right" class="list-group">
 		                <li uib-dropdown>
 		                    <a uib-dropdown-toggle>
 		                    	<i class="glyphicon glyphicon-user"></i>
-		                        {{username}}
+		                        {{user.usuario}}
 		                        <b class='caret'></b>
 		                    </a>
 		                    <tree tree='sesion'></tree>

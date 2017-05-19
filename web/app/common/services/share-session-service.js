@@ -13,17 +13,21 @@
         .service('shareSessionService', function() {
 
             var setCurrentSession = function(pData) {
-                var sessionData = JSON.stringify(pData);
-                localStorage.setItem('user', sessionData);
+                console.log(pData);
+                localStorage.setItem('user', pData.username);
+                localStorage.setItem('rol', pData.rol);
             };
 
             var getCurrentSession = function() {
-                var dataSession = JSON.parse(localStorage.getItem('user'));
+                var user = localStorage.getItem('user');
+                var rol = parseInt(localStorage.getItem('rol'));
+                var dataSession = {usuario: user, rol: rol};
                 return dataSession;
             };
 
             var deleteCurrentSession = function() {
                 localStorage.removeItem('user');
+                localStorage.removeItem('rol');
             };
 
             var getSessionStatus = function() {

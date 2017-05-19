@@ -16,7 +16,7 @@ div.tab {
     overflow: hidden;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
-    width: 29%;
+    width: 27.5%;
     margin: auto;
 }
 
@@ -27,7 +27,7 @@ div.tab button {
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 14px 56.5px;
+    padding: 4% 15%;
     transition: 0.3s;
 }
 

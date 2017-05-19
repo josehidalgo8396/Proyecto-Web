@@ -82,7 +82,12 @@
           templateUrl: 'promociones/views/nueva-promocion.html',
           controller: 'NuevaPromocionCtrl'
         })
-
+        .state('editar-cupon', {
+          url: '/editar-cupon',
+          parent: 'prom',
+          templateUrl: 'cupons/views/editar-cupon.html',
+          controller: 'EditarCuponCtrl'
+        })
     });
     window.fbAsyncInit = function() {
       FB.init({

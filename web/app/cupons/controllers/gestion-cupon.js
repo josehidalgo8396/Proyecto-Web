@@ -2,8 +2,8 @@
   'use strict';
   angular
     .module('webApp')
-    .controller('GestionCuponCtrl', ["$scope", "CuponService", "messageHandlerService" , "shareSessionService","$uibModal","confirmationModalService",
-     function ($scope, cuponService, messageHandlerService, shareSessionService, $uibModal,confirmationModalService) {
+    .controller('GestionCuponCtrl', ["$scope", "$state", "CuponService", "messageHandlerService" , "shareSessionService","$uibModal","confirmationModalService", "shareCuponService", 
+     function ($scope, $state, cuponService, messageHandlerService, shareSessionService, $uibModal,confirmationModalService, shareCuponService) {
   
       $scope.user = {};
       $scope.cuponList = [];
@@ -29,15 +29,16 @@
       };
 
       $scope.getUser = function() {
-        $scope.user = shareSessionService.getSession();
+          var session = shareSessionService.getSession();
+          $scope.user.usuario = session.usuario;
+          $scope.user.rol = session.rol;
       };
 
-    /*
+    
       $scope.sendToUpdateCuponView = function(pId) {
         shareCuponService.setCuponId(pId);
         $state.go('editar-cupon');
       };
-          */
 
       $scope.disableCupon = function(pId) {
         $scope.openConfirmationModal(function(response){
@@ -73,18 +74,16 @@
         });
 
         modalInstance.result.then(
-        function (confirmationResponse) {
-          callback({
-            success: confirmationResponse
-          });
-        }, function () {
-          callback({
-            success: false
-          });
+          function (confirmationResponse) {
+            callback({
+              success: confirmationResponse
+            });
+          }, function () {
+            callback({
+              success: false
+            });
         });
       };
-
-
 
       $scope.getUser();
       $scope.getCupons();
