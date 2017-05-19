@@ -42,6 +42,7 @@ app.get('/cupones',cuponController.getAllCupons);
 app.post('/cupones',cuponController.addCupon);
 app.post('/cupones/additionalInfo',cuponController.addAdditionalInfoCupon);
 app.post('/cupones/restrictionInfo',cuponController.addRestrictionInfoCupon);
+app.put('/cupones/disable/:id',cuponController.disableCupon);
 
 
 
@@ -49,6 +50,7 @@ app.get('/promociones',promotionController.getAllPromotions);
 app.post('/promociones',promotionController.addPromotion);
 app.post('/promociones/importantInfo',promotionController.addImportantInfoPromotion);
 app.post('/promociones/mustKnowInfo',promotionController.addMustKnowInfoPromotion);
+app.put('/promociones/disable/:id',promotionController.disablePromotion);
 
 
 server.listen(8080, function(){

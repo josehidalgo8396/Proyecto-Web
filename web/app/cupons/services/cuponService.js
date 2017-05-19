@@ -46,8 +46,40 @@
 			};
 
 
-			/*var updateC =	 function(pData) {
-                var link = '/cupons/';                  
+			var updateC =	 function(pData) {
+                var link = '/cupones/';                  
+                return  requestService.putRequest({data: pData, params: pData.id}, {url: link}).then(function(pResp) {
+                    return pResp;
+                },
+                function(pResp){
+                    return pResp;
+                });
+            };
+            
+            
+            var disableC = function(pData) {
+				var link = '/cupones/disable/';                  
+				return  requestService.putRequest({data: pData, params: pData.id}, {url: link}).then(function(pResp) {
+					return pResp;
+				},
+				function(pResp){
+					return pResp;
+				});
+			};
+				
+
+			var getCuponById = function(pId) {
+                var link = '/cupones/';
+                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {
+                    return pResp; 
+                },  
+                function(pResp){
+                    return pResp;   
+                });
+            };
+
+            var updateAInfoCupon =	 function(pData) {
+                var link = '/cupones/additionalInfo';                  
                 return  requestService.putRequest({data: pData, params: pData.id}, {url: link}).then(function(pResp) {
                     return pResp;
                 },
@@ -56,25 +88,35 @@
                 });
             };
 
-            var disableC = function(pData) {
-				var link = '/cupons/disable/';                  
-				return  requestService.putRequest({data: pData, params: pData.id}, {url: link}).then(function(pResp) {
-					return pResp;
-				},
-				function(pResp){
-					return pResp;
-				});
-			};
-
-			var getCuponById = function(pId) {
-                var link = '/cupons/';
-                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {
+            var updateRInfoCupon =	 function(pData) {
+                var link = '/cupones/restrictionInfo';                  
+                return  requestService.putRequest({data: pData, params: pData.id}, {url: link}).then(function(pResp) {
+                    return pResp;
+                },
+                function(pResp){
+                    return pResp;
+                });
+            };
+            var getAInfoCuponById = function(pId) {
+             	var link = '/cupones/additionalInfo/';
+                
+                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {//corregir como se envian los datos
                     return pResp; 
                 },  
                 function(pResp){
                     return pResp;   
                 });
-            };*/
+            };
+            var getRInfoCuponById = function(pId) {
+                var link = '/cupones/restrictionInfo/';
+                
+                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {//corregir como se envian los datos
+                    return pResp; 
+                },  
+                function(pResp){
+                    return pResp;   
+                });
+            };
 
 
 			return {
@@ -89,9 +131,7 @@
 				},
 				addRestrictionInfoCupon: function(pData){
 					return addRInfoCupon(pData);
-				}
-
-				/*,
+				},
 				updateCupon: function(pData){
 					return updateC(pData);
 				},
@@ -100,8 +140,19 @@
 				},
 				getCupon: function(pId){
 					return getCuponById(pId);
-				}*/
-				
+				},
+				updateAdditionalInfoCupon: function(pData){
+					return updateAInfoCupon(pData);
+				},
+				updateRestrictionInfoCupon: function(pData){
+					return updateRInfoCupon(pData);
+				},
+				getAdditionalInfoCupon: function(pId){
+					return getAInfoCuponById(pId);
+				},
+				getRestrictionInfoCupon: function(pId){
+					return getRInfoCuponById(pId);
+				}
 			};
 		}]);
 })();

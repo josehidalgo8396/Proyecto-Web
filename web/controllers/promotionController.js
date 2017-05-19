@@ -23,22 +23,15 @@ exports.addMustKnowInfoPromotion= function(dRequest, dResponse) {
 
 
 
-/*exports.addCupon= function(dRequest, dResponse) {
-    var data = cuponService.addCupon(dRequest.body, function(data) {
-        dResponse.send(data);
-    });
-};
-*/
-
 /*
 exports.updateCupon= function(dRequest, dResponse) {
     var data = cuponService.updateCupon(dRequest.body, function(data) {
         dResponse.send(data);
     });
 };
-
-exports.disableCupon= function(dRequest, dResponse) {
-    var data = cuponService.disableCupon(dRequest.body, function(data) {
+*/
+exports.disablePromotion= function(dRequest, dResponse) {
+    var data = promotionService.disablePromotion(dRequest.body, function(data) {
         dResponse.send(data);
     });
-};*/
+};

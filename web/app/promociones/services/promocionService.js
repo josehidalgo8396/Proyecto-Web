@@ -45,8 +45,40 @@
 	  			});
 			};
 
-			/*var updateC = function(pData) {
-                var link = '/cupons/';                  
+			var updateP =	 function(pData) {
+                var link = '/promociones/';                  
+                return  requestService.putRequest({data: pData, params: pData.id}, {url: link}).then(function(pResp) {
+                    return pResp;
+                },
+                function(pResp){
+                    return pResp;
+                });
+            };
+            
+            
+            var disableP = function(pData) {
+				var link = '/promociones/disable/';                  
+				return  requestService.putRequest({data: pData, params: pData.id}, {url: link}).then(function(pResp) {
+					return pResp;
+				},
+				function(pResp){
+					return pResp;
+				});
+			};
+				
+
+			var getPromotionById = function(pId) {
+                var link = '/promociones/';
+                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {
+                    return pResp; 
+                },  
+                function(pResp){
+                    return pResp;   
+                });
+            };
+
+            var updateIInfoPromo =	 function(pData) {
+                var link = '/promociones/importantInfo';                  
                 return  requestService.putRequest({data: pData, params: pData.id}, {url: link}).then(function(pResp) {
                     return pResp;
                 },
@@ -55,25 +87,35 @@
                 });
             };
 
-            var disableC = function(pData) {
-				var link = '/cupons/disable/';                  
-				return  requestService.putRequest({data: pData, params: pData.id}, {url: link}).then(function(pResp) {
-					return pResp;
-				},
-				function(pResp){
-					return pResp;
-				});
-			};
-
-			var getCuponById = function(pId) {
-                var link = '/cupons/';
-                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {
+            var updateMKInfoPromo =	 function(pData) {
+                var link = '/promociones/mustKnowInfo';                  
+                return  requestService.putRequest({data: pData, params: pData.id}, {url: link}).then(function(pResp) {
+                    return pResp;
+                },
+                function(pResp){
+                    return pResp;
+                });
+            };
+            var getIInfoPromoById = function(pId) {
+             	var link = '/promociones/importantInfo/';
+                
+                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {//corregir como se envian los datos
                     return pResp; 
                 },  
                 function(pResp){
                     return pResp;   
                 });
-            };*/
+            };
+            var getMKInfoPromoById = function(pId) {
+                var link = '/promociones/mustKnowInfo/';
+                
+                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {//corregir como se envian los datos
+                    return pResp; 
+                },  
+                function(pResp){
+                    return pResp;   
+                });
+            };
 
 
 			return {
@@ -88,20 +130,29 @@
 				},
 				addMustKnowInfoPromotion: function(pData){
 					return addMKInfoPromo(pData);
-				}
-
-				/*
-				,
-				updateCupon: function(pData){
-					return updateC(pData);
 				},
-				disableCupon: function(pData){
-					return disableC(pData);
+				updatePromotion: function(pData){
+					return updateP(pData);
 				},
-				getCupon: function(pId){
-					return getCuponById(pId);
+				disablePromotion: function(pData){
+					return disableP(pData);
+				},
+				getPromotion: function(pId){
+					return getPromotionById(pId);
+				},
+				updateImportantInfoPromotion: function(pData){
+					return updateIInfoPromo(pData);
+				},
+				updateMustKnowInfoPromotion: function(pData){
+					return updateMKInfoPromo(pData);
+				},
+				getImportantInfoPromotion: function(pId){
+					return getIInfoPromoById(pId);
+				},
+				getMustKnowInfoPromotion: function(pId){
+					return getMKInfoPromoById(pId);
 				}
-				*/
+				
 			};
 		}]);
 })();

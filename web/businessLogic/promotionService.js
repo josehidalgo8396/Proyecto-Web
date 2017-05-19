@@ -123,6 +123,41 @@ exports.createMustKnowInfoPromotion = function(data, callback){
 };
 
 
+exports.disablePromotion = function(data, callback){
+
+    repository.executeQuery({
+        spName:  'sp_disablePromotion',
+        params: data.id
+    },
+    function(success, data) {
+        if(success) {
+            if(data[0].sp_disablepromotion == 0) {
+                callback({
+                    success: false, 
+                    message: 'Esa promoción no existe en el sistema',
+                    data: {}
+                });
+            }
+            else{
+                
+                callback({
+                    success: true, 
+                    message: 'Se ha deshabilitado la promoción de manera exitosa',
+                    data: data[0].sp_disablepromotion
+                });
+               
+            }
+        } 
+        else {
+            callback({
+                success: false, 
+                message: 'Ha ocurrido un error, no se ha deshabilitado la promoción',
+                data: {}
+            });
+        }
+    });    
+};
+
 
 exports.allPromotions= function(callback){
     repository.executeQuery({

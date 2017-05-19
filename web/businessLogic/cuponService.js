@@ -115,6 +115,43 @@ exports.createRestrictionInfoCupon = function(data, callback){
     });    
 };
 
+
+exports.disableCupon = function(data, callback){
+
+    repository.executeQuery({
+        spName:  'sp_disableCupon',
+        params: data.id
+    },
+    function(success, data) {
+        if(success) {
+            if(data[0].sp_disablecupon == 0) {
+                callback({
+                    success: false, 
+                    message: 'Ese cupón no existe en el sistema',
+                    data: {}
+                });
+            }
+            else{
+                
+                callback({
+                    success: true, 
+                    message: 'Se ha deshabilitado el cupón de manera exitosa',
+                    data: data[0].sp_disablecupon
+                });
+               
+            }
+        } 
+        else {
+            callback({
+                success: false, 
+                message: 'Ha ocurrido un error, no se ha deshabilitado el cupon',
+                data: {}
+            });
+        }
+    });    
+};
+
+
 exports.allCupons = function(callback){
     repository.executeQuery({
         spName: 'sp_getCupons',

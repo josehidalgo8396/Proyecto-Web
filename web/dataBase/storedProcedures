@@ -142,6 +142,17 @@ CREATE FUNCTION  sp_updateCupon(idP integer, titleP text, subtitleP text, imageP
    END;
 $$ LANGUAGE 'plpgsql';
 
+CREATE FUNCTION  sp_disableCupon(idP integer) RETURNS INTEGER AS $$  
+   BEGIN
+   		if exists(SELECT * FROM CUPON where id = idP) then
+            update  CUPON set active = 0 where id = idP;
+            return 1;
+      	else
+        	return 0;
+        end if;
+   END;
+$$ LANGUAGE 'plpgsql';
+
 -- -------------------  PROMOCION    ----------------------------
 
 
@@ -200,7 +211,6 @@ CREATE FUNCTION  sp_add_Must_Know_Info_Promotion(idPromotionP integer, infoP tex
 $$ LANGUAGE 'plpgsql';
 
 
-
 CREATE FUNCTION  sp_updatePromotion(idP integer, titleP text, image1P text, image2P text, priceP float, valueP float,discountP integer, saveP float, soldP integer, activeP integer) RETURNS INTEGER AS $$  
    BEGIN
    		if exists(SELECT * FROM PROMOTION where id = idP) then
@@ -212,5 +222,13 @@ CREATE FUNCTION  sp_updatePromotion(idP integer, titleP text, image1P text, imag
    END;
 $$ LANGUAGE 'plpgsql';
 
-
-
+CREATE FUNCTION  sp_disablePromotion(idP integer) RETURNS INTEGER AS $$  
+   BEGIN
+   		if exists(SELECT * FROM PROMOTION where id = idP) then
+            update  PROMOTION set active = 0 where id = idP;
+            return 1;
+      	else
+        	return 0;
+        end if;
+   END;
+$$ LANGUAGE 'plpgsql';

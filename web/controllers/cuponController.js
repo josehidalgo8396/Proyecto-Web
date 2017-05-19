@@ -28,9 +28,10 @@ exports.updateCupon= function(dRequest, dResponse) {
         dResponse.send(data);
     });
 };
+*/
 
 exports.disableCupon= function(dRequest, dResponse) {
     var data = cuponService.disableCupon(dRequest.body, function(data) {
         dResponse.send(data);
     });
-};*/
+};

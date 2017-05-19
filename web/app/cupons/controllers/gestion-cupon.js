@@ -2,8 +2,8 @@
   'use strict';
   angular
     .module('webApp')
-    .controller('GestionCuponCtrl', ["$scope", "CuponService", "messageHandlerService" , "shareSessionService",
-     function ($scope, cuponService, messageHandlerService, shareSessionService) {
+    .controller('GestionCuponCtrl', ["$scope", "CuponService", "messageHandlerService" , "shareSessionService","$uibModal","confirmationModalService",
+     function ($scope, cuponService, messageHandlerService, shareSessionService, $uibModal,confirmationModalService) {
   
       $scope.user = {};
       $scope.cuponList = [];
@@ -31,6 +31,60 @@
       $scope.getUser = function() {
         $scope.user = shareSessionService.getSession();
       };
+
+    /*
+      $scope.sendToUpdateCuponView = function(pId) {
+        shareCuponService.setCuponId(pId);
+        $state.go('editar-cupon');
+      };
+          */
+
+      $scope.disableCupon = function(pId) {
+        $scope.openConfirmationModal(function(response){
+          if (!response.success){
+            return;
+          }
+          var data = {id: pId};
+          cuponService.disableCupon(data).then(function(result) {
+            if(result.success) {
+              messageHandlerService.notifySuccess(null, result.message);
+              $scope.cuponList = [];  
+              $scope.getCupons();
+            }
+            else {
+              messageHandlerService.notifyWarning(null, result.message);
+            }
+          });
+        });
+      };
+
+      var setModalContent = function(mTitle, mMessage){
+        confirmationModalService.setModalContent(mTitle, mMessage);
+      };
+
+      $scope.openConfirmationModal = function (callback) {
+        setModalContent('Deshabilitar Cupón', '¿Está seguro(a) de que desea deshabilitar el cupón?');
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'confirmationModalTemplate.html',
+          controller: 'ModalInstanceCtrl',
+          size: 'sm',
+          resolve: {}
+        });
+
+        modalInstance.result.then(
+        function (confirmationResponse) {
+          callback({
+            success: confirmationResponse
+          });
+        }, function () {
+          callback({
+            success: false
+          });
+        });
+      };
+
+
 
       $scope.getUser();
       $scope.getCupons();
