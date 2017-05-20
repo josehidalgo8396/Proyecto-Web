@@ -81,8 +81,11 @@
                                     <td>
                                         <button class="btn btn-primary btn-xs"  uib-tooltip="agregar" ng-click="validAdditionalInfoForm(additionalForm.$valid, inputCupon.additionalInfo)"><span class="glyphicon glyphicon-plus"></span></button>
                                     </td>
-                                </tr>
-                                <tr ng-repeat = "infoA in cupon.additionalInfo">
+                                    <td>
+                                        <button class="btn btn-info btn-xs" uib-tooltip="actualizar" ng-click="updateAdditionalInfo(additionalForm.$valid, inputCupon.additionalInfo)"><span class="glyphicon glyphicon-refresh"></span></button>                                    </td>
+                                    </td>
+                               </tr>
+                                <tr ng-repeat = "infoA in cupon.additionalInfo" ng-click="editarAdditionalInfo(infoA)">
                                     <td>{{infoA.info}}</td>
                                     <td></td>  
                                 </tr>         
@@ -115,8 +118,11 @@
                                     <td>
                                         <button class="btn btn-primary btn-xs"  uib-tooltip="agregar" ng-click="validRestrictionInfoForm(restrictionForm.$valid, inputCupon.restrictionInfo)"><span class="glyphicon glyphicon-plus"></span></button>
                                     </td>
+                                    <td>
+                                        <button class="btn btn-info btn-xs" uib-tooltip="actualizar" ng-click="updateRestrictionInfo(restrictionForm.$valid, inputCupon.restrictionInfo)"><span class="glyphicon glyphicon-refresh"></span></button>                                    </td>
+                                    </td>
                                 </tr>  
-                                <tr ng-repeat = "infoR in cupon.restrictionInfo"> 
+                                <tr ng-repeat = "infoR in cupon.restrictionInfo" ng-click="editarRestrictionInfo(infoR)"> 
                                     <td>{{infoR.info}}</td> 
                                     <td></td>  
                                 </tr>          
@@ -129,7 +135,7 @@
     </div>
     <div>
         <div class="container">
-            <button class="btn btn-primary center-block" ng-click="validatedCupon(cuponForm.$valid, cupon)">Agregar Cupón</button> 
+            <button class="btn btn-primary center-block" ng-click="validatedCupon(cuponForm.$valid, cupon)">Editar Cupón</button> 
             <br></br>
        </div>
     </div>

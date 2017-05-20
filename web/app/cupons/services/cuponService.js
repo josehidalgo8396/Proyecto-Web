@@ -46,7 +46,7 @@
 			};
 
 
-			var updateC =	 function(pData) {
+			var updateC = function(pData) {
                 var link = '/cupones/';                  
                 return  requestService.putRequest({data: pData, params: pData.id}, {url: link}).then(function(pResp) {
                     return pResp;
@@ -79,7 +79,7 @@
             };
 
             var updateAInfoCupon =	 function(pData) {
-                var link = '/cupones/additionalInfo';                  
+                var link = '/cupones/additionalInfo/';                  
                 return  requestService.putRequest({data: pData, params: pData.id}, {url: link}).then(function(pResp) {
                     return pResp;
                 },
@@ -89,7 +89,7 @@
             };
 
             var updateRInfoCupon =	 function(pData) {
-                var link = '/cupones/restrictionInfo';                  
+                var link = '/cupones/restrictionInfo/';                  
                 return  requestService.putRequest({data: pData, params: pData.id}, {url: link}).then(function(pResp) {
                     return pResp;
                 },

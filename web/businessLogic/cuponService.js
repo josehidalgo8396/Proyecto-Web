@@ -257,3 +257,83 @@ exports.getRestrictionInfo = function(data, callback){
         }
     });
 };
+
+exports.updateCupon = function(data, callback){
+    var paramsString =      data.info.id+","+
+                        "'"+data.info.title+"',"+
+                        "'"+data.info.subtitle+"',"+
+                        "'"+data.info.image+"',"+
+                            data.info.maxprice+','+
+                            data.info.normalprice+','+
+                            data.info.save+ ','+
+                            data.info.sold+ ','+
+                            data.info.days;
+    repository.executeQuery({
+        spName:  'sp_updateCupon',
+        params: paramsString
+    },
+    function(success, data) {
+        if(success) {                
+            callback({
+                success: true, 
+                message: 'Se ha actualizado la informacion del cupón de manera exitosa',
+                data: {}
+            });
+        } 
+        else {
+            callback({
+                success: false, 
+                message: 'Ha ocurrido un error, no se ha actualizado el cupon',
+                data: {}
+            });
+        }
+    });    
+};
+
+exports.updateRestrictionInfoCupon = function(data, callback){
+    var paramsString = data.id + ","+ "'"+data.info+"'";
+    repository.executeQuery({
+        spName:  'sp_update_Restriction_Info_Cupon',
+        params: paramsString
+    },
+    function(success, data) {
+        if(success) {
+            callback({
+                success: true, 
+                message: 'Se ha actualizado la informacion del cupón de manera exitosa',
+                data: {}
+            });
+        }
+        else {
+            callback({
+                success: false, 
+                message: 'Ha ocurrido un error, no se ha actualizado la información adicional',
+                data: {}
+            });
+        }
+    });    
+};
+
+exports.updateAdditionalInfoCupon = function(data, callback){
+    var paramsString = data.id + ","+ "'"+data.info+"'";
+    repository.executeQuery({
+        spName:  'sp_update_Additional_Info_Cupon',
+        params: paramsString
+    },
+    function(success, data) {
+        if(success) {
+            callback({
+                success: true, 
+                message: 'Se ha actualizado la informacion del cupón de manera exitosa',
+                data: {}
+            });
+        }
+        else {
+            callback({
+                success: false, 
+                message: 'Ha ocurrido un error, no se ha actualizado la información adicional',
+                data: {}
+            });
+        }
+    });    
+};

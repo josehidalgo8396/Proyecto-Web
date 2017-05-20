@@ -73,8 +73,7 @@ LANGUAGE 'plpgsql';
 
 
 -- ------------------------    CUPON    -----------------------------------------
- 
- 
+  
 CREATE OR REPLACE FUNCTION  sp_getCupons() 
 RETURNS SETOF CUPON AS $$
    	BEGIN
@@ -82,7 +81,6 @@ RETURNS SETOF CUPON AS $$
     END; $$
 LANGUAGE 'plpgsql';
  
-
 
 CREATE OR REPLACE FUNCTION  sp_get_Additional_Info_Cupon(idParam integer) 
 RETURNS SETOF CUPON_ADDITIONAL_INFO AS $$
@@ -138,14 +136,21 @@ CREATE FUNCTION  sp_add_Restriction_Info_Cupon(idCuponP integer, infoP text) RET
 $$ LANGUAGE 'plpgsql';
 
 
-CREATE FUNCTION  sp_updateCupon(idP integer, titleP text, subtitleP text, imageP text, maxPriceP integer, normalPriceP integer,saveP integer, soldP integer, daysP integer,activeP integer) RETURNS INTEGER AS $$  
+CREATE FUNCTION  sp_updateCupon(idP integer, titleP text, subtitleP text, imageP text, maxPriceP integer, normalPriceP integer,saveP integer, soldP integer, daysP integer) RETURNS VOID AS $$  
    BEGIN
-   		if exists(SELECT * FROM CUPON where id = idP) then
-            update  CUPON set title = titleP, subtitle = subtitleP, image = imageP, maxPrice = maxPriceP, normalPrice = normalPriceP, save = saveP, sold = soldP, days = daysP, active = activeP where id = idP;
-            return 1;
-      	else
-        	return 0;
-        end if;
+        update  CUPON set title = titleP, subtitle = subtitleP, image = imageP, maxPrice = maxPriceP, normalPrice = normalPriceP, save = saveP, sold = soldP, days = daysP where id = idP;
+   END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE FUNCTION  sp_update_Additional_Info_Cupon(idP integer, infoP text) RETURNS VOID AS $$
+   BEGIN
+   		update CUPON_ADDITIONAL_INFO set info = infoP where id = idP;
+   END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE FUNCTION  sp_update_Restriction_Info_Cupon(idP integer, infoP text) RETURNS VOID AS $$
+   BEGIN
+   		update CUPON_RESTRICTION_INFO set info = infoP where id = idP;
    END;
 $$ LANGUAGE 'plpgsql';
 

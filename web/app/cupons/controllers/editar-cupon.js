@@ -18,16 +18,17 @@
                     sold: 0,
                     days: 0
                 },
-            
                 additionalInfo: [],
                 restrictionInfo: []
             };
 
             $scope.inputCupon = {
                 additionalInfo: {
+                    id: 0,
                     info: ""
                 },
                 restrictionInfo: {
+                    id: 0,
                     info: ""
                 }
             };
@@ -69,37 +70,35 @@
 
             $scope.editCupon = function(pData){
                 console.log(pData);
-                cuponService.addCupon(pData).then(function(result) {
-                if(result.success) {
-                    messageHandlerService.notifySuccess(null, result.message);
-                    var i;
-                    for (i = 0; i < pData.additionalInfo.length; i++) {  
-                        var data = {
-                            id: result.data,  
-                            params: pData.additionalInfo[i] 
-                        };
-                        addAdditionalInfoCupon(data);
+                cuponService.updateCupon(pData).then(function(result) {
+                    if(result.success) {
+                        messageHandlerService.notifySuccess(null, result.message);
                     }
-                    for (i = 0; i < pData.restrictionInfo.length; i++) {
-                        var data = {
-                            id: result.data,  
-                            params: pData.restrictionInfo[i] 
-                        };
-                        addRestrictionInfoCupon(data);
+                    else {
+                        messageHandlerService.notifyWarning(null, result.message);
                     }
-                    $state.go('gestionar-cupones');
-                }
-                else {
-                    messageHandlerService.notifyWarning(null, result.message);
-                }
                 });
             };
             
+            $scope.editarAdditionalInfo = function(infoA) {
+                $scope.inputCupon.additionalInfo.id = infoA.id;
+                $scope.inputCupon.additionalInfo.info = infoA.info;
+            };
+
+            $scope.editarRestrictionInfo = function(infoR) {
+                $scope.inputCupon.restrictionInfo.id = infoR.id;
+                $scope.inputCupon.restrictionInfo.info = infoR.info;
+            };
 
             var addAdditionalInfoCupon = function(pData) {
                 cuponService.addAdditionalInfoCupon(pData).then(function(result) {
                     if(!result.success) {
                         messageHandlerService.notifyWarning(null, result.message);            
+                    }
+                    else{
+                        messageHandlerService.notifySuccess(null, result.message);
+                        var data = {id: $scope.cupon.additionalInfo.length+1, info: pData.params.info};            
+                        addAdditionalInfo(data);
                     }
                 });
             };
@@ -109,13 +108,21 @@
                     if(!result.success) {
                         messageHandlerService.notifyWarning(null, result.message);            
                     }
+                    else{
+                        messageHandlerService.notifySuccess(null, result.message);
+                        var data = {id: $scope.cupon.restrictionInfo.length+1, info: pData.params.info};  
+                        addRestrictionInfo(data);
+                    }
                 });
             };  
 
-
             $scope.validAdditionalInfoForm = function(pIsValid, pData) {
-                if(pIsValid && pData.grado != "") { 
-                    addAdditionalInfo(pData);
+                if(pIsValid) { 
+                    var newAdditionalInfo = {
+                        id: $scope.cupon.info.id,
+                        params: pData
+                    };
+                    addAdditionalInfoCupon(newAdditionalInfo);
                 }
                 else {
                     var message = 'Debe completar todos los campos de la información adicional de manera correcta';
@@ -125,7 +132,11 @@
 
             $scope.validRestrictionInfoForm = function(pIsValid, pData) {
                 if(pIsValid) { 
-                    addRestrictionInfo(pData);
+                    var newRestrictionInfo = {
+                        id: $scope.cupon.info.id,
+                        params: pData
+                    };
+                    addRestrictionInfoCupon(newRestrictionInfo);
                 }
                 else {
                     var message = 'Debe completar la información de restricciones de manera correcta';
@@ -150,11 +161,56 @@
                 }
             };
 
+            $scope.updateAdditionalInfo = function(pIsValid, pData) {
+                if(pIsValid){
+                    cuponService.updateAdditionalInfoCupon(pData).then(function(result) {
+                        if(result.success) {
+                            messageHandlerService.notifySuccess(null, result.message);
+                            $scope.cupon.additionalInfo.forEach(function(value) {
+                                if(value.id == pData.id){
+                                    value.info = pData.info;
+                                    return;
+                                }
+                            });
+                            cleanAdditionalInfo();
+                        }
+                        else{
+                            messageHandlerService.notifyWarning(null, result.message);
+                        }
+                    });
+                }
+                else {
+                    var message = 'Debe completar la información de manera correcta';
+                    messageHandlerService.notifyError(null, message);
+                }
+            };
+
+            $scope.updateRestrictionInfo = function(pIsValid, pData) {
+                if(pIsValid){
+                    cuponService.updateRestrictionInfoCupon(pData).then(function(result) {
+                        if(result.success) {
+                            messageHandlerService.notifySuccess(null, result.message);
+                            $scope.cupon.restrictionInfo.forEach(function(value) {
+                                if(value.id == pData.id){
+                                    value.info = pData.info;
+                                    return;
+                                }
+                            });
+                            cleanRestrictionInfo();
+                        }
+                        else{
+                            messageHandlerService.notifyWarning(null, result.message);
+                        }
+                    });
+                }
+                else {
+                    var message = 'Debe completar la información de manera correcta';
+                    messageHandlerService.notifyError(null, message);
+                }
+            };
+
             var addAdditionalInfo = function(pData) {
-                var newAdditionalInfo = {
-                    info: pData.info
-                };
-                $scope.cupon.additionalInfo.push(newAdditionalInfo);
+                $scope.cupon.additionalInfo.push(pData);
                 cleanAdditionalInfo();
             };  
 
@@ -163,15 +219,12 @@
             };
 
             var addRestrictionInfo = function(pData) {
-                var newRestrictionInfo = {
-                    info: pData.info
-                };
-                $scope.cupon.restrictionInfo.push(newRestrictionInfo);
+                $scope.cupon.restrictionInfo.push(pData);
                 cleanRestrictionInfo();
             };  
 
             var cleanRestrictionInfo = function() {
-                $scope.cupon.restrictionInfo.info = '';
+                $scope.inputCupon.restrictionInfo.info = '';
             };
 
             var completeAllCuponData = function() {

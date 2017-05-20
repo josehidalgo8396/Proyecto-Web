@@ -81,7 +81,7 @@
 
 
         $scope.validAdditionalInfoForm = function(pIsValid, pData) {
-          if(pIsValid && pData.grado != "") { 
+          if(pIsValid) { 
             addAdditionalInfo(pData);
           }
           else {

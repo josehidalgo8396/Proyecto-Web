@@ -46,8 +46,27 @@ exports.getAdditionalInfo = function(dRequest, dResponse) {
         dResponse.send(data);
     });
 };
+
 exports.getRestrictionInfo = function(dRequest, dResponse) {
     var data = cuponService.getRestrictionInfo(dRequest.params, function(data) {
+        dResponse.send(data);
+    });
+};
+
+exports.updateCupon = function(dRequest, dResponse) {
+    var data = cuponService.updateCupon(dRequest.body, function(data) {
+        dResponse.send(data);
+    });
+};
+
+exports.updateAdditionalInfoCupon = function(dRequest, dResponse) {
+    var data = cuponService.updateAdditionalInfoCupon(dRequest.body, function(data) {
+        dResponse.send(data);
+    });
+};
+
+exports.updateRestrictionInfoCupon = function(dRequest, dResponse) {
+    var data = cuponService.updateRestrictionInfoCupon(dRequest.body, function(data) {
         dResponse.send(data);
     });
 };

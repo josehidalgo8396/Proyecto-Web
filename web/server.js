@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 
 app.use('/', express.static(__dirname + '/app'));
 //send the main page
-app.get('/promo', function(req, res) {
+app.get('/', function(req, res) {
     res.sendfile(__dirname + '/common/views/promo.html');
 });
 
@@ -33,10 +33,8 @@ app.put('/changePassword/:id', userController.changePassword);
 
 app.post('/sendMail', contactController.sendMail);
 
-
 app.get('/home/cupones',homeController.getAllCupons);
 app.get('/home/promociones',homeController.getAllPromotions);
-
 
 app.get('/cupones',cuponController.getAllCupons);
 app.get('/cupones/:id', cuponController.getCupon);
@@ -45,16 +43,16 @@ app.get('/cupones/additionalInfo/:id', cuponController.getAdditionalInfo);
 app.post('/cupones',cuponController.addCupon);
 app.post('/cupones/additionalInfo',cuponController.addAdditionalInfoCupon);
 app.post('/cupones/restrictionInfo',cuponController.addRestrictionInfoCupon);
+app.put('/cupones/:id', cuponController.updateCupon);
 app.put('/cupones/disable/:id',cuponController.disableCupon);
-
-
+app.put('/cupones/additionalInfo/:id',cuponController.updateAdditionalInfoCupon);
+app.put('/cupones/restrictionInfo/:id',cuponController.updateRestrictionInfoCupon);
 
 app.get('/promociones',promotionController.getAllPromotions);
 app.post('/promociones',promotionController.addPromotion);
 app.post('/promociones/importantInfo',promotionController.addImportantInfoPromotion);
 app.post('/promociones/mustKnowInfo',promotionController.addMustKnowInfoPromotion);
 app.put('/promociones/disable/:id',promotionController.disablePromotion);
-
 
 server.listen(8080, function(){
 	console.log('Listening at port 8080...');
