@@ -49,10 +49,16 @@ app.put('/cupones/additionalInfo/:id',cuponController.updateAdditionalInfoCupon)
 app.put('/cupones/restrictionInfo/:id',cuponController.updateRestrictionInfoCupon);
 
 app.get('/promociones',promotionController.getAllPromotions);
+app.get('/promociones/:id', promotionController.getPromotion);
+app.get('/promociones/importantInfo/:id', promotionController.getImportantInfo);
+app.get('/promociones/mustKnowInfo/:id', promotionController.getMustKnowInfo);
 app.post('/promociones',promotionController.addPromotion);
 app.post('/promociones/importantInfo',promotionController.addImportantInfoPromotion);
 app.post('/promociones/mustKnowInfo',promotionController.addMustKnowInfoPromotion);
+app.put('/promociones/:id', promotionController.updatePromotion);
 app.put('/promociones/disable/:id',promotionController.disablePromotion);
+app.put('/promociones/importantInfo', promotionController.updateImportantInfo);
+app.put('/promociones/mustKnowInfo', promotionController.updateMustKnowInfo);
 
 server.listen(8080, function(){
 	console.log('Listening at port 8080...');

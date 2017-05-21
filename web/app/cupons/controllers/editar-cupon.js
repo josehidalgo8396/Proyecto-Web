@@ -69,7 +69,6 @@
             };
 
             $scope.editCupon = function(pData){
-                console.log(pData);
                 cuponService.updateCupon(pData).then(function(result) {
                     if(result.success) {
                         messageHandlerService.notifySuccess(null, result.message);
@@ -147,13 +146,7 @@
 
             $scope.validatedCupon = function(pIsValid, pData) {
                 if(pIsValid) { 
-                    var result = completeAllCuponData(pData);
-                    if(result.success) {
-                        $scope.editCupon(pData);
-                    }
-                    else {
-                        messageHandlerService.notifyWarning(null, result.message);
-                    }
+                    $scope.editCupon(pData);
                 }
                 else {
                     var message = 'Debe completar la información de manera correcta';
@@ -225,20 +218,6 @@
 
             var cleanRestrictionInfo = function() {
                 $scope.inputCupon.restrictionInfo.info = '';
-            };
-
-            var completeAllCuponData = function() {
-                var status = {};
-                var largoAdditionalInfo = $scope.cupon.additionalInfo.length;
-                var largoRestrictionInfo = $scope.cupon.restrictionInfo.length;
-                if((largoAdditionalInfo > 0) & (largoRestrictionInfo > 0)) {
-                    status.success = true;
-                }
-                else {
-                    status.success = false;
-                    status.message = 'Debe agregar todas las secciones de información';
-                }
-                return status;
             };
 
             $scope.getUser = function() {

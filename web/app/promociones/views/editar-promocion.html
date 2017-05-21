@@ -1,0 +1,142 @@
+<div>
+	<ol class="breadcrumb">
+        <li class="active">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Promociones</li>
+        <li class="active">Editar Promoción</li>
+    </ol>
+    <div>
+    	<div class="container"> 
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p>Ingrese los datos de la promoción</p>
+                    <form name="promotionForm" novalidate>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Imagen 1</th>
+                                    <th>Imagen 2</th>
+                                    <th>Precio Máximo</th>
+                                    <th>Precio Normal</th>
+                                    <th>Descuento</th>
+                                    <th>Ahorro</th>
+                                    <th>Vendidos</th>
+                                </tr>
+                            </thead>
+                            <tbody> 
+                                <tr>
+                                    <td>
+                                        <input class="form-control" type="text" placeholder="Título" required ng-model="promocion.info.title" required>
+                                        </input>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="text" placeholder="Imagen 1" required ng-model="promocion.info.image1" required>
+                                        </input>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="text" placeholder="Imagen 2" required ng-model="promocion.info.image2" requiered>
+                                        </input>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" placeholder="Precio Máximo" required ng-model="promocion.info.price" requiered>
+                                        </input>
+                                    </td> 
+                                    <td>
+                                        <input class="form-control" type="number" placeholder="Precio Normal" required ng-model="promocion.info.value"> 
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" placeholder="Descuento" required ng-model="promocion.info.discount"> 
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" placeholder="Ahorro" required ng-model="promocion.info.save"> 
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" placeholder="Vendidos" required ng-model="promocion.info.sold"> 
+                                    </td>
+                                </tr>             
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <h4>Información Importante</h4>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p>Ingrese la información importante de la promoción</p>
+                    <form name="importantForm" novalidate>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Información</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>       
+                                    <td>
+                                        <textarea class="form-control" type="text" align="justify" placeholder="Información" ng-model="inputPromocion.importantInfo.info" required></textarea>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary btn-xs"  uib-tooltip="agregar" ng-click="validImportantInfoForm(importantForm.$valid, inputPromocion.importantInfo)"><span class="glyphicon glyphicon-plus"></span></button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-info btn-xs" uib-tooltip="actualizar" ng-click="updateImportantInfo(importantForm.$valid, inputPromocion.importantInfo)"><span class="glyphicon glyphicon-refresh"></span></button>                                    </td>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat = "infoI in promocion.importantInfo" ng-click="editarImportantInfo(infoI)">
+                                    <td>{{infoI.info}}</td>
+                                    <td></td>  
+                                </tr>         
+                            </tbody>
+                        </table>
+                    </form>   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <h4>Información que necesita saber</h4>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p>Ingrese las información de la promoción</p>
+                    <form name="mustKnowForm" novalidate>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Información</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <textarea class="form-control" type="text" align="justify" placeholder="Información" ng-model="inputPromocion.mustKnowInfo.info" required></textarea>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary btn-xs"  uib-tooltip="agregar" ng-click="validMustKnowInfoForm(mustKnowForm.$valid, inputPromocion.mustKnowInfo)"><span class="glyphicon glyphicon-plus"></span></button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-info btn-xs" uib-tooltip="actualizar" ng-click="updateMustKnowInfo(mustKnowForm.$valid, inputPromocion.mustKnowInfo)"><span class="glyphicon glyphicon-refresh"></span></button>                                    </td>
+                                    </td>
+                                </tr>  
+                                <tr ng-repeat = "infoMK in promocion.mustKnowInfo" ng-click="editarMustKnowInfo(infoMK)"> 
+                                    <td>{{infoMK.info}}</td> 
+                                    <td></td>  
+                                </tr>          
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+       </div>
+    </div>
+    <div>
+        <div class="container">
+            <button class="btn btn-primary center-block" ng-click="validatedPromotion(promotionForm.$valid, promocion)">Editar Promoción</button> 
+            <br></br>
+       </div>
+    </div>
+</div>

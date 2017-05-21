@@ -79,7 +79,7 @@
 
             var updateIInfoPromo =	 function(pData) {
                 var link = '/promociones/importantInfo';                  
-                return  requestService.putRequest({data: pData, params: pData.id}, {url: link}).then(function(pResp) {
+                return  requestService.putRequest({data: pData, params: ""}, {url: link}).then(function(pResp) {
                     return pResp;
                 },
                 function(pResp){
@@ -89,7 +89,7 @@
 
             var updateMKInfoPromo =	 function(pData) {
                 var link = '/promociones/mustKnowInfo';                  
-                return  requestService.putRequest({data: pData, params: pData.id}, {url: link}).then(function(pResp) {
+                return  requestService.putRequest({data: pData, params: ""}, {url: link}).then(function(pResp) {
                     return pResp;
                 },
                 function(pResp){

@@ -2,8 +2,8 @@
   'use strict';
   angular
     .module('webApp')
-    .controller('GestionPromocionCtrl', ["$scope", "PromocionService", "messageHandlerService" , "shareSessionService","$uibModal","confirmationModalService",
-     function ($scope, promocionService, messageHandlerService, shareSessionService, $uibModal, confirmationModalService) {
+    .controller('GestionPromocionCtrl', ["$scope", "PromocionService", "messageHandlerService" , "shareSessionService","$uibModal","confirmationModalService", "sharePromocionService", "$state",
+     function ($scope, promocionService, messageHandlerService, shareSessionService, $uibModal, confirmationModalService, sharePromocionService, $state) {
   
       $scope.user = {};
       $scope.cuponList = [];
@@ -27,20 +27,16 @@
         }); 
       };
 
-
       $scope.getUser = function() {
         var session = shareSessionService.getSession();
         $scope.user.usuario = session.usuario;
         $scope.user.rol = session.rol;
       };
 
-
-    /*
       $scope.sendToUpdatePromotionView = function(pId) {
-        sharePromocionService.setCuponId(pId);
+        sharePromocionService.setPromocionId(pId);
         $state.go('editar-promocion');
-      };*/
-
+      };
 
       $scope.disablePromotion = function(pId) {
         $scope.openConfirmationModal(function(response){

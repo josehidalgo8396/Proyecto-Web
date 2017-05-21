@@ -175,6 +175,12 @@ RETURNS SETOF PROMOTION AS $$
    END; $$
 LANGUAGE 'plpgsql';
 
+CREATE OR REPLACE FUNCTION  sp_get_Promotion(idParam integer) 
+RETURNS SETOF PROMOTION AS $$
+   BEGIN
+		RETURN QUERY SELECT * FROM PROMOTION where id = idParam;
+   END; $$
+LANGUAGE 'plpgsql';
 
 CREATE OR REPLACE FUNCTION  sp_get_Important_Info_Promotion(idParam integer) 
 RETURNS SETOF PROMOTION_IMPORTANT_INFO AS $$
@@ -222,15 +228,21 @@ CREATE FUNCTION  sp_add_Must_Know_Info_Promotion(idPromotionP integer, infoP tex
    END;
 $$ LANGUAGE 'plpgsql';
 
-
-CREATE FUNCTION  sp_updatePromotion(idP integer, titleP text, image1P text, image2P text, priceP float, valueP float,discountP integer, saveP float, soldP integer, activeP integer) RETURNS INTEGER AS $$  
+CREATE FUNCTION  sp_update_Must_Know_Info_Promotion(idP integer, infoP text) RETURNS VOID AS $$ 
    BEGIN
-   		if exists(SELECT * FROM PROMOTION where id = idP) then
-            update  PROMOTION set title = titleP, image1 = image1P, image2 = image2P, price = priceP, value = valueP, discount = discountP, save = saveP, sold = soldP, active = activeP where id = idP;
-            return 1;
-      	else
-        	return 0;
-        end if;
+        update PROMOTION_MUST_KNOW_INFO set info = infoP where id = idP;
+   END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE FUNCTION  sp_updatePromotion(idP integer, titleP text, image1P text, image2P text, priceP float, valueP float,discountP integer, saveP float, soldP integer) RETURNS VOID AS $$  
+   BEGIN
+        update  PROMOTION set title = titleP, image1 = image1P, image2 = image2P, price = priceP, value = valueP, discount = discountP, save = saveP, sold = soldP where id = idP;
+   END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE FUNCTION  sp_update_Important_Info_Promotion(idP integer, infoP text) RETURNS VOID AS $$ 
+   BEGIN
+        update PROMOTION_IMPORTANT_INFO set info = infoP where id = idP;
    END;
 $$ LANGUAGE 'plpgsql';
 

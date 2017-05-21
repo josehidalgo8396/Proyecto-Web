@@ -1,7 +1,7 @@
 (function(){
     'use strict';
     angular
-        .module('saaApp')
+        .module('webApp')
         .service('sharePromocionService', function() {
 
             var promocionData = {
