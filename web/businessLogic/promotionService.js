@@ -4,10 +4,10 @@ exports.createPromotion = function(data, callback){
     var paramsString =  "'"+data.info.title+"',"+
                         "'"+data.info.image1+"',"+
                         "'"+data.info.image2+"',"+
-                            data.info.price+','+
-                            data.info.value+','+
+                        "'"+data.info.price+"',"+
+                        "'"+data.info.value+"',"+
                             data.info.discount+ ','+
-                            data.info.save+ ','+
+                        "'"+data.info.save+"',"+
                             data.info.sold+',1';
 
     repository.executeQuery({
@@ -297,10 +297,10 @@ exports.updatePromotion= function(data, callback){
                         "'"+data.info.title+"',"+
                         "'"+data.info.image1+"',"+
                         "'"+data.info.image2+"',"+
-                            data.info.price+','+
-                            data.info.value+','+
+                        "'"+data.info.price+"',"+
+                        "'"+data.info.value+"',"+
                             data.info.discount+ ','+
-                            data.info.save+ ','+
+                        "'"+data.info.save+"',"+
                             data.info.sold;
 
     repository.executeQuery({

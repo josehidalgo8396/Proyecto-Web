@@ -17,13 +17,13 @@ CREATE TABLE CUPON
     title text NOT NULL,
     subtitle text NOT NULL,
     image text NOT NULL,
-    maxPrice integer NOT NULL,
-    normalPrice integer NOT NULL,
-    save integer NOT NULL,
+    maxPrice text NOT NULL,
+    normalPrice text NOT NULL,
+    save float NOT NULL,
     sold integer NOT NULL,
     days integer NOT NULL,
     active integer NOT NULL,
-    CONSTRAINT cupon_pkey PRIMARY KEY (id)
+    CONSTRAINT cupon_pkey PRIMARY KEY (id) 
 )
 WITH (
   OIDS=FALSE
@@ -58,10 +58,10 @@ CREATE TABLE PROMOTION
     title text NOT NULL,
     image1 text NOT NULL,
     image2 text NOT NULL,
-    price float NOT NULL,
-    value float NOT NULL,
-    discount integer NOT NULL,
-    save float NOT NULL,
+    price text NOT NULL,
+    value text NOT NULL,
+    discount float NOT NULL,
+    save text NOT NULL,
     sold integer NOT NULL,
     active integer NOT NULL,
     CONSTRAINT promotion_pkey PRIMARY KEY (id)

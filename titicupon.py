@@ -12,7 +12,7 @@ def getData(link):
     soup = BeautifulSoup(page.content, "html.parser")
     nodeHeader = soup.find("div", attrs={"class":"node-header"})
     title = nodeHeader.find("h1", attrs={"class":"cupon-title"}).getText()
-    #print(title)
+    print(title)
     lista.append(title)
     subTitle = nodeHeader.find("h2", attrs={"class":"cupon-subtitle"}).getText()
     #print(subTitle)
@@ -59,11 +59,14 @@ def getData(link):
 
 def insertData(lista):
     listaTemp = []
-    lista[3] = float(lista[3].replace("₡","").replace(",","."))
-    lista[4] = float(lista[4].replace("₡","").replace(",","."))
-    lista[5] = int(lista[5].split(" ")[1].replace("%",""))
+    lista[3] = lista[3].replace("₡","")
+    lista[4] = lista[4].replace("₡","")
+    lista[5] = float(lista[5].split(" ")[1].replace("%",""))
     lista[6] = int(lista[6].split(" ")[1])
-    lista[7] = int(lista[7].split(" ")[3])
+    if len(lista[7].split(" ")) > 3:
+        lista[7] = int(lista[7].split(" ")[3])
+    else:
+        lista[7] = 0
     listaTemp.append(lista[0])
     listaTemp.append(lista[1])
     listaTemp.append(lista[2])

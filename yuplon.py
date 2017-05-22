@@ -12,14 +12,17 @@ def getData(link):
     soup = BeautifulSoup(page.content, "html.parser")
     title = soup.find("h3", attrs={"class":"title"}).getText()
     title = title.strip()
-    #print(title)
+    print(title)
     lista.append(title)
     mainRight = soup.find("div", attrs={"id":"main-right"})
     images = mainRight.select("img")
     image = images[0]["src"]
     #print(image)
     lista.append(image)
-    image2 = images[1]["src"]
+    if len(images) > 1:
+        image2 = images[1]["src"]
+    else:
+        image2 = "No image"
     #print(image2)
     lista.append(image2)
     mainLeft = soup.find("div", attrs={"id":"main-left"})
@@ -60,10 +63,10 @@ def getData(link):
 
 def insertData(lista):
     listaTemp = []
-    lista[3] = float(lista[3].replace("₡","").replace(",","."))
-    lista[4] = float(lista[4].replace("₡","").replace(",","."))
-    lista[5] = int(lista[5].replace("%",""))
-    lista[6] = float(lista[6].replace("₡","").replace(",","."))
+    lista[3] = lista[3].replace("₡","")
+    lista[4] = lista[4].replace("₡","")
+    lista[5] = float(lista[5].replace("%",""))
+    lista[6] = lista[6].replace("₡","")
     lista[7] = int(lista[7].split(" ")[1])
     listaTemp.append(lista[0])
     listaTemp.append(lista[1])
@@ -100,7 +103,7 @@ def main(link):
     cupons = soup.findAll("div", attrs={"class":"extra-campaign"})
     conta = 1
     for cupon in cupons:
-        print("Cupon #" + str(conta))
+        print("Promocion #" + str(conta))
         newLink = cupon.select("a")[0]["href"]
         getData(link+newLink)
         conta+=1

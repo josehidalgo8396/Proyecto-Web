@@ -1,4 +1,5 @@
 var repository = require('../dataAccess/repository.js');
+var sendmail = require('sendmail')();
 
 exports.allCupons = function(callback){
     repository.executeQuery({
@@ -33,37 +34,6 @@ exports.allCupons = function(callback){
         }
     });
 };
-
-/*
-repository.executeQuery({
-                    spName:  'sp_get_Additional_Info_Cupon',
-                    params: data[0].id
-                },
-                function(success2, data2) {
-                    console.log(data2);
-                    if(success){
-                        data.additionalInfo  = data2;
-
-                        var paramsString2 = "'" + data[0][0].id + "'";
-
-                        repository.executeQuery({
-                            spName:  'sp_get_Restriction_Info_Cupon',
-                            params: paramsString2
-                        },
-                        function(success3, data3) {
-                            if(success){
-                                data.restrictionInfo  = data3;
-
-                                callback({
-                                    success: true, 
-                                    message: "Operación exitosa",
-                                    data: data
-                                });
-                            }  
-                        });
-                    }  
-                });*/
-
 
 exports.allPromotions= function(callback){
     repository.executeQuery({
@@ -100,36 +70,123 @@ exports.allPromotions= function(callback){
     });
 };
 
+exports.getCuponTop5 = function(callback){
+    repository.executeQuery({
+        spName: 'sp_get_Top5_Cupon',
+        params: ''
+    }, 
+    function(success, data) {
+        if(success) {
+            if (data.length == 0){
+                callback(
+                {
+                    success: false,
+                    data: null,
+                    message: "No hay registro de Cupones"
+                });
+            }
+            else{
+                callback({
+                    success: true, 
+                    message: "Operación exitosa",
+                    data: data
+                });
+            }
+        } 
+        else{
+            callback(
+            {
+                success: false,
+                data: null,
+                message: "No se pudo establecer la conexión a la base de datos"
+            });
+        }
+    });
+};
 
-/* 
-var paramsString = "'" + data[0][0].id + "'";
+exports.getPromotionTop5= function(callback){
+    repository.executeQuery({
+        spName: 'sp_get_Top5_Promotion',
+        params: ''
+    }, 
+    function(success, data) {
+        if(success) {
+            if (data.length == 0){
+                callback(
+                {
+                    success: false,
+                    data: null,
+                    message: "No hay registro de Promociones"
+                });
+            }
+            else{
+                callback(
+                {
+                    success: true,
+                    data: data,
+                    message: "Operación exitosa"
+                });
+            }
+        } 
+        else{
+            callback(
+            {
+                success: false,
+                data: null,
+                message: "No se pudo establecer la conexión a la base de datos"
+            });
+        }
+    });
+};
 
-                repository.executeQuery({
-                    spName:  'sp_get_Important_Info_Promotion',
-                    params: paramsString
-                },
-                function(success2, data2) {
-                    if(success){
-                        data.ImportantInfo  = data2;
+exports.sendCuponInfo = function(data, callback) {
+    var message =   "Título: " + data.title + "\n"+
+                    "Precio normal: ₡" + data.normalprice + "\n"+
+                    "Precio ahora: ₡" + data.maxprice + "\n"+
+                    "Ahorra: " + data.save + "%";
+    sendmail({
+        from: "lujaramireztorres@gmail.com",
+        to: data.correo,
+        subject: "Información del cupón",
+        html: message,
+    }, function(err, reply) {
+        if(err) {
+            callback({
+                success: false,
+                message: "Error al enviar el correo"
+            })
+        }
+        else{
+            callback({
+                success: true,
+                message: "El correo se ha enviado exitosamente"
+            })
+        }
+    });
+};
 
-                        var paramsString2 = "'" + data[0][0].id + "'";
-
-                        repository.executeQuery({
-                            spName:  'sp_get_Must_Know_Info_Promotion',
-                            params: paramsString2
-                        },
-                        function(success3, data3) {
-                            if(success){
-                                data.MustKnowInfo  = data3;
-
-                                console.log(data);
-
-                                callback({
-                                    success: true, 
-                                    message: "Operación exitosa",
-                                    data: data
-                                });
-                            }  
-                        });
-                    }  
-                });*/
+exports.sendPromotionInfo = function(data, callback) {
+    var message =   "Título: " + data.title + "\n"+
+                    "Precio normal: ₡" + data.value + "\n"+
+                    "Precio ahora: ₡" + data.price + "\n"+
+                    "Ahorra: " + data.save + "%";
+    sendmail({
+        from: "lujaramireztorres@gmail.com",
+        to: data.correo,
+        subject: "Información del cupón",
+        html: message,
+    }, function(err, reply) {
+        if(err) {
+            callback({
+                success: false,
+                message: "Error al enviar el correo"
+            })
+        }
+        else{
+            callback({
+                success: true,
+                message: "El correo se ha enviado exitosamente"
+            })
+        }
+    });
+};

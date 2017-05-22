@@ -4,8 +4,8 @@ exports.createCupon = function(data, callback){
     var paramsString =  "'"+data.info.title+"',"+
                         "'"+data.info.subtitle+"',"+
                         "'"+data.info.image+"',"+
-                            data.info.maxPrice+','+
-                            data.info.normalPrice+','+
+                        "'"+data.info.maxPrice+"',"+
+                        "'"+data.info.normalPrice+"',"+
                             data.info.save+ ','+
                             data.info.sold+ ','+
                             data.info.days+',1';
@@ -263,8 +263,8 @@ exports.updateCupon = function(data, callback){
                         "'"+data.info.title+"',"+
                         "'"+data.info.subtitle+"',"+
                         "'"+data.info.image+"',"+
-                            data.info.maxprice+','+
-                            data.info.normalprice+','+
+                        "'"+data.info.maxprice+"',"+
+                        "'"+data.info.normalprice+"',"+
                             data.info.save+ ','+
                             data.info.sold+ ','+
                             data.info.days;

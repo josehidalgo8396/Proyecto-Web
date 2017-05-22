@@ -34,7 +34,12 @@ app.put('/changePassword/:id', userController.changePassword);
 app.post('/sendMail', contactController.sendMail);
 
 app.get('/home/cupones',homeController.getAllCupons);
+app.get('/home/cupones/top5',homeController.getCuponTop5);
 app.get('/home/promociones',homeController.getAllPromotions);
+app.get('/home/promociones/top5',homeController.getPromotionTop5);
+app.post('/home/cupones/send', homeController.sendCuponInfo);
+app.post('/home/promociones/send', homeController.sendPromotionInfo);
+
 
 app.get('/cupones',cuponController.getAllCupons);
 app.get('/cupones/:id', cuponController.getCupon);

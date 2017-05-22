@@ -13,10 +13,10 @@
                 title: '',
                 image1: '',
                 image2: '',
-                price: 0,
-                value: 0,
+                price: '',
+                value: '',
                 discount: 0,
-                save: 0,
+                save: '',
                 sold: 0
             },
             

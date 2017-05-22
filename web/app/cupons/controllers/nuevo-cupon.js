@@ -12,8 +12,8 @@
           title: '',
           subtitle: '',
           image: '',
-          maxPrice: 0,
-          normalPrice: 0,
+          maxPrice: '',
+          normalPrice: '',
           save: 0,
           sold: 0,
           days: 0

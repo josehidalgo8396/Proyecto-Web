@@ -105,7 +105,7 @@ RETURNS SETOF CUPON AS $$
 LANGUAGE 'plpgsql';
 
 
-CREATE FUNCTION  sp_addCupon(titleP text, subtitleP text, imageP text, maxPriceP integer, normalPriceP integer,saveP integer, soldP integer, daysP integer,activeP integer) RETURNS integer AS $$
+CREATE FUNCTION  sp_addCupon(titleP text, subtitleP text, imageP text, maxPriceP text, normalPriceP text, saveP float, soldP integer, daysP integer,activeP integer) RETURNS integer AS $$
    BEGIN
 		 insert into CUPON(title,subtitle,image,maxPrice,normalPrice,save,sold,days,active) values(titleP, subtitleP, imageP, maxPriceP, normalPriceP, saveP, soldP, daysP, activeP);
    		 return (select id from Cupon order by id desc limit 1);
@@ -136,7 +136,7 @@ CREATE FUNCTION  sp_add_Restriction_Info_Cupon(idCuponP integer, infoP text) RET
 $$ LANGUAGE 'plpgsql';
 
 
-CREATE FUNCTION  sp_updateCupon(idP integer, titleP text, subtitleP text, imageP text, maxPriceP integer, normalPriceP integer,saveP integer, soldP integer, daysP integer) RETURNS VOID AS $$  
+CREATE FUNCTION  sp_updateCupon(idP integer, titleP text, subtitleP text, imageP text, maxPriceP text, normalPriceP text,saveP float, soldP integer, daysP integer) RETURNS VOID AS $$  
    BEGIN
         update  CUPON set title = titleP, subtitle = subtitleP, image = imageP, maxPrice = maxPriceP, normalPrice = normalPriceP, save = saveP, sold = soldP, days = daysP where id = idP;
    END;
@@ -165,8 +165,15 @@ CREATE FUNCTION  sp_disableCupon(idP integer) RETURNS INTEGER AS $$
    END;
 $$ LANGUAGE 'plpgsql';
 
--- -------------------  PROMOCION    ----------------------------
+CREATE OR REPLACE FUNCTION  sp_get_Top5_Cupon() 
+RETURNS SETOF CUPON AS $$
+   BEGIN
+		RETURN QUERY SELECT * FROM CUPON order by sold desc limit 5;
+   END; $$
+LANGUAGE 'plpgsql';
 
+
+-- -------------------  PROMOCION    ----------------------------
 
 CREATE OR REPLACE FUNCTION  sp_getPromotions() 
 RETURNS SETOF PROMOTION AS $$
@@ -198,7 +205,7 @@ RETURNS SETOF PROMOTION_MUST_KNOW_INFO AS $$
 LANGUAGE 'plpgsql';
 
 
-CREATE FUNCTION  sp_addPromotion(titleP text, image1P text, image2P text, priceP float, valueP float,discountP integer, saveP float, soldP integer, activeP integer) RETURNS INTEGER AS $$
+CREATE FUNCTION  sp_addPromotion(titleP text, image1P text, image2P text, priceP text, valueP text,discountP float, saveP text, soldP integer, activeP integer) RETURNS INTEGER AS $$
    BEGIN
 		 insert into PROMOTION(title,image1,image2,price,value,discount,save,sold,active) values(titleP , image1P , image2P , priceP , valueP ,discountP , saveP , soldP, activeP );
          return (select id from PROMOTION order by id desc limit 1);
@@ -234,7 +241,7 @@ CREATE FUNCTION  sp_update_Must_Know_Info_Promotion(idP integer, infoP text) RET
    END;
 $$ LANGUAGE 'plpgsql';
 
-CREATE FUNCTION  sp_updatePromotion(idP integer, titleP text, image1P text, image2P text, priceP float, valueP float,discountP integer, saveP float, soldP integer) RETURNS VOID AS $$  
+CREATE FUNCTION  sp_updatePromotion(idP integer, titleP text, image1P text, image2P text, priceP text, valueP text,discountP float, saveP text, soldP integer) RETURNS VOID AS $$  
    BEGIN
         update  PROMOTION set title = titleP, image1 = image1P, image2 = image2P, price = priceP, value = valueP, discount = discountP, save = saveP, sold = soldP where id = idP;
    END;
@@ -256,3 +263,10 @@ CREATE FUNCTION  sp_disablePromotion(idP integer) RETURNS INTEGER AS $$
         end if;
    END;
 $$ LANGUAGE 'plpgsql';
+
+CREATE OR REPLACE FUNCTION  sp_get_Top5_Promotion() 
+RETURNS SETOF PROMOTION AS $$
+   BEGIN
+		RETURN QUERY SELECT * FROM PROMOTION order by sold desc limit 5;  
+   END; $$
+LANGUAGE 'plpgsql';  

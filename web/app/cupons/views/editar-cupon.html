@@ -37,11 +37,11 @@
                                         </input>
                                     </td>
                                     <td>
-                                        <input class="form-control" type="number" placeholder="Precio Máximo" required ng-model="cupon.info.maxprice" requiered>
+                                        <input class="form-control" type="text" placeholder="Precio Máximo" required ng-model="cupon.info.maxprice" requiered>
                                         </input>
                                     </td> 
                                     <td>
-                                        <input class="form-control" type="number" placeholder="Precio Normal" required ng-model="cupon.info.normalprice"> 
+                                        <input class="form-control" type="text" placeholder="Precio Normal" required ng-model="cupon.info.normalprice"> 
                                     </td>
                                     <td>
                                         <input class="form-control" type="number" placeholder="Ahorro" required ng-model="cupon.info.save"> 
@@ -79,7 +79,7 @@
                                         <textarea class="form-control" type="text" align="justify" placeholder="Información" ng-model="inputCupon.additionalInfo.info" required></textarea>
                                     </td>
                                     <td>
-                                        <button class="btn btn-primary btn-xs"  uib-tooltip="agregar" ng-click="validAdditionalInfoForm(additionalForm.$valid, inputCupon.additionalInfo)"><span class="glyphicon glyphicon-plus"></span></button>
+                                        <button class="btn btn-success btn-xs"  uib-tooltip="agregar" ng-click="validAdditionalInfoForm(additionalForm.$valid, inputCupon.additionalInfo)"><span class="glyphicon glyphicon-plus"></span></button>
                                     </td>
                                     <td>
                                         <button class="btn btn-info btn-xs" uib-tooltip="actualizar" ng-click="updateAdditionalInfo(additionalForm.$valid, inputCupon.additionalInfo)"><span class="glyphicon glyphicon-refresh"></span></button>                                    </td>
@@ -116,7 +116,7 @@
                                         <textarea class="form-control" type="text" align="justify" placeholder="Restricción" ng-model="inputCupon.restrictionInfo.info" required></textarea>
                                     </td>
                                     <td>
-                                        <button class="btn btn-primary btn-xs"  uib-tooltip="agregar" ng-click="validRestrictionInfoForm(restrictionForm.$valid, inputCupon.restrictionInfo)"><span class="glyphicon glyphicon-plus"></span></button>
+                                        <button class="btn btn-success btn-xs"  uib-tooltip="agregar" ng-click="validRestrictionInfoForm(restrictionForm.$valid, inputCupon.restrictionInfo)"><span class="glyphicon glyphicon-plus"></span></button>
                                     </td>
                                     <td>
                                         <button class="btn btn-info btn-xs" uib-tooltip="actualizar" ng-click="updateRestrictionInfo(restrictionForm.$valid, inputCupon.restrictionInfo)"><span class="glyphicon glyphicon-refresh"></span></button>                                    </td>
@@ -135,7 +135,7 @@
     </div>
     <div>
         <div class="container">
-            <button class="btn btn-primary center-block" ng-click="validatedCupon(cuponForm.$valid, cupon)">Editar Cupón</button> 
+            <button class="btn btn-success center-block" ng-click="validatedCupon(cuponForm.$valid, cupon)">Editar Cupón</button> 
             <br></br>
        </div>
     </div>
