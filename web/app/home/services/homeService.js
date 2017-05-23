@@ -64,6 +64,71 @@
 	  			});
 			};
 
+			var getCuponById = function(pId) {
+                var link = '/home/cupones/';
+                
+                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {
+                    return pResp; 
+                },  
+                function(pResp){
+                    return pResp;   
+                });
+            };
+
+            var getPromocionById = function(pId) {
+                var link = '/home/promociones/';
+                
+                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {
+                    return pResp; 
+                },  
+                function(pResp){
+                    return pResp;   
+                });
+            };
+
+            var getAInfoCuponById = function(pId) {
+                var link = '/home/cupones/additionalInfo/';
+                
+                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {//corregir como se envian los datos
+                    return pResp; 
+                },  
+                function(pResp){
+                    return pResp;   
+                });
+            };
+
+            var getRInfoCuponById = function(pId) {
+                var link = '/home/cupones/restrictionInfo/';
+                
+                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {//corregir como se envian los datos
+                    return pResp; 
+                },  
+                function(pResp){
+                    return pResp;   
+                });
+            };
+
+            var getIInfoPromoById = function(pId) {
+             	var link = '/promociones/importantInfo/';
+                
+                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {//corregir como se envian los datos
+                    return pResp; 
+                },  
+                function(pResp){
+                    return pResp;   
+                });
+            };
+            var getMKInfoPromoById = function(pId) {
+                var link = '/promociones/mustKnowInfo/';
+                
+                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {//corregir como se envian los datos
+                    return pResp; 
+                },  
+                function(pResp){
+                    return pResp;   
+                });
+            };
+
 			return {
 				getCupons: function() {
 					return getC();
@@ -82,6 +147,24 @@
 				},
 				sendPromotionInfo: function(pData) {
 					return sendPromotionInfo(pData);
+				},
+				getCupon: function(pId){
+					return getCuponById(pId);
+				},
+				getPromocion: function(pId){
+					return getPromocionById(pId);
+				},
+				getAdditionalInfoCupon: function(pId){
+					return getAInfoCuponById(pId);
+				},
+				getRestrictionInfoCupon: function(pId){
+					return getRInfoCuponById(pId);
+				},
+				getImportantInfoPromotion: function(pId){
+					return getIInfoPromoById(pId);
+				},
+				getMustKnowInfoPromotion: function(pId){
+					return getMKInfoPromoById(pId);
 				}
 			};
 		}]);

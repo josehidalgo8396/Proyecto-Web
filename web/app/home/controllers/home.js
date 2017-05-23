@@ -10,8 +10,8 @@
   'use strict';
   angular
     .module('webApp')
-    .controller('GestionHomeCtrl', ["$scope", "$q", "HomeService", "messageHandlerService" , "shareSessionService",
-     function ($scope, $q, homeService, messageHandlerService, shareSessionService) {
+    .controller('GestionHomeCtrl', ["$scope","$state" ,"$q", "HomeService", "messageHandlerService" , "shareSessionService","shareCuponService","sharePromocionService",
+     function ($scope,$state,$q, homeService, messageHandlerService, shareSessionService,shareCuponService,sharePromocionService) {
   
         $scope.user = {};
         $scope.cuponList = [];
@@ -128,6 +128,17 @@
           }
           $scope.tab = !$scope.tab;
         };
+
+        $scope.sendToCuponView = function(pId) {
+          shareCuponService.setCuponId(pId);
+          $state.go('ver-cupon');
+        };
+        
+        $scope.sendToPromocionView = function(pId) {
+          sharePromocionService.setPromocionId(pId);
+          $state.go('ver-promocion');
+        };
+       
 
         $scope.getUser();
         $scope.getCuponTop5();

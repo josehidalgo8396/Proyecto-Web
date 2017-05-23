@@ -94,6 +94,19 @@
           templateUrl: 'promociones/views/editar-promocion.html',
           controller: 'EditarPromocionCtrl'
         })
+        .state('ver-cupon', {
+          url: '/ver-cupon',
+          parent: 'prom',
+          templateUrl: 'home/views/ver-cupon.html',
+          controller: 'VerCuponCtrl'
+        })
+        .state('ver-promocion', {
+          url: '/ver-promocion',
+          parent: 'prom',
+          templateUrl: 'home/views/ver-promocion.html',
+          controller: 'VerPromocionCtrl'
+        })
+
     });
     window.fbAsyncInit = function() {
       FB.init({

@@ -190,3 +190,149 @@ exports.sendPromotionInfo = function(data, callback) {
         }
     });
 };
+
+
+exports.getCupon = function(data, callback){
+    repository.executeQuery({
+        spName: 'sp_get_Cupon',
+        params: data.id
+    }, 
+    function(success, data) {
+        if(success) {
+            callback({
+                success: true, 
+                message: "Operación exitosa",
+                data: data[0]
+            });
+        } 
+        else{
+            callback(
+            {
+                success: false,
+                data: null,
+                message: "No se pudo obtener la información del cupón"
+            });
+        }
+    });
+};
+
+exports.getAdditionalInfo = function(data, callback){
+    repository.executeQuery({
+        spName: 'sp_get_Additional_Info_Cupon',
+        params: data.id
+    }, 
+    function(success, data) {
+        if(success) {
+            callback({
+                success: true, 
+                message: "Operación exitosa",
+                data: data
+            });
+        } 
+        else{
+            callback(
+            {
+                success: false,
+                data: null,
+                message: "No se pudo obtener la información adicional del cupón"
+            });
+        }
+    });
+};
+
+exports.getRestrictionInfo = function(data, callback){
+    repository.executeQuery({
+        spName: 'sp_get_Restriction_Info_Cupon',
+        params: data.id
+    }, 
+    function(success, data) {
+        if(success) {
+            callback({
+                success: true, 
+                message: "Operación exitosa",
+                data: data
+            });
+        } 
+        else{
+            callback(
+            {
+                success: false,
+                data: null,
+                message: "No se pudo obtener la información de restricción del cupón"
+            });
+        }
+    });
+};
+
+
+exports.getPromotion = function(data, callback){
+    repository.executeQuery({
+        spName: 'sp_get_Promotion',
+        params: data.id
+    }, 
+    function(success, data) {
+        if(success) {
+            callback({
+                success: true, 
+                message: "Operación exitosa",
+                data: data[0]
+            });
+        } 
+        else{
+            callback(
+            {
+                success: false,
+                data: null,
+                message: "No se pudo obtener la información de la promoción"
+            });
+        }
+    });
+};
+
+exports.getImportantInfo = function(data, callback){
+    repository.executeQuery({
+        spName: 'sp_get_Important_Info_Promotion',
+        params: data.id
+    }, 
+    function(success, data) {
+        if(success) {
+            callback({
+                success: true, 
+                message: "Operación exitosa",
+                data: data
+            });
+        } 
+        else{
+            callback(
+            {
+                success: false,
+                data: null,
+                message: "No se pudo obtener la información importante de la promoción"
+            });
+        }
+    });
+};
+
+exports.getMustKnowInfo = function(data, callback){
+    repository.executeQuery({
+        spName: 'sp_get_Must_Know_Info_Promotion',
+        params: data.id
+    }, 
+    function(success, data) {
+        if(success) {
+            callback({
+                success: true, 
+                message: "Operación exitosa",
+                data: data
+            });
+        } 
+        else{
+            callback(
+            {
+                success: false,
+                data: null,
+                message: "No se pudo obtener la información que necesita saber de la promoción"
+            });
+        }
+    });
+};

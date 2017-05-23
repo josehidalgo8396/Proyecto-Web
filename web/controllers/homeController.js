@@ -36,3 +36,37 @@ exports.sendPromotionInfo = function(dRequest, dResponse) {
         dResponse.send(data);
     });
 };
+
+exports.getCupon= function(dRequest, dResponse) {
+    var data = homeService.getCupon(dRequest.params, function(data) {
+        dResponse.send(data);
+    });
+};
+exports.getAdditionalInfo = function(dRequest, dResponse) {
+    var data = homeService.getAdditionalInfo(dRequest.params, function(data) {
+        dResponse.send(data);
+    });
+};
+
+exports.getRestrictionInfo = function(dRequest, dResponse) {
+    var data = homeService.getRestrictionInfo(dRequest.params, function(data) {
+        dResponse.send(data);
+    });
+};
+exports.getPromotion= function(dRequest, dResponse) {
+    var data = homeService.getPromotion(dRequest.params, function(data) {
+        dResponse.send(data);
+    });
+};
+
+exports.getImportantInfo= function(dRequest, dResponse) {
+    var data = homeService.getImportantInfo(dRequest.params, function(data) {
+        dResponse.send(data);
+    });
+};
+
+exports.getMustKnowInfo= function(dRequest, dResponse) {
+    var data = homeService.getMustKnowInfo(dRequest.params, function(data) {
+        dResponse.send(data);
+    });
+};

@@ -1,0 +1,124 @@
+<div>
+	<ol class="breadcrumb">
+        <li class="active">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Promociones</li>
+        <li class="active">Visualizar Promoción</li>
+    </ol>
+    <div>
+    	<div class="container"> 
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form name="promocionForm" novalidate>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <h2>{{promocion.info.title}}</h2>
+                                </tr>
+                            </thead>
+                            <tbody> 
+                                <tr>
+                                    <td>
+                                        <img src="{{promocion.info.image1}}" style="width: 600px;height: 400px">
+                                    </td>
+                                    <td>
+                                        <img src="{{promocion.info.image2}}" style="width: 600px;height: 400px">
+                                    </td>
+                                </tr>             
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <h4>Información</h4>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form name="infoForm" novalidate>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Precio Máximo (₡)</th>
+                                    <th>Precio Normal (₡)</th>
+                                    <th>Descuento</th>
+                                    <th>Ahorro (%)</th>
+                                    <th>Vendidos</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <td>
+                                        {{promocion.info.price}}
+                                       
+                                    </td> 
+                                    <td>
+                                        {{promocion.info.value}}
+                                        
+                                    </td>
+                                    <td>
+                                        {{promocion.info.discount}}
+                                    </td>
+                                    <td>
+                                        {{promocion.info.save}}
+                                    </td>
+                                    <td>
+                                        {{promocion.info.sold}} 
+                                    </td>       
+                            </tbody>
+                        </table>
+                    </form>   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+    <div>
+        <div class="container">
+            <h4>Información Importante</h4>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form name="importantInfoForm" novalidate>
+                        <table class="table table-striped">
+                            <thead>
+                                
+                            </thead>
+                            <tbody>
+                               
+                                <tr ng-repeat = "infoA in promocion.importantInfo">
+                                    <td>{{infoA.info}}</td>
+                                    <td></td>  
+                                </tr>         
+                            </tbody>
+                        </table>
+                    </form>   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <h4>Información que necesita saber</h4>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form name="mustKnowInfoForm" novalidate>
+                        <table class="table">
+                            <thead>
+                                
+                            </thead>
+                            <tbody>
+                                
+                                <tr ng-repeat = "infoR in promocion.mustKnowInfo"> 
+                                    <td>{{infoR.info}}</td> 
+                                    <td></td>  
+                                </tr>          
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+       </div>
+    </div>
+    <div>
+    </div>
+</div>

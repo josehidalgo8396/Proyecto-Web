@@ -1,0 +1,123 @@
+<div>
+	<ol class="breadcrumb">
+        <li class="active">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cupones</li>
+        <li class="active">Visualizar Cupón</li>
+    </ol>
+    <div>
+    	<div class="container"> 
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form name="cuponForm" novalidate>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <h2>{{cupon.info.title}}</h2>
+                                </tr>
+                                <tr>
+                                    <th>{{cupon.info.subtitle}}</th>
+                                </tr>
+                            </thead>
+                            <tbody> 
+                                <tr>
+                                    <td>
+                                        <img src="{{cupon.info.image}}" style="width: 600px;height: 400px">
+                                    </td>
+                                </tr>             
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <h4>Información</h4>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form name="infoForm" novalidate>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Precio Máximo (₡)</th>
+                                    <th>Precio Normal (₡)</th>
+                                    <th>Ahorro (%)</th>
+                                    <th>Vendidos</th>
+                                    <th>Días</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <td>
+                                        {{cupon.info.maxprice}}
+                                       
+                                    </td> 
+                                    <td>
+                                        {{cupon.info.normalprice}}
+                                        
+                                    </td>
+                                    <td>
+                                        {{cupon.info.save}}
+                                    </td>
+                                    <td>
+                                        {{cupon.info.sold}}
+                                    </td>
+                                    <td>
+                                        {{cupon.info.days}} 
+                                    </td>       
+                            </tbody>
+                        </table>
+                    </form>   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+    <div>
+        <div class="container">
+            <h4>Información Adicional</h4>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form name="additionalForm" novalidate>
+                        <table class="table table-striped">
+                            <thead>
+                                
+                            </thead>
+                            <tbody>
+                               
+                                <tr ng-repeat = "infoA in cupon.additionalInfo">
+                                    <td>{{infoA.info}}</td>
+                                    <td></td>  
+                                </tr>         
+                            </tbody>
+                        </table>
+                    </form>   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <h4>Información de Restriciones</h4>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form name="restrictionForm" novalidate>
+                        <table class="table">
+                            <thead>
+                                
+                            </thead>
+                            <tbody>
+                                
+                                <tr ng-repeat = "infoR in cupon.restrictionInfo"> 
+                                    <td>{{infoR.info}}</td> 
+                                    <td></td>  
+                                </tr>          
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+       </div>
+    </div>
+    <div>
+    </div>
+</div>

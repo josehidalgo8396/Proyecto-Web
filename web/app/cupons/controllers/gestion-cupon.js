@@ -17,7 +17,6 @@
         cuponService.getCupons().then(function(result) {
           if (result.success){
             $scope.cuponList = result.data;
-            console.log($scope.cuponList);
             $scope.currentPage = 1;
             $scope.maxSize = $scope.cuponList.length;
           }

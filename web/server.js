@@ -37,6 +37,12 @@ app.get('/home/cupones',homeController.getAllCupons);
 app.get('/home/cupones/top5',homeController.getCuponTop5);
 app.get('/home/promociones',homeController.getAllPromotions);
 app.get('/home/promociones/top5',homeController.getPromotionTop5);
+app.get('/home/cupones/:id',homeController.getCupon);
+app.get('/home/cupones/additionalInfo/:id',homeController.getAdditionalInfo);
+app.get('/home/cupones/restrictionInfo/:id',homeController.getRestrictionInfo);
+app.get('/home/promociones/:id',homeController.getPromotion);
+app.get('/home/promociones/importantInfo/:id',homeController.getImportantInfo);
+app.get('/home/promociones/mustKnowInfo/:id',homeController.getMustKnowInfo);
 app.post('/home/cupones/send', homeController.sendCuponInfo);
 app.post('/home/promociones/send', homeController.sendPromotionInfo);
 
