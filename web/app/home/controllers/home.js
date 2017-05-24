@@ -22,10 +22,11 @@
         $scope.filteredPromotions = [];
         $scope.currentCuponPage = 0;
         $scope.currentPromotionPage = 0;
-        $scope.numPerPage = 3;
+        $scope.numPerPage = 12;
         $scope.maxCuponSize = 0;
         $scope.maxPromotionSize = 0;
         $scope.tab = true;
+        $scope.index = 0;
 
         $scope.getCupons = function(){
           homeService.getCupons().then(function(result) {
