@@ -20,30 +20,48 @@
 			
 			<div class="row" ng-repeat = "cupon in filteredCupons" ng-if="$index % 3 == 0">	
 				<div class="col-xs-4 border panel panel-default">
-					<h4>{{filteredCupons[$index].title}}</h4>
+					<!-- <h4>{{filteredCupons[$index].title}}</h4>
 					<h4>Precio normal: 	₡{{filteredCupons[$index].normalprice}}</h4>
 					<h4>Precio ahora: 	₡{{filteredCupons[$index].maxprice}}</h4>
-					<h4>Ahorro:  {{filteredCupons[$index].save}}%</h4>
-					<img src={{filteredCupons[$index].image}} style="height: 100px;width: 200px">	
+					<h4>Ahorro:  {{filteredCupons[$index].save}}%</h4> -->
+					<strong>{{filteredCupons[$index].title}}</strong>
+					<br>
+					<br>
+					    
+					Precio: ₡ <s>{{filteredCupons[$index].normalprice}}</s> <strong>{{filteredCupons[$index].maxprice}}</strong>
+					<br>
+					Ahorro:  {{filteredCupons[$index].save}}%
+					<img src={{filteredCupons[$index].image}} style="height: 100px;width: 100%">
+						 
 					<button class="btn btn-success" ng-click="sendCuponInfo(filteredCupons[$index])">Enviar datos al correo</button>
 					<button class="btn btn-primary" ng-click="sendToCuponView(filteredCupons[$index].id)">Ver Detalles</button>
 				</div>
 
 				<div class="col-xs-4 border panel panel-default">
-					<h4>{{filteredCupons[$index + 1].title}}</h4>
+					<!-- <h4>{{filteredCupons[$index + 1].title}}</h4>
 					<h4>Precio normal: 	₡{{filteredCupons[$index + 1].normalprice}}</h4>
 					<h4>Precio ahora: 	₡{{filteredCupons[$index + 1].maxprice}}</h4>
-					<h4>Ahorro:  {{filteredCupons[$index + 1].save}}%</h4>
-					<img src={{filteredCupons[$index+1].image}} style="height: 100px;width: 200px">	
+					<h4>Ahorro:  {{filteredCupons[$index + 1].save}}%</h4> -->
+					<strong>{{filteredCupons[$index+1].title}}</strong>
+					<br><br>
+					Precio: ₡ <s>{{filteredCupons[$index+1].normalprice}}</s> <strong>{{filteredCupons[$index+1].maxprice}}</strong> 
+					<br>
+					Ahorro:  {{filteredCupons[$index+1].save}}%
+					<img src={{filteredCupons[$index+1].image}} style="height: 100px;width: 100%">	
 					<button class="btn btn-success" ng-click="sendCuponInfo(filteredCupons[$index+1])">Enviar datos al correo</button>
 					<button class="btn btn-primary" ng-click="sendToCuponView(filteredCupons[$index + 1].id)">Ver Detalles</button>
 				</div>
 				<div class="col-xs-4 border panel panel-default">
-					<h4>{{filteredCupons[$index + 2].title}}</h4>
+					<!--<h4>{{filteredCupons[$index + 2].title}}</h4>
 					<h4>Precio normal: 	₡{{filteredCupons[$index + 2].normalprice}}</h4>
 					<h4>Precio ahora: 	₡{{filteredCupons[$index + 2].maxprice}}</h4>
-					<h4>Ahorro:  {{filteredCupons[$index + 2].save}}%</h4>
-					<img src={{filteredCupons[$index+2].image}} style="height: 100px;width: 200px">	
+					<h4>Ahorro:  {{filteredCupons[$index + 2].save}}%</h4> -->
+					<strong>{{filteredCupons[$index+2].title}}</strong>
+					<br><br>
+					Precio: ₡ <s>{{filteredCupons[$index+2].normalprice}}</s> <strong>{{filteredCupons[$index+2].maxprice}}</strong>
+					<br>
+					Ahorro:  {{filteredCupons[$index+2].save}}%
+					<img src={{filteredCupons[$index+2].image}} style="height: 100px;width: 100%">	
 					<button class="btn btn-success" ng-click="sendCuponInfo(filteredCupons[$index+2])">Enviar datos al correo</button>
 					<button class="btn btn-primary" ng-click="sendToCuponView(filteredCupons[$index + 2].id)">Ver Detalles</button>
 				</div>
@@ -64,15 +82,52 @@
 					<img src={{prom.image1}} style="height: 70px;width: 140px">
 				</nav>
 			</aside>-->
-			<div class="border panel panel-default" ng-repeat = "prom in filteredPromotions">	
-				<h3>Promoción</h3>
-				<h4>{{prom.title}}</h4>
-				<h4>Precio normal: ₡{{prom.value}}</h4>
-				<h4>Precio ahora: ₡{{prom.price}}</h4>
-				<h4>Ahorro: {{prom.save}}%</h4>
-				<img src={{prom.image1}} style="height: 100px;width: 200px">
-				<button class="btn btn-success" ng-click="sendPromotionInfo(prom)">Enviar datos al correo</button>	
-				<button class="btn btn-primary" ng-click="sendToPromocionView(prom.id)">Ver Detalles</button>				
+			<div class="row" ng-repeat = "prom in filteredPromotions" ng-if="$index % 3 == 0">	
+				<div class="col-xs-4 border panel panel-default">	
+					<!--<h4>{{filteredPromotions[$index].title}}</h4>
+					<h4>Precio normal: ₡{{filteredPromotions[$index].value}}</h4>
+					<h4>Precio ahora: ₡{{filteredPromotions[$index].price}}</h4>
+					<h4>Ahorro: {{filteredPromotions[$index].save}}%</h4>-->
+					<strong>{{filteredPromotions[$index].title}}</strong>
+					<br><br>
+					Precio: ₡ <s>{{filteredPromotions[$index].value}}</s> <strong>{{filteredPromotions[$index].price}}</strong>
+					<br>
+					Ahorro: {{filteredPromotions[$index].save}}%
+					<br>
+					<img src={{filteredPromotions[$index].image1}} style="height: 100px;width: 100%">
+					<button class="btn btn-success" ng-click="sendPromotionInfo(filteredPromotions[$index])">Enviar datos al correo</button>	
+					<button class="btn btn-primary" ng-click="sendToPromocionView(filteredPromotions[$index].id)">Ver Detalles</button>				
+				</div>
+				<div class="col-xs-4 border panel panel-default">	
+					<!--<h4>{{filteredPromotions[$index + 1].title}}</h4>
+					<h4>Precio normal: ₡{{filteredPromotions[$index + 1].value}}</h4>
+					<h4>Precio ahora: ₡{{filteredPromotions[$index + 1].price}}</h4>
+					<h4>Ahorro: {{filteredPromotions[$index + 1].save}}%</h4> -->
+					<strong>{{filteredPromotions[$index+1].title}}</strong>
+					<br><br>
+					Precio: ₡ <s>{{filteredPromotions[$index+1].value}}</s> <strong>{{filteredPromotions[$index+1].price}}</strong>
+					<br>
+					Ahorro: {{filteredPromotions[$index+1].save}}%
+					<br>
+					<img src={{filteredPromotions[$index+1].image1}} style="height: 100px;width: 100%">
+					<button class="btn btn-success" ng-click="sendPromotionInfo(filteredPromotions[$index+1])">Enviar datos al correo</button>	
+					<button class="btn btn-primary" ng-click="sendToPromocionView(filteredPromotions[$index+1].id)">Ver Detalles</button>				
+				</div>
+				<div class="col-xs-4 border panel panel-default">	
+					<!--<h4>{{filteredPromotions[$index+2].title}}</h4>
+					<h4>Precio normal: ₡{{filteredPromotions[$index+2].value}}</h4>
+					<h4>Precio ahora: ₡{{filteredPromotions[$index+2].price}}</h4>
+					<h4>Ahorro: {{filteredPromotions[$index+2].save}}%</h4> -->
+					<strong>{{filteredPromotions[$index+2].title}}</strong>
+					<br><br>
+					Precio: ₡ <s>{{filteredPromotions[$index+2].value}}</s> <strong>{{filteredPromotions[$index+2].price}}</strong>
+					<br>
+					Ahorro: {{filteredPromotions[$index+2].save}}%
+					<br>
+					<img src={{filteredPromotions[$index+2].image1}} style="height: 100px;width: 100%">
+					<button class="btn btn-success" ng-click="sendPromotionInfo(filteredPromotions[$index+2])">Enviar datos al correo</button>	
+					<button class="btn btn-primary" ng-click="sendToPromocionView(filteredPromotions[$index+2].id)">Ver Detalles</button>				
+				</div>
 			</div>
 			<div align="center">
 				<ul uib-pagination total-items="maxPromotionSize" ng-model="currentPromotionPage" max-size="numPerPage" class="pagination-lg" boundary-links="true" rotate="false"></ul>
