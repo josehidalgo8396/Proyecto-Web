@@ -71,6 +71,10 @@ app.put('/promociones/disable/:id',promotionController.disablePromotion);
 app.put('/promociones/importantInfo', promotionController.updateImportantInfo);
 app.put('/promociones/mustKnowInfo', promotionController.updateMustKnowInfo);
 
-server.listen(8080, function(){
+/*server.listen(8080, function(){
 	console.log('Listening at port 8080...');
+});*/
+
+server.listen(process.env.PORT || 5000, function(){
+    console.log('Listening at port...');
 });
