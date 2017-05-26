@@ -15,7 +15,7 @@
 div.tab {
     overflow: hidden;
     background-color: #f1f1f1;
-    width: 50%;
+    width: 32%;
     margin: auto;
 }
 
@@ -36,10 +36,6 @@ div.tab button:hover {
 .border {
     /*border: 3px solid green;*/
     background-color: #E5E7E9;
-}
-
-#btn1 {
-    background-color: #e6ffe6;
 }
 
 [class*="col-"] {

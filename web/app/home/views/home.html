@@ -1,9 +1,12 @@
 <div class="container">
-	<div class="tab" >
+	<!--<div class="tab">
 		<button id="btn1" class="tablinks" ng-click="setTab()">Cupones</button>
 		<button id="btn2" class="tablinks" ng-click="setTab()">Promociones</button>
+	</div>-->
+	<div align="center">
+		<div toggle-switch class="switch-large switch-success" on-label="Cupones" off-label="Promociones" ng-model="tab" ng-change="scope.tab = !scope.tab"></div>
 	</div>
-	<br>
+	<br><br>
 	<div>
 		<div ng-show="tab">
 			<!--<aside>

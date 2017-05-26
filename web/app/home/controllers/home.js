@@ -118,18 +118,6 @@
           $scope.user.rol = session.rol;
         };
 
-        $scope.setTab = function() {
-          if($scope.tab){
-            document.getElementById("btn2").style = "background-color: #e6ffe6"
-            document.getElementById("btn1").style = "background-color: #f1f1f1"
-          }
-          else {
-            document.getElementById("btn1").style = "background-color: #e6ffe6"
-            document.getElementById("btn2").style = "background-color: #f1f1f1"
-          }
-          $scope.tab = !$scope.tab;
-        };
-
         $scope.sendToCuponView = function(pId) {
           shareCuponService.setCuponId(pId);
           $state.go('ver-cupon');

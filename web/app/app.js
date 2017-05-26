@@ -5,7 +5,8 @@
       'ui.router',
       'ui-notification',
       'ui.bootstrap',
-      'ui.navbar'
+      'ui.navbar',
+      'toggle-switch'
     ])
     .config(function($stateProvider, $urlRouterProvider) {
 
