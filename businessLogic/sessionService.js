@@ -6,11 +6,11 @@
 */
 var repository = require('../dataAccess/repository.js');
 exports.validateUser = function(data, callback){
-    var paramsString = "'" +data.userName+"'"+','+"'"+data.password+"'";
+    var paramsString = "'" +data.username+"'"+','+"'"+data.password+"'";
     var spName = 'sp_login';
     if(data.type) {
         spName = 'sp_register';
-        paramsString = "'" +data.userName+"'"+","+"'" + data.name +"'" +"," +"'" + data.password +"'"+","+data.rol+",1";
+        paramsString = "'" +data.username+"'"+","+"'" + data.name +"'" +"," +"'" + data.password +"'"+","+data.rol+",1";
     }
     repository.executeQuery({
         spName: spName,

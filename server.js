@@ -45,6 +45,8 @@ app.get('/home/promociones/importantInfo/:id',homeController.getImportantInfo);
 app.get('/home/promociones/mustKnowInfo/:id',homeController.getMustKnowInfo);
 app.post('/home/cupones/send', homeController.sendCuponInfo);
 app.post('/home/promociones/send', homeController.sendPromotionInfo);
+app.post('/home/cupon/comment', homeController.setCommentCupon);
+app.post('/home/promocion/comment', homeController.setCommentPromotion);
 
 
 app.get('/cupones',cuponController.getAllCupons);

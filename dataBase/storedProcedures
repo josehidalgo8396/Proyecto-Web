@@ -172,6 +172,12 @@ RETURNS SETOF CUPON AS $$
    END; $$
 LANGUAGE 'plpgsql';
 
+CREATE FUNCTION  sp_add_Cupon_Comment(idCuponP integer, commentP text, usernameP text) RETURNS VOID AS $$
+   BEGIN
+        insert into CUPON_COMMENT(idCupon,username,comment) values(idCuponP , usernameP, commentP);
+   END;
+$$ LANGUAGE 'plpgsql';
+
 
 -- -------------------  PROMOCION    ----------------------------
 
@@ -270,3 +276,9 @@ RETURNS SETOF PROMOTION AS $$
 		RETURN QUERY SELECT * FROM PROMOTION order by sold desc limit 5;  
    END; $$
 LANGUAGE 'plpgsql';  
+
+CREATE FUNCTION  sp_add_Promotion_Comment(idPromotionP integer, commentP text, usernameP text) RETURNS VOID AS $$
+   BEGIN
+        insert into PROMOTION_COMMENT(idPromotion,username,comment) values(idPromotionP , usernameP, commentP);
+   END; 
+$$ LANGUAGE 'plpgsql';

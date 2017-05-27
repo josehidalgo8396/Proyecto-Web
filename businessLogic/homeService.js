@@ -336,3 +336,53 @@ exports.getMustKnowInfo = function(data, callback){
         }
     });
 };
+
+exports.setCommentCupon = function(data, callback){
+    var paramsString = data.idCupon + ",'" + data.comment + "','" + data.usuario + "'";
+    repository.executeQuery({
+        spName: 'sp_add_Cupon_Comment',
+        params: paramsString
+    }, 
+    function(success, data) {
+        if(success) {
+            callback({
+                success: true, 
+                message: "El comentario se agregó correctamente",
+                data: data
+            });
+        } 
+        else{
+            callback(
+            {
+                success: false,
+                data: null,
+                message: "No se pudo agregar el comentario al cupón"
+            });
+        }
+    });
+};
+
+exports.setCommentPromotion = function(data, callback){
+    var paramsString = data.idPromotion + ",'" + data.comment + "','" + data.usuario + "'";
+    repository.executeQuery({
+        spName: 'sp_add_Promotion_Comment',
+        params: paramsString
+    }, 
+    function(success, data) {
+        if(success) {
+            callback({
+                success: true, 
+                message: "El comentario se agregó correctamente",
+                data: data
+            });
+        } 
+        else{
+            callback(
+            {
+                success: false,
+                data: null,
+                message: "No se pudo agregar el comentario a la promoción"
+            });
+        }
+    });
+};

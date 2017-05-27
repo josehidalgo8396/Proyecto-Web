@@ -89,7 +89,7 @@
             var getAInfoCuponById = function(pId) {
                 var link = '/home/cupones/additionalInfo/';
                 
-                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {//corregir como se envian los datos
+                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {
                     return pResp; 
                 },  
                 function(pResp){
@@ -100,7 +100,7 @@
             var getRInfoCuponById = function(pId) {
                 var link = '/home/cupones/restrictionInfo/';
                 
-                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {//corregir como se envian los datos
+                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {
                     return pResp; 
                 },  
                 function(pResp){
@@ -111,17 +111,40 @@
             var getIInfoPromoById = function(pId) {
              	var link = '/promociones/importantInfo/';
                 
-                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {//corregir como se envian los datos
+                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {
                     return pResp; 
                 },  
                 function(pResp){
                     return pResp;   
                 });
             };
+
             var getMKInfoPromoById = function(pId) {
                 var link = '/promociones/mustKnowInfo/';
                 
-                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {//corregir como se envian los datos
+                return  requestService.getRequest({params: pId}, {url: link}).then(function(pResp) {
+                    return pResp; 
+                },  
+                function(pResp){
+                    return pResp;   
+                });
+            };
+
+			var commentCupon = function(pData) {
+                var link = '/home/cupon/comment';
+                
+                return  requestService.postRequest({data: pData, params: ""}, {url: link}).then(function(pResp) {
+                    return pResp; 
+                },  
+                function(pResp){
+                    return pResp;   
+                });
+            };
+
+			var commentPromotion = function(pData) {
+                var link = 'home/promocion/comment';
+                
+                return  requestService.postRequest({data: pData, params: ""}, {url: link}).then(function(pResp) {
                     return pResp; 
                 },  
                 function(pResp){
@@ -165,6 +188,12 @@
 				},
 				getMustKnowInfoPromotion: function(pId){
 					return getMKInfoPromoById(pId);
+				},
+				setCommentCupon: function(pData) {
+					return commentCupon(pData);
+				},
+				setCommentPromotion: function(pData) {
+					return commentPromotion(pData);
 				}
 			};
 		}]);

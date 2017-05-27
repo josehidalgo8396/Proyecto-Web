@@ -51,6 +51,18 @@ WITH (
   OIDS=FALSE
 );
 
+CREATE TABLE CUPON_COMMENT
+(
+    id serial NOT NULL,
+    idCupon integer NOT NULL references CUPON(id),
+    username text NOT NULL references UserTable(username),
+    comment text NOT NULL,
+    CONSTRAINT cupon_comment_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+
 
 CREATE TABLE PROMOTION
 (
@@ -91,5 +103,19 @@ CREATE TABLE PROMOTION_MUST_KNOW_INFO
 WITH (
   OIDS=FALSE
 );
+
+CREATE TABLE PROMOTION_COMMENT
+(
+    id serial NOT NULL,
+    idPromotion integer NOT NULL references PROMOTION(id),
+    username text NOT NULL references UserTable(username),
+    comment text NOT NULL,
+    CONSTRAINT promotion_comment_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+
+
 
 INSERT INTO UserTable (username,name,password,rol,active) VALUES('jose','Jose','123',1,1);

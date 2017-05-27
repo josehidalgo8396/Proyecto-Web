@@ -70,3 +70,15 @@ exports.getMustKnowInfo= function(dRequest, dResponse) {
         dResponse.send(data);
     });
 };
+
+exports.setCommentCupon= function(dRequest, dResponse) {
+    var data = homeService.setCommentCupon(dRequest.body, function(data) {
+        dResponse.send(data);
+    });
+};
+
+exports.setCommentPromotion= function(dRequest, dResponse) {
+    var data = homeService.setCommentPromotion(dRequest.body, function(data) {
+        dResponse.send(data);
+    });
+};

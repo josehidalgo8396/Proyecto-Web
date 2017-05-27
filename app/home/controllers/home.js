@@ -14,6 +14,7 @@
      function ($scope,$state,$q, homeService, messageHandlerService, shareSessionService,shareCuponService,sharePromocionService) {
   
         $scope.user = {};
+        $scope.hiddenCommentView = [];
         $scope.cuponList = [];
         $scope.promotionList = [];
         $scope.cuponTop5 = [];
@@ -27,6 +28,7 @@
         $scope.maxPromotionSize = 0;
         $scope.tab = true;
         $scope.index = 0;
+        $scope.writeComment = [];
 
         $scope.getCupons = function(){
           homeService.getCupons().then(function(result) {
@@ -128,6 +130,39 @@
           $state.go('ver-promocion');
         };
        
+        $scope.setCommentView = function($index){
+          $scope.hiddenCommentView[$index] = !$scope.hiddenCommentView[$index];
+        };
+
+        $scope.setCommentCupon = function(comment, id, index) {
+          if(comment != "") {
+            var data = {idCupon: id, comment: comment, usuario: $scope.user.usuario};
+            homeService.setCommentCupon(data).then(function(result) {
+              if(result.success) {
+                $scope.writeComment[index] = "";
+                messageHandlerService.notifySuccess(null, result.message);
+              }
+              else{
+                messageHandlerService.notifyWarning(null, result.message);
+              }
+            });
+          }
+        };
+
+        $scope.setCommentPromotion = function(comment, id, index) {
+          if(comment != "") {
+            var data = {idPromotion: id, comment: comment, usuario: $scope.user.usuario};
+            homeService.setCommentPromotion(data).then(function(result) {
+              if(result.success) {
+                $scope.writeComment[index] = "";
+                messageHandlerService.notifySuccess(null, result.message);
+              }
+              else{
+                messageHandlerService.notifyWarning(null, result.message);
+              }
+            });
+          }
+        };
 
         $scope.getUser();
         $scope.getCuponTop5();
