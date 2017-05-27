@@ -76,5 +76,5 @@ app.put('/promociones/mustKnowInfo', promotionController.updateMustKnowInfo);
 });*/
 
 server.listen(process.env.PORT || 5000, function(){
-    console.log('Listening at port...');
+    console.log('Listening at port 5000...');
 });
