@@ -29,9 +29,9 @@
 			$scope.login = function(pData) {
 				loginService.logIn(pData).then(function(result) {
 					if(result.success) {
-						var session = {username: pData.userName, rol: result.data};
+						var session = {username: pData.username, rol: result.data};
 						shareSessionService.setSession(session);
-						welcomeMessage(pData.userName);
+						welcomeMessage(pData.username);
 				        sendToHome();
 					}
 					else {
