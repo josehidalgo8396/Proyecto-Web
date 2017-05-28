@@ -79,7 +79,7 @@
                                         <textarea class="form-control" type="text" align="justify" placeholder="Información" ng-model="inputCupon.additionalInfo.info" required></textarea>
                                     </td>
                                     <td>
-                                        <button class="btn btn-success btn-xs"  uib-tooltip="agregar" ng-click="validAdditionalInfoForm(additionalForm.$valid, inputCupon.additionalInfo)"><span class="glyphicon glyphicon-plus"></span></button>
+                                        <button class="btn btn-primary btn-xs"  uib-tooltip="agregar" ng-click="validAdditionalInfoForm(additionalForm.$valid, inputCupon.additionalInfo)"><span class="glyphicon glyphicon-plus"></span></button>
                                     </td>
                                 </tr>
                                 <tr ng-repeat = "infoA in cupon.additionalInfo">
@@ -113,7 +113,7 @@
                                         <textarea class="form-control" type="text" align="justify" placeholder="Restricción" ng-model="inputCupon.restrictionInfo.info" required></textarea>
                                     </td>
                                     <td>
-                                        <button class="btn btn-success btn-xs"  uib-tooltip="agregar" ng-click="validRestrictionInfoForm(restrictionForm.$valid, inputCupon.restrictionInfo)"><span class="glyphicon glyphicon-plus"></span></button>
+                                        <button class="btn btn-primary btn-xs"  uib-tooltip="agregar" ng-click="validRestrictionInfoForm(restrictionForm.$valid, inputCupon.restrictionInfo)"><span class="glyphicon glyphicon-plus"></span></button>
                                     </td>
                                 </tr>  
                                 <tr ng-repeat = "infoR in cupon.restrictionInfo"> 
@@ -129,7 +129,7 @@
     </div>
     <div>
         <div class="container">
-            <button class="btn btn-success center-block" ng-click="validatedCupon(cuponForm.$valid, cupon)">Agregar Cupón</button> 
+            <button class="btn btn-primary center-block" ng-click="validatedCupon(cuponForm.$valid, cupon)">Agregar Cupón</button> 
             <br></br>
        </div>
     </div>

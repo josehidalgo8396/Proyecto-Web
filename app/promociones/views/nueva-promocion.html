@@ -79,7 +79,7 @@
                                         <textarea class="form-control" type="text" align="justify" placeholder="Información" ng-model="inputPromotion.importantInfo.info" required></textarea>
                                     </td>
                                     <td>
-                                        <button class="btn btn-success btn-xs"  uib-tooltip="agregar" ng-click="validImportantInfoForm(importantForm.$valid, inputPromotion.importantInfo)"><span class="glyphicon glyphicon-plus"></span></button>
+                                        <button class="btn btn-primary btn-xs"  uib-tooltip="agregar" ng-click="validImportantInfoForm(importantForm.$valid, inputPromotion.importantInfo)"><span class="glyphicon glyphicon-plus"></span></button>
                                     </td>
                                 </tr>
                                 <tr ng-repeat = "infoI in promocion.importantInfo">
@@ -113,7 +113,7 @@
                                         <textarea class="form-control" type="text" align="justify" placeholder="Información" ng-model="inputCupon.mustKnowInfo.info" required></textarea>
                                     </td>
                                     <td>
-                                        <button class="btn btn-success btn-xs"  uib-tooltip="agregar" ng-click="validMustKnowInfoForm(mustKnowForm.$valid, inputCupon.mustKnowInfo)"><span class="glyphicon glyphicon-plus"></span></button>
+                                        <button class="btn btn-primary btn-xs"  uib-tooltip="agregar" ng-click="validMustKnowInfoForm(mustKnowForm.$valid, inputCupon.mustKnowInfo)"><span class="glyphicon glyphicon-plus"></span></button>
                                     </td>
                                 </tr>  
                                 <tr ng-repeat = "infoMK in promocion.mustKnowInfo"> 
@@ -129,7 +129,7 @@
     </div>
     <div>
         <div class="container">
-            <button class="btn btn-success center-block" ng-click="validatedPromotion(promotionForm.$valid, promocion)">Agregar Promoción</button> 
+            <button class="btn btn-primary center-block" ng-click="validatedPromotion(promotionForm.$valid, promocion)">Agregar Promoción</button> 
             <br></br>
        </div>
     </div>
