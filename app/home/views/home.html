@@ -1,14 +1,7 @@
-
-
 <div class="container">
-	<!--<div class="tab">
-		<button id="btn1" class="tablinks" ng-click="setTab()">Cupones</button>
-		<button id="btn2" class="tablinks" ng-click="setTab()">Promociones</button>
-	</div> -->
 	<div align="center">
-		<div toggle-switch class="switch-large switch-success" on-label="Cupones" off-label="Promociones" ng-model="tab" ng-change="scope.tab = !scope.tab; hiddenCommentView=[]"></div>
+		<div toggle-switch class="switch-large switch-success" on-label="Cupones" off-label="Promociones" ng-model="tab" ng-change="scope.tab = !scope.tab; hiddenCommentView=[]; hiddenCommentView=[]; writeComment=[]; writeComment2=[]"></div>
 	</div>
-
 	<br><br>
 </div>
 
@@ -180,35 +173,33 @@
 
 -->
 
-  <div class="container" id="contenedor">
+  <div class="container">
       <div class="row">
-        <div class="col-md-12" id="head"></div>
+        <div class="col-md-12"></div>
       </div>
       <div class="row">
         <div class="col-md-8" id="principal">
-          <div class="row">
+        	<div class="row">
               	<div ng-show="tab">
 					<div class="row col-md-6 border panel panel-default" ng-repeat = "cupon in filteredCupons" >	
-						<article>
-							<strong>{{cupon.title}}</strong>
+						<strong>{{cupon.title}}</strong>
+						<br>
+						<br>
+					
+						Precio: ₡ <s>{{cupon.normalprice}}</s> <strong>{{cupon.maxprice}}</strong>
+						<br>
+						Ahorro:  {{cupon.save}}%
+						<img src={{cupon.image}} style="height: 100px;width: 100%">
+						
+						<button class="btn btn-success" ng-click="sendCuponInfo(cupon)">Enviar datos al correo</button>
+						<button class="btn btn-primary" ng-click="sendToCuponView(cupon)">Ver Detalles</button>
+						<a class="btn btn-lg btn-blue glyphicon glyphicon-comment" ng-click="setCommentView($index)"></a>
+						<div ng-show="hiddenCommentView[$index]">
 							<br>
-							<br>
-					    
-							Precio: ₡ <s>{{cupon.normalprice}}</s> <strong>{{cupon.maxprice}}</strong>
-							<br>
-							Ahorro:  {{cupon.save}}%
-							<img src={{cupon.image}} style="height: 100px;width: 100%">
-						 
-							<button class="btn btn-success" ng-click="sendCuponInfo(cupon)">Enviar datos al correo</button>
-							<button class="btn btn-primary" ng-click="sendToCuponView(cupon)">Ver Detalles</button>
-							<a class="btn btn-lg btn-blue glyphicon glyphicon-comment" ng-click="setCommentView($index)"></a>
-							<div ng-show="hiddenCommentView[$index]">
-								<br>
-								<form class="form-group" ng-submit="setCommentCupon(writeComment[$index], cupon.id, $index)">
-									<input class="form-control" type="text" placeholder="Write a comment..." ng-model="writeComment[$index]"/>
-								</form>
-							</div>
-						</article>
+							<form class="form-group" ng-submit="setCommentCupon(writeComment[$index], cupon.id, $index)">
+								<input class="form-control" type="text" placeholder="Write a comment..." ng-model="writeComment[$index]"/>
+							</form>
+						</div>
 					</div>
 					<div align="center">
 						<ul uib-pagination total-items="maxCuponSize" ng-model="currentCuponPage" max-size="numPerPage" class="pagination-lg" boundary-links="true" rotate="false"></ul>
@@ -247,30 +238,44 @@
             <div class="col-md-12" id="anuncios">
               	<aside ng-show="tab">
 					<h3>Más Populares</h3>
-						<div class="row border panel panel-default" ng-repeat="cupon in cuponTop5">
-							<strong>{{cupon.title}}</strong>
-							<br><br>
-							Precio: ₡ <s>{{cupon.normalprice}}</s> <strong>{{cupon.maxprice}}</strong>
+					<div class="row border panel panel-default" ng-repeat="cupon in cuponTop5">
+						<strong>{{cupon.title}}</strong>
+						<br><br>
+						Precio: ₡ <s>{{cupon.normalprice}}</s> <strong>{{cupon.maxprice}}</strong>
+						<br>
+						Ahorro:  {{cupon.save}}%
+						<img src={{cupon.image}} style="height: 100px;width: 100%">
+						<button class="btn btn-success" ng-click="sendCuponInfo(cupon)">Enviar datos al correo</button>
+						<button class="btn btn-primary" ng-click="sendToCuponView(cupon.id)">Ver Detalles</button>
+						<a class="btn btn-lg btn-blue glyphicon glyphicon-comment" ng-click="setCommentView2($index)"></a>
+						<div ng-show="hiddenCommentView2[$index]">
 							<br>
-							Ahorro:  {{cupon.save}}%
-							<img src={{cupon.image}} style="height: 100px;width: 100%">
-							<button class="btn btn-success" ng-click="sendCuponInfo(cupon)">Enviar datos al correo</button>
-							<button class="btn btn-primary" ng-click="sendToCuponView(cupon.id)">Ver Detalles</button>
+							<form class="form-group" ng-submit="setCommentCupon(writeComment2[$index], cupon.id, $index)">
+								<input class="form-control" type="text" placeholder="Write a comment..." ng-model="writeComment2[$index]"/>
+							</form>
 						</div>
-					</aside>
+					</div>
+				</aside>
 
 				<aside ng-show="tab==false">
 					<h3>Más Populares</h3>
-						<div class="row border panel panel-default" ng-repeat="prom in promotionTop5" >
-							<strong>{{prom.title}}</strong>
-							<br><br>
-							Precio ₡ <s>{{prom.value}}</s> <strong>{{prom.price}}</strong>
+					<div class="row border panel panel-default" ng-repeat="prom in promotionTop5" >
+						<strong>{{prom.title}}</strong>
+						<br><br>
+						Precio ₡ <s>{{prom.value}}</s> <strong>{{prom.price}}</strong>
+						<br>
+						Ahorro: {{prom.save}}%
+						<img src={{prom.image1}} style="height: 100px;width: 100%">
+						<button class="btn btn-success" ng-click="sendCuponInfo(prom)">Enviar datos al correo</button>
+						<button class="btn btn-primary" ng-click="sendToCuponView(prom.id)">Ver Detalles</button>
+						<a class="btn btn-lg btn-blue glyphicon glyphicon-comment" ng-click="setCommentView2($index)"></a>
+						<div ng-show="hiddenCommentView2[$index]">
 							<br>
-							Ahorro: {{prom.save}}%
-							<img src={{prom.image1}} style="height: 100px;width: 100%">
-							<button class="btn btn-success" ng-click="sendCuponInfo(prom)">Enviar datos al correo</button>
-							<button class="btn btn-primary" ng-click="sendToCuponView(prom.id)">Ver Detalles</button>
+							<form class="form-group" ng-submit="setCommentPromotion(writeComment2[$index], prom.id, $index)">
+								<input class="form-control" type="text" placeholder="Write a comment..." ng-model="writeComment2[$index]"/>
+							</form>
 						</div>
+					</div>
 				</aside> 
             </div>
           </div>
