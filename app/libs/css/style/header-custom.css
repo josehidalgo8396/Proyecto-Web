@@ -1,6 +1,7 @@
 .header-custom{
 	text-align: center; 
-	color: white; 
-	background-color: #000000; 
+	color: black; 
+	background-color: #989D9D; 
 	padding: 5px 5px 5px 5px;
+	font-family: "Comic sans MS";
 }

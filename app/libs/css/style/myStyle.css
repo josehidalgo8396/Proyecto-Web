@@ -42,3 +42,7 @@ div.tab button:hover {
     background-clip: padding-box;
     border: 10px solid transparent;
 }
+
+.menuColor {
+    color: white; 
+}
