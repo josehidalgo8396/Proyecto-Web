@@ -13,7 +13,7 @@
 	    .controller('LoginCtrl', ['$scope', '$state', 'LoginService', 'shareSessionService', 'messageHandlerService',
 	    function($scope, $state, loginService, shareSessionService, messageHandlerService){
 			$scope.userData = {
-				userName: '',
+				username: '',
 				password: ''
 			};
 
