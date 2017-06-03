@@ -1,9 +1,4 @@
-/*
- *Tecnologico de Costa Rica
- *Proyecto de ingenieria de software
- *Luis Javier Ramírez Torres
- *Sistema de apoyo administrativo
-*/
+
 var repository = require('../dataAccess/repository.js');
 
 exports.allUsers = function(callback){

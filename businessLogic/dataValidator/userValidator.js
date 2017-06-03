@@ -1,10 +1,4 @@
-/*
- *Tecnologico de Costa Rica
- *Proyecto de Ingenieria de Software
- *Luis Javier Ramírez Torres
- *Sistema de apoyo administrativo
- *Validador de datos de usuarios
-*/
+
 exports.validateDates = function(startDate, endDate) {
     var response = {};
     if(startDate <= endDate){

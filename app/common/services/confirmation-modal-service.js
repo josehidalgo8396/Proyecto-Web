@@ -1,10 +1,4 @@
-/**
- * @ngdoc Service
- * @author Jose Alberto Hidalgo Bonilla
- * @name confirmationModalService
- * @description
- * #  service to show confirmation modals
- */
+
 (function(){
     'use strict';
     angular

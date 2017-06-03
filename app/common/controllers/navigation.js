@@ -1,12 +1,4 @@
 
-/**
- * @ngdoc Controller
- * @author Jose Alberto Hidalgo Bonilla
- * @name navigationCtrl
- * @description
- * # controller de navegacion
- */
-
  (function(){
     'use strict';
     angular

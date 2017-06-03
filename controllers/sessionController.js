@@ -1,11 +1,4 @@
 
-/*
- *Tecnologico de Costa Rica
- *Proyecto de ingenieria de software
- *Jose Hidalgo Bonilla
- *Sistema de apoyo administrativo
- *Controlador de sesion
-*/
 var sessionService   = require('../businessLogic/sessionService.js'),
     sessionValidator = require('../businessLogic/dataValidator/sessionDataValidator.js');
 

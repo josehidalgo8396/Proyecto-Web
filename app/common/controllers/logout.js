@@ -1,10 +1,4 @@
-/**
- * @ngdoc Controller
- * @author Alberto Hidalgo Bonilla
- * @name LoginCtrl
- * @description
- * #  controller para logout
- */ 
+
 (function(){
 	'use strict';
 	angular

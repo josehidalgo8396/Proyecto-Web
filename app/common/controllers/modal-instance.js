@@ -1,12 +1,4 @@
 'use strict';
-
-/**
- * @ngdoc Controller
- * @author Luis Javier Ramírez Torres
- * @name ModalInstanceCtrl
- * @description
- * #  controller para gestionar la respuestas de los modales
- */
 angular.module('webApp')
 .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, confirmationModalService) {
   $scope.modalContent = {};

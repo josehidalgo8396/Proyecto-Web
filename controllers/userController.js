@@ -1,10 +1,4 @@
-/*
- *Tecnologico de Costa Rica
- *Proyecto de ingenieria de software
- *Jose Hidalgo Bonilla
- *Sistema de apoyo administrativo
- *Controlador de usuarios
-*/
+
 var userService   = require('../businessLogic/userService.js');
 
 exports.getAllUsers = function(dRequest, dResponse) {

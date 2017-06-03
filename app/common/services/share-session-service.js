@@ -1,11 +1,4 @@
 
-/**
- * @ngdoc Service
- * @author Luis Javier Ramírez Torres
- * @name shareSessionService
- * @description
- * #  service for share information between controllers
- */
 (function(){
     'use strict';
     angular
