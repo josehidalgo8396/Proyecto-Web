@@ -4,175 +4,6 @@
 	</div>
 	<br><br>
 </div>
-
-<!--
-	
-	<aside ng-show="tab">
-		<h3>Más Populares</h3>
-		<div class="row" ng-repeat="cupon in cuponTop5">
-			<div class="col-md-2 well border panel panel-default" >
-				<strong>{{cupon.title}}</strong>
-				<br><br>
-				Precio: ₡ <s>{{cupon.normalprice}}</s> <strong>{{cupon.maxprice}}</strong>
-				<br>
-				Ahorro:  {{cupon.save}}%
-				<img src={{cupon.image}} style="height: 70px;width: 140px">
-				<button class="btn btn-success" ng-click="sendCuponInfo(cupon)">Enviar datos al correo</button>
-				<button class="btn btn-primary" ng-click="sendToCuponView(cupon.id)">Ver Detalles</button>
-			</div>
-		</div>
-	</aside>
-
-	<aside ng-show="tab==false">
-		<h3>Más Populares</h3>
-		<div class="row" ng-repeat="prom in promotionTop5" >
-			<div class="col-md-2 well border panel panel-default" >
-				<strong>{{prom.title}}</strong>
-				<br><br>
-				Precio ₡ <s>{{prom.value}}</s> <strong>{{prom.price}}</strong>
-				<br>
-				Ahorro: {{prom.save}}%
-				<img src={{prom.image1}} style="height: 70px;width: 140px">
-				<button class="btn btn-success" ng-click="sendCuponInfo(prom)">Enviar datos al correo</button>
-				<button class="btn btn-primary" ng-click="sendToCuponView(prom.id)">Ver Detalles</button>
-			</div>
-		</div>
-	</aside> 
-
-<div class="container">
-
-		<div ng-show="tab">
-		
-			<div class="row" ng-repeat = "cupon in filteredCupons" ng-if="$index % 3 == 0">	
-				<div class="col-md-4 well border panel panel-default">
-					<strong>{{filteredCupons[$index].title}}</strong>
-					<br>
-					<br>
-					    
-					Precio: ₡ <s>{{filteredCupons[$index].normalprice}}</s> <strong>{{filteredCupons[$index].maxprice}}</strong>
-					<br>
-					Ahorro:  {{filteredCupons[$index].save}}%
-					<img src={{filteredCupons[$index].image}} style="height: 100px;width: 100%">
-						 
-					<button class="btn btn-success" ng-click="sendCuponInfo(filteredCupons[$index])">Enviar datos al correo</button>
-					<button class="btn btn-primary" ng-click="sendToCuponView(filteredCupons[$index].id)">Ver Detalles</button>
-					<a class="btn btn-lg btn-blue glyphicon glyphicon-comment" ng-click="setCommentView($index)"></a>
-					<div ng-show="hiddenCommentView[$index]">
-						<br>
-						<form class="form-group" ng-submit="setCommentCupon(writeComment[$index], filteredCupons[$index].id, $index)">
-							<input class="form-control" type="text" placeholder="Write a comment..." ng-model="writeComment[$index]"/>
-						</form>
-					</div>
-				</div>
-
-				<div class="col-md-4 well border panel panel-default">
-					<strong>{{filteredCupons[$index+1].title}}</strong>
-					<br><br>
-					Precio: ₡ <s>{{filteredCupons[$index+1].normalprice}}</s> <strong>{{filteredCupons[$index+1].maxprice}}</strong> 
-					<br>
-					Ahorro:  {{filteredCupons[$index+1].save}}%
-					<img src={{filteredCupons[$index+1].image}} style="height: 100px;width: 100%">	
-					<button class="btn btn-success" ng-click="sendCuponInfo(filteredCupons[$index+1])">Enviar datos al correo</button>
-					<button class="btn btn-primary" ng-click="sendToCuponView(filteredCupons[$index + 1].id)">Ver Detalles</button>
-					<a class="btn btn-lg btn-blue glyphicon glyphicon-comment" ng-click="setCommentView($index+1)"></a>
-					<div ng-show="hiddenCommentView[$index+1]">
-						<br>
-						<form class="form-group" ng-submit="setCommentCupon(writeComment[$index+1], filteredCupons[$index+1].id, $index+1)">
-							<input class="form-control" type="text" placeholder="Write a comment..." ng-model="writeComment[$index+1]"/>
-						</form>
-					</div>
-				</div>
-				<div class="col-md-4 well border panel panel-default">
-					<strong>{{filteredCupons[$index+2].title}}</strong>
-					<br><br>
-					Precio: ₡ <s>{{filteredCupons[$index+2].normalprice}}</s> <strong>{{filteredCupons[$index+2].maxprice}}</strong>
-					<br>
-					Ahorro:  {{filteredCupons[$index+2].save}}%
-					<img src={{filteredCupons[$index+2].image}} style="height: 100px;width: 100%">	
-					<button class="btn btn-success" ng-click="sendCuponInfo(filteredCupons[$index+2])">Enviar datos al correo</button>
-					<button class="btn btn-primary" ng-click="sendToCuponView(filteredCupons[$index + 2].id)">Ver Detalles</button>
-					<a class="btn btn-lg btn-blue glyphicon glyphicon-comment" ng-click="setCommentView($index+2)"></a>
-					<div ng-show="hiddenCommentView[$index+2]">
-						<br>
-						<form class="form-group" ng-submit="setCommentCupon(writeComment[$index+2], filteredCupons[$index+2].id, $index+2)">
-							<input class="form-control" type="text" placeholder="Write a comment..." ng-model="writeComment[$index+2]"/>
-						</form>
-					</div>
-				</div>
-			</div>
-			<div align="center">
-				<ul uib-pagination total-items="maxCuponSize" ng-model="currentCuponPage" max-size="numPerPage" class="pagination-lg" boundary-links="true" rotate="false"></ul>
-			</div>
-		</div>
-
-
-		<div ng-show="tab==false">
-
-
-			<div class="row" ng-repeat = "prom in filteredPromotions" ng-if="$index % 3 == 0">	
-				<div class="col-md-4 well border panel panel-default">	
-					<strong>{{filteredPromotions[$index].title}}</strong>
-					<br><br>
-					Precio: ₡ <s>{{filteredPromotions[$index].value}}</s> <strong>{{filteredPromotions[$index].price}}</strong>
-					<br>
-					Ahorro: {{filteredPromotions[$index].save}}%
-					<br>
-					<img src={{filteredPromotions[$index].image1}} style="height: 100px;width: 100%">
-					<button class="btn btn-success" ng-click="sendPromotionInfo(filteredPromotions[$index])">Enviar datos al correo</button>	
-					<button class="btn btn-primary" ng-click="sendToPromocionView(filteredPromotions[$index].id)">Ver Detalles</button>		
-					<a class="btn btn-lg btn-blue glyphicon glyphicon-comment" ng-click="setCommentView($index)"></a>
-					<div ng-show="hiddenCommentView[$index]">
-						<br>
-						<form class="form-group" ng-submit="setCommentPromotion(writeComment[$index], filteredPromotions[$index].id, $index)">
-							<input class="form-control" type="text" placeholder="Write a comment..." ng-model="writeComment[$index]"/>
-						</form>
-					</div>		
-				</div>
-				<div class="col-md-4 well border panel panel-default">	
-					<strong>{{filteredPromotions[$index+1].title}}</strong>
-					<br><br>
-					Precio: ₡ <s>{{filteredPromotions[$index+1].value}}</s> <strong>{{filteredPromotions[$index+1].price}}</strong>
-					<br>
-					Ahorro: {{filteredPromotions[$index+1].save}}%
-					<br>
-					<img src={{filteredPromotions[$index+1].image1}} style="height: 100px;width: 100%">
-					<button class="btn btn-success" ng-click="sendPromotionInfo(filteredPromotions[$index+1])">Enviar datos al correo</button>	
-					<button class="btn btn-primary" ng-click="sendToPromocionView(filteredPromotions[$index+1].id)">Ver Detalles</button>
-					<a class="btn btn-lg btn-blue glyphicon glyphicon-comment" ng-click="setCommentView($index+1)"></a>
-					<div ng-show="hiddenCommentView[$index+1]">
-						<br>
-						<form class="form-group" ng-submit="setCommentPromotion(writeComment[$index+1], filteredPromotions[$index+1].id, $index+1)">
-							<input class="form-control" type="text" placeholder="Write a comment..." ng-model="writeComment[$index+1]"/>
-						</form>
-					</div>					
-				</div>
-				<div class="col-md-4 well border panel panel-default">	
-					<strong>{{filteredPromotions[$index+2].title}}</strong>
-					<br><br>
-					Precio: ₡ <s>{{filteredPromotions[$index+2].value}}</s> <strong>{{filteredPromotions[$index+2].price}}</strong>
-					<br>
-					Ahorro: {{filteredPromotions[$index+2].save}}%
-					<br>
-					<img src={{filteredPromotions[$index+2].image1}} style="height: 100px;width: 100%">
-					<button class="btn btn-success" ng-click="sendPromotionInfo(filteredPromotions[$index+2])">Enviar datos al correo</button>	
-					<button class="btn btn-primary" ng-click="sendToPromocionView(filteredPromotions[$index+2].id)">Ver Detalles</button>
-					<a class="btn btn-lg btn-blue glyphicon glyphicon-comment" ng-click="setCommentView($index+2)"></a>
-					<div ng-show="hiddenCommentView[$index+2]">
-						<br>
-						<form class="form-group" ng-submit="setCommentPromotion(writeComment[$index+2], filteredPromotions[$index+2].id, $index+2)">
-							<input class="form-control" type="text" placeholder="Write a comment..." ng-model="writeComment[$index+2]"/>
-						</form>
-					</div>					
-				</div>
-			</div>
-			<div align="center">
-				<ul uib-pagination total-items="maxPromotionSize" ng-model="currentPromotionPage" max-size="numPerPage" class="pagination-lg" boundary-links="true" rotate="false"></ul>
-			</div>
-		</div>
-</div>
-
--->
-
   <div class="container">
       <div class="row">
         <div class="col-md-12"></div>
@@ -181,7 +12,7 @@
         <div class="col-md-8" id="principal">
         	<div class="row">
               	<div ng-show="tab">
-					<div class="row col-md-6 border panel panel-default" ng-repeat = "cupon in filteredCupons" >	
+					<div class="col-md-6 border panel panel-default" ng-repeat = "cupon in filteredCupons" >	
 						<strong>{{cupon.title}}</strong>
 						<br>
 						<br>
@@ -192,7 +23,7 @@
 						<img src={{cupon.image}} style="height: 100px;width: 100%">
 						
 						<button class="btn btn-success" ng-click="sendCuponInfo(cupon)">Enviar datos al correo</button>
-						<button class="btn btn-primary" ng-click="sendToCuponView(cupon)">Ver Detalles</button>
+						<button class="btn btn-primary" ng-click="sendToCuponView(cupon.id)">Ver Detalles</button>
 						<a class="btn btn-lg btn-blue glyphicon glyphicon-comment" ng-click="setCommentView($index)"></a>
 						<div ng-show="hiddenCommentView[$index]">
 							<br>
@@ -207,7 +38,7 @@
 				</div>
 
 				<div ng-show="tab==false">	
-					<div class="row col-md-6 border panel panel-default" ng-repeat = "prom in filteredPromotions">
+					<div class="col-md-6 border panel panel-default" ng-repeat = "prom in filteredPromotions">
 						<article>	
 							<strong>{{prom.title}}</strong>
 							<br><br>
@@ -233,7 +64,7 @@
 				</div>
          	 </div>
         </div>
-        <div class="col-md-4" id="lateral">
+        <div class="col-md-3" id="lateral">
           <div class="row">
             <div class="col-md-12" id="anuncios">
               	<aside ng-show="tab">

@@ -9,12 +9,13 @@ var express       = require('express'),
     cuponController = require('./controllers/cuponController.js');
     promotionController = require('./controllers/promotionController.js');
 
-
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
 
 app.use(bodyParser.json());
+
+//app.use(bodyParser({uploadDir:'/app/images'}));
 
 app.use('/', express.static(__dirname + '/app'));
 //send the main page
@@ -73,9 +74,6 @@ app.put('/promociones/disable/:id',promotionController.disablePromotion);
 app.put('/promociones/importantInfo', promotionController.updateImportantInfo);
 app.put('/promociones/mustKnowInfo', promotionController.updateMustKnowInfo);
 
-/*server.listen(8080, function(){
-	console.log('Listening at port 8080...');
-});*/
 
 server.listen(process.env.PORT || 5000, function(){
     console.log('Listening at port 5000...');

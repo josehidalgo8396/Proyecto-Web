@@ -32,7 +32,6 @@
         }
       };
 
-
       $scope.addCupon = function(pData){
         console.log(pData);
         cuponService.addCupon(pData).then(function(result) {
